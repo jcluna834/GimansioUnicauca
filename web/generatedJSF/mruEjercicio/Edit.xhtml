@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MruEjercicioEditDlg" widgetVar="MruEjercicioEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditMruEjercicioTitle}">
+            <h:form id="MruEjercicioEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{mruEjercicioController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditMruEjercicioLabel_ejId}" for="ejId" />
+                        <p:inputText id="ejId" value="#{mruEjercicioController.selected.ejId}" title="#{bundle.EditMruEjercicioTitle_ejId}" required="true" requiredMessage="#{bundle.EditMruEjercicioRequiredMessage_ejId}"/>
+                        <p:outputLabel value="#{bundle.EditMruEjercicioLabel_ejNombre}" for="ejNombre" />
+                        <p:inputText id="ejNombre" value="#{mruEjercicioController.selected.ejNombre}" title="#{bundle.EditMruEjercicioTitle_ejNombre}" required="true" requiredMessage="#{bundle.EditMruEjercicioRequiredMessage_ejNombre}"/>
+                        <p:outputLabel value="#{bundle.EditMruEjercicioLabel_ejDescrip}" for="ejDescrip" />
+                        <p:inputText id="ejDescrip" value="#{mruEjercicioController.selected.ejDescrip}" title="#{bundle.EditMruEjercicioTitle_ejDescrip}" />
+                        <p:outputLabel value="#{bundle.EditMruEjercicioLabel_ejImagen}" for="ejImagen" />
+                        <p:inputText id="ejImagen" value="#{mruEjercicioController.selected.ejImagen}" title="#{bundle.EditMruEjercicioTitle_ejImagen}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{mruEjercicioController.update}" value="#{bundle.Save}" update="display,:MruEjercicioListForm:datalist,:growl" oncomplete="handleSubmit(args, 'MruEjercicioEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="MruEjercicioEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

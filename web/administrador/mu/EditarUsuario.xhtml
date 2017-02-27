@@ -1,0 +1,509 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <p:dialog header="Editar Usuario" modal="true" resizable="false" position="center"  widgetVar="editarUsuario" closable="true">
+        <h:form id="editarFoto">
+            <p:panelGrid styleClass="panelgrid" id="panel">
+                <p:row>
+                    <p:column>
+                        
+                    </p:column>
+                    <p:column >
+                        
+                    </p:column>
+                    <p:column >
+                        
+                    </p:column>
+                    <p:column rowspan="7">
+                        <p:panel header="Foto de Perfil" toggleable="true">
+                            <div style="float:left">
+                                <h:form id="formularioFoto">
+                                    <p:messages closable="true"/>
+                                    <p:panelGrid styleClass="panelgrid" id="panelgridusuario">                            
+                                        <p:row>
+                                            <p:column>                                
+                                            </p:column>
+
+                                            <p:column  rendered="#{editarUsuarioController.campoFoto}">                                
+                                                <p:graphicImage value="#{editarUsuarioController.imagenFlujo}" >
+                                                    <f:param name="idUsu" value="#{editarUsuarioController.usuario.usuIdentificacion}" />
+                                                </p:graphicImage>
+
+                                            </p:column>
+                                            <p:column rendered="#{editarUsuarioController.campoFoto}">
+                                                <p:commandLink style="color: blue;" action="#{editarUsuarioController.mostraSubirFoto()}" value="Cambiar"/>                                                                 
+                                            </p:column>
+
+                                            <p:column  rendered="#{!editarUsuarioController.campoFoto}">
+                                                    <p:fileUpload  fileUploadListener="#{editarUsuarioController.cargarFoto}" mode="advanced" dragDropSupport="false"
+                                                                   style="width:250px;"
+                                                                   label="Seleccionar" auto="false"  
+                                                                   invalidFileMessage="Tipo de archivo no válido" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+                                                                   onstart="PF('cargando').show()"  oncomplete="PF('cargando').hide()"/>
+
+                                                </p:column>
+                                                <p:column rendered="#{!editarUsuarioController.campoFoto}">
+                                                    <p:outputLabel value="#{editarUsuarioController.uploadedFileFoto.fileName}"/>
+                                                </p:column>
+                                        </p:row>                                   
+
+                                    </p:panelGrid>            
+                                </h:form> 
+                            </div>
+                            <div style="float:left;margin-top: 50px;">
+                                <h:form id="formularioEditarFoto">
+                                    <p:commandLink rendered="#{!editarUsuarioController.campoFoto}"
+                                                   action="#{editarUsuarioController.actualizarFoto()}"
+                                                   style="color:blue;"  value="Aceptar"
+                                                   onstart="PF('cargando').show()"  oncomplete="PF('cargando').hide()"  />
+                                    <p:commandLink rendered="#{!editarUsuarioController.campoFoto}" 
+                                                   style="margin-left:10px; color:blue;"  value="Cancelar" action="#{editarUsuarioController.cancelarSubirFoto()}"
+                                                   onstart="PF('cargando').show()"  oncomplete="PF('cargando').hide()"/>
+                                </h:form>
+                            </div>            
+                            <div style="clear: both"></div>
+                        </p:panel>
+                    </p:column>
+                </p:row>
+            </p:panelGrid>
+        </h:form>
+        
+        <h:form id="editarInformacionUsuario">
+            <p:panelGrid styleClass="panelgrid" id="panel">
+                
+                <p:row rendered="#{editarUsuarioController.campoIdentificacion}">
+                    <p:column>
+                        <p:outputLabel style="font-size: 15px;" value="Número de cédula: "/>
+                    </p:column>
+                    <p:column style="background: #eff5fa">
+                        <p:outputLabel value="#{editarUsuarioController.usuario.usuIdentificacion}"/>
+                    </p:column>
+                    <p:column style="background: #eff5fa">
+                        <p:commandLink style="color:blue;" value="Modificar" action="#{editarUsuarioController.mostrarModificarIdentificacion()}"/>
+                    </p:column>
+                </p:row>
+                <p:row rendered="#{!editarUsuarioController.campoIdentificacion}">
+                    <p:column>
+                        <p:outputLabel style="font-size: 15px;" value="Número de cédula: "/>
+                        <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
+                                       value="* "/>
+                    </p:column>
+                    <p:column style="background: #eff5fa">
+                        <p:inputText value="#{editarUsuarioController.identificacion}"/>
+                    </p:column>
+                    <p:column style="background: #eff5fa">
+                        <p:commandLink style="color:blue;"  value="Aceptar" action="#{editarUsuarioController.actualizarIdentificacion()}"
+                                       onstart="PF('cargando').show()"  onsuccess="PF('cargando').hide()"/>
+                        <p:commandLink style="margin-left: 10px;color:blue;"  value="Cancelar" action="#{editarUsuarioController.cancelarActualizarIdentificacion()}"
+                                       onstart="PF('cargando').show()"  onsuccess="PF('cargando').hide()"/>
+                    </p:column>
+                </p:row>
+
+                <p:row rendered="#{editarUsuarioController.campoCodigo}">
+                    <p:column>
+                        <p:outputLabel style="font-size: 15px;" value="Codigo: "/>
+                    </p:column>
+                    <p:column>
+                        <p:outputLabel value="#{editarUsuarioController.usuario.usuCodigo}"/>
+                    </p:column>
+                    <p:column>
+                        <p:commandLink style="color:blue;" value="Modificar" action="#{editarUsuarioController.mostrarModificarCodigo()}"/>
+                    </p:column>
+                </p:row>
+                <p:row rendered="#{!editarUsuarioController.campoCodigo}">
+                    <p:column>
+                        <p:outputLabel style="font-size: 15px;" value="Codigo: "/>
+                        <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
+                                       value="* "/>
+                    </p:column>
+                    <p:column>
+                        <p:inputText value="#{editarUsuarioController.codigo}"/>
+                    </p:column>
+                    <p:column>
+                        <p:commandLink style="color:blue;"  value="Aceptar" action="#{editarUsuarioController.actualizarCodigo()}"
+                                       onstart="PF('cargando').show()"  onsuccess="PF('cargando').hide()"/>
+                        <p:commandLink style="margin-left: 10px;color:blue;"  value="Cancelar" action="#{editarUsuarioController.cancelarActualizarCodigo()}"
+                                       onstart="PF('cargando').show()"  onsuccess="PF('cargando').hide()"/>
+                    </p:column>
+                </p:row>
+                <p:row rendered="#{editarUsuarioController.campoNombre}">
+                    <p:column>
+                        <p:outputLabel style="font-size: 15px;" value="Nombres: "/>
+                    </p:column>
+                    <p:column style="background: #eff5fa">
+                        <p:outputLabel value="#{editarUsuarioController.usuario.usuNombres}"/>
+                    </p:column>
+                    <p:column style="background: #eff5fa">
+                        <p:commandLink style="color: blue;" value="Modificar" action="#{editarUsuarioController.mostrarModificarNombre()}"/>
+                    </p:column>
+                </p:row>
+                <p:row rendered="#{!editarUsuarioController.campoNombre}">
+                    <p:column>
+                        <p:outputLabel style="font-size: 15px;" value="Nombre: "/>
+                        <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
+                                       value="* "/>
+                    </p:column>
+                    <p:column style="background: #eff5fa">
+                        <p:inputText value="#{editarUsuarioController.nombres}"/>  
+                    </p:column >
+                    <p:column style="background: #eff5fa">
+                        <p:commandLink style="color: blue;" value="Aceptar" action="#{editarUsuarioController.actualizarNombre()}"
+                                       onstart="PF('cargando').show()"  onsuccess="PF('cargando').hide()"/>
+                        <p:commandLink style="margin-left: 10px;color: blue;" value="Cancelar" 
+                                       action="#{editarUsuarioController.cancelarActualizarNombre()}"
+                                       onstart="PF('cargando').show()"  onsuccess="PF('cargando').hide()"/>
+                    </p:column>
+                </p:row>
+
+                <p:row rendered="#{editarUsuarioController.campoApellido1}">
+                    <p:column>
+                        <p:outputLabel style="font-size: 15px;" value="Primer apellido: "/>
+                    </p:column>
+                    <p:column>
+                        <p:outputLabel value="#{editarUsuarioController.usuario.usuApellido1}"/>
+                    </p:column>
+                    <p:column>
+                        <p:commandLink style="color: blue;" value="Modificar" action="#{editarUsuarioController.mostrarModificarApellido1()}"/>
+                    </p:column>
+                </p:row>
+                <p:row rendered="#{!editarUsuarioController.campoApellido1}">
+                    <p:column>
+                        <p:outputLabel style="font-size: 15px;" value="Primer apellidos: "/>
+                        <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
+                                       value="* "/>
+                    </p:column>
+                    <p:column>
+                        <p:inputText value="#{editarUsuarioController.apellido1}"/>  
+                    </p:column>
+                    <p:column>
+                        <p:commandLink style="color: blue;" value="Aceptar" action="#{editarUsuarioController.actualizarApellido1()}"
+                                       onstart="PF('cargando').show()"  onsuccess="PF('cargando').hide()"/>
+                        <p:commandLink style="margin-left: 10px;color: blue;" value="Cancelar" 
+                                       action="#{editarUsuarioController.cancelarActualizarApellido1()}"
+                                       onstart="PF('cargando').show()"  onsuccess="PF('cargando').hide()"/>
+                    </p:column>
+                </p:row> 
+
+
+                <p:row rendered="#{editarUsuarioController.campoApellido2}">
+                    <p:column>
+                        <p:outputLabel style="font-size: 15px;" value="Segundo apellido: "/>
+                    </p:column>
+                    <p:column style="background: #eff5fa">
+                        <p:outputLabel value="#{editarUsuarioController.usuario.usuApellido2}"/>
+                    </p:column>
+                    <p:column style="background: #eff5fa">
+                        <p:commandLink style="color: blue;" value="Modificar" action="#{editarUsuarioController.mostrarModificarApellido2()}"/>
+                    </p:column>
+                </p:row>
+                <p:row rendered="#{!editarUsuarioController.campoApellido2}">
+                    <p:column>
+                        <p:outputLabel style="font-size: 15px;" value="Segundo apellidos: "/>
+                        <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
+                                       value="* "/>
+                    </p:column>
+                    <p:column style="background: #eff5fa">
+                        <p:inputText value="#{editarUsuarioController.apellido2}"/>  
+                    </p:column>
+                    <p:column style="background: #eff5fa">
+                        <p:commandLink style="color: blue;" value="Aceptar" action="#{editarUsuarioController.actualizarApellido2()}"
+                                       onstart="PF('cargando').show()"  onsuccess="PF('cargando').hide()"/>
+                        <p:commandLink style="margin-left: 10px;color: blue;" value="Cancelar" 
+                                       action="#{editarUsuarioController.cancelarActualizarApellido2()}"
+                                       onstart="PF('cargando').show()"  onsuccess="PF('cargando').hide()"/>
+                    </p:column>
+                </p:row> 
+
+                <p:row rendered="#{editarUsuarioController.campoFechaNacimiento}">
+                    <p:column>
+                        <p:outputLabel style="font-size: 15px;" value="Fecha de Nacimiento: "/>
+                    </p:column>                                                        
+                    <p:column>
+                        <p:outputLabel value="#{editarUsuarioController.sdf.format(editarUsuarioController.usuario.usuFechaNacimiento)}"/>
+                    </p:column>
+                    <p:column>
+                        <p:commandLink style="color:blue;" value="Modificar" action="#{editarUsuarioController.mostrarModificarFechaNacimiento()}"/>
+                    </p:column>
+                </p:row>
+                <p:row rendered="#{!editarUsuarioController.campoFechaNacimiento}">
+                    <p:column>
+                        <p:outputLabel style="font-size: 15px;" value="Fecha de Nacimiento (aaaa-mm-dd): "/>
+                        <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
+                                       value="* "/>
+                    </p:column>
+                    <p:column>
+                        <p:calendar value="#{editarUsuarioController.fechaNacimiento}" size="10"    
+                                    showOn="button" navigator="true" pattern="yyyy-MM-dd" yearRange="c-100:c" 
+                                    />
+                    </p:column>
+                    <p:column>
+                        <p:commandLink style="color:blue;"  value="Aceptar" action="#{editarUsuarioController.actualizarFechaNacimiento()}"
+                                       onstart="PF('cargando').show()"  onsuccess="PF('cargando').hide()"/>
+                        <p:commandLink style="margin-left: 10px;color:blue;"  value="Cancelar" action="#{editarUsuarioController.cancelarActualizarFechaNacimiento()}"
+                                       onstart="PF('cargando').show()"  onsuccess="PF('cargando').hide()"/>
+                    </p:column>
+                </p:row>
+
+                <p:row rendered="#{editarUsuarioController.campoCorreo}">
+                    <p:column>
+                        <p:outputLabel style="font-size: 15px;" value="Correo Electróncio: "/>
+                    </p:column>
+                    <p:column style="background: #eff5fa">
+                        <p:outputLabel value="#{editarUsuarioController.usuario.usuEmail}"/>
+                    </p:column>
+                    <p:column style="background: #eff5fa" colspan="2">
+                        <p:commandLink style="color: blue;" value="Modificar" action="#{editarUsuarioController.mostrarModificarCorreo()}"/>
+                    </p:column>
+                </p:row>
+                <p:row rendered="#{!editarUsuarioController.campoCorreo}">
+                    <p:column>
+                        <p:outputLabel style="font-size: 15px;" value="Correo Electróncio: "/>
+                        <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
+                                       value="* "/>
+                    </p:column>
+                    <p:column style="background: #eff5fa">
+                        <p:inputText value="#{editarUsuarioController.correo}"/>  
+                    </p:column >
+                    <p:column style="background: #eff5fa" colspan="2">
+                        <p:commandLink style="color: blue;" value="Aceptar" action="#{editarUsuarioController.actualizarCorreo()}"
+                                       onstart="PF('cargando').show()"  onsuccess="PF('cargando').hide()"/>
+                        <p:commandLink style="margin-left: 10px;color: blue;" value="Cancelar" 
+                                       action="#{editarUsuarioController.cancelarActualizarCorreo()}"
+                                       onstart="PF('cargando').show()"  onsuccess="PF('cargando').hide()"/>
+                    </p:column>
+                </p:row>
+
+                <p:row rendered="#{editarUsuarioController.campoTelefono}">
+                    <p:column>
+                        <p:outputLabel style="font-size: 15px;" value="Teléfono: "/>
+                    </p:column>
+                    <p:column>
+                        <p:outputLabel value="#{editarUsuarioController.usuario.usuTelefono}"/>
+                    </p:column>
+                    <p:column>
+                        <p:commandLink style="color: blue;" value="Modificar" action="#{editarUsuarioController.mostrarModificarTelefono()}"/>
+                    </p:column>
+                </p:row>
+                <p:row rendered="#{!editarUsuarioController.campoTelefono}">
+                    <p:column>
+                        <p:outputLabel style="font-size: 15px;" value="Teléfono: "/>
+                    </p:column>
+                    <p:column>
+                        <p:inputText value="#{editarUsuarioController.telefono}"/>  
+                    </p:column>
+                    <p:column>
+                        <p:commandLink style="color: blue;" value="Aceptar" action="#{editarUsuarioController.actualizarTelefono()}"
+                                       onstart="PF('cargando').show()"  onsuccess="PF('cargando').hide()"/>
+                        <p:commandLink style="margin-left: 10px;color: blue;" value="Cancelar" 
+                                       action="#{editarUsuarioController.cancelarActualizarTelefono()}"
+                                       onstart="PF('cargando').show()"  onsuccess="PF('cargando').hide()"/>
+                    </p:column>
+                </p:row>
+                <p:row rendered="#{editarUsuarioController.campoCelular}">
+                    <p:column>
+                        <p:outputLabel style="font-size: 15px;" value="Celular "/>
+                    </p:column>
+                    <p:column style="background: #eff5fa">
+                        <p:outputLabel value="#{editarUsuarioController.usuario.usuCelular}"/>
+                    </p:column>
+                    <p:column style="background: #eff5fa" colspan="2">
+                        <p:commandLink style="color: blue;" value="Modificar" action="#{editarUsuarioController.mostrarModificarCelular()}"/>
+                    </p:column>
+                </p:row>
+                <p:row rendered="#{!editarUsuarioController.campoCelular}">
+                    <p:column>
+                        <p:outputLabel style="font-size: 15px;" value="Celular: "/>
+                    </p:column>
+                    <p:column style="background: #eff5fa">
+                        <p:inputText value="#{editarUsuarioController.celular}"/>  
+                    </p:column>
+                    <p:column style="background: #eff5fa" colspan="2">
+                        <p:commandLink style="color: blue;" value="Aceptar" action="#{editarUsuarioController.actualizarCelular()}"
+                                       onstart="PF('cargando').show()"  onsuccess="PF('cargando').hide()"/>
+                        <p:commandLink style="margin-left: 10px;color: blue;" value="Cancelar" 
+                                       action="#{editarUsuarioController.cancelarActualizarCelular()}"
+                                       onstart="PF('cargando').show()"  onsuccess="PF('cargando').hide()"/>
+                    </p:column>
+                </p:row>
+
+                <p:row rendered="#{editarUsuarioController.campoGenero}">
+                    <p:column>
+                        <p:outputLabel style="font-size: 15px;" value="Sexo (M,F): "/>
+                    </p:column>
+                    <p:column>
+                        <p:outputLabel value="#{editarUsuarioController.usuario.usuGenero}"/>
+                    </p:column>
+                    <p:column>
+                        <p:commandLink style="color: blue;" value="Modificar" action="#{editarUsuarioController.mostrarModificarGenero()}"/>
+                    </p:column>
+                </p:row>
+                <p:row rendered="#{!editarUsuarioController.campoGenero}">
+                    <p:column>
+                        <p:outputLabel style="font-size: 15px;" value="Sexo: "/>
+                    </p:column>
+                    <p:column>
+                        <p:selectOneRadio    id="genero" value="#{editarUsuarioController.genero}" required="true" requiredMessage="Seleccione Sexo.">
+                            <f:selectItem itemLabel="M" itemValue="M" />
+                            <f:selectItem itemLabel="F" itemValue="F" />                                            
+                        </p:selectOneRadio>
+
+                    </p:column>
+                    <p:column>
+                        <p:commandLink style="color: blue;" value="Aceptar" action="#{editarUsuarioController.actualizarGenero()}"
+                                       onstart="PF('cargando').show()"  onsuccess="PF('cargando').hide()"/>
+                        <p:commandLink style="margin-left: 10px;color: blue;" value="Cancelar" 
+                                       action="#{editarUsuarioController.cancelarActualizarGenero()}"
+                                       onstart="PF('cargando').show()"  onsuccess="PF('cargando').hide()"/>
+                    </p:column>
+                </p:row>
+
+                <p:row>
+                    <p:column>
+                        <p:outputLabel style="font-size: 15px;" value="Edad: "/>
+                    </p:column>
+                    <p:column style="background: #eff5fa" colspan="3">
+                        <p:outputLabel value="#{editarUsuarioController.usuario.calcularEdad()}"/>
+                        <p:outputLabel value=" años"/>
+                    </p:column>
+                </p:row>
+                
+                <p:row rendered="#{editarUsuarioController.campoOcupacion}">
+                    <p:column>
+                        <p:outputLabel style="font-size: 15px;" value="Ocupacion: "/>
+                    </p:column>
+                    <p:column>
+                        <p:outputLabel value="#{editarUsuarioController.usuario.ocuId.ocuDescripcion}"/>
+                    </p:column>                        
+                    <p:column>
+                        <p:commandLink style="color: blue;" value="Modificar" action="#{editarUsuarioController.mostrarModificarOcupacion()}"/>
+                    </p:column>
+                </p:row>
+
+                <p:row rendered="#{!editarUsuarioController.campoOcupacion}">
+                    <p:column>
+                        <p:outputLabel style="font-size: 15px;" value="Ocupacion: "/>
+                    </p:column>
+                    <p:column>
+                        <p:selectOneMenu id="ocupacion"  style="width:170px" value="#{editarUsuarioController.usuario.ocuId}" valueChangeListener="#{registrarUsuarioController.cambiarOcupacionUsuario}">
+                            <f:selectItem itemLabel="Seleccione..." itemValue="0" />
+                            <f:selectItems value="#{editarUsuarioController.listaOcupaciones}" 
+                                           var="ocupacion" itemLabel="#{ocupacion.ocuDescripcion}" 
+                                           itemValue="#{ocupacion.ocuId}"
+                                           />
+
+
+                            <f:validator validatorId="ValidarCamposSeleccionar"/>
+                        </p:selectOneMenu>
+                    </p:column>
+                    <p:column>
+                        <p:commandLink style="color: blue;" value="Aceptar" action="#{editarUsuarioController.actualizarOcupacion()}"
+                                       onstart="PF('cargando').show()"  onsuccess="PF('cargando').hide()"/>
+                        <p:commandLink style="margin-left: 10px;color: blue;" value="Cancelar" 
+                                       action="#{editarUsuarioController.cancelarActualizarOcupacion()}"
+                                       onstart="PF('cargando').show()"  onsuccess="PF('cargando').hide()"/>
+                    </p:column>
+                </p:row>
+
+
+                <p:row rendered="#{editarUsuarioController.campoFacultadDependencia}">
+                    <p:column>
+                        <p:outputLabel style="font-size: 15px;" value="Facultad o dependencia: "/>
+                    </p:column>
+                    <p:column style="background: #eff5fa">
+                        <p:outputLabel value="#{editarUsuarioController.usuario.facDepId.facDepNombre}"/>
+                    </p:column>                        
+                    <p:column style="background: #eff5fa" colspan="2">
+                        <p:commandLink style="color: blue;" value="Modificar" action="#{editarUsuarioController.mostrarModificarFacultadDependencia()}"/>
+                    </p:column>
+                </p:row>
+
+                <p:row rendered="#{!editarUsuarioController.campoFacultadDependencia}">
+                    <p:column>
+                        <p:outputLabel style="font-size: 15px;" value="Facultad o dependencia: "/>
+                    </p:column>
+                    <p:column style="background: #eff5fa">
+                        <p:selectOneMenu id="facultadDependenica"  style="width:170px" value="#{editarUsuarioController.usuario.facDepId}" >
+                            <f:selectItem itemLabel="Seleccione..." itemValue="0" />
+                            <f:selectItems value="#{editarUsuarioController.listaFacultadesYDependencias}" 
+                                           var="facultadDependencia" itemLabel="#{facultadDependencia.facDepNombre}" 
+                                           itemValue="#{facultadDependencia.facDepId}"
+                                           />
+
+
+                            <f:validator validatorId="ValidarCamposSeleccionar"/>
+                        </p:selectOneMenu>
+                    </p:column>
+                    <p:column style="background: #eff5fa" colspan="2">
+                        <p:commandLink style="color: blue;" value="Aceptar" action="#{editarUsuarioController.actualizarFacultadDependencia()}"
+                                       onstart="PF('cargando').show()"  onsuccess="PF('cargando').hide()"/>
+                        <p:commandLink style="margin-left: 10px;color: blue;" value="Cancelar" 
+                                       action="#{editarUsuarioController.cancelarActualizarFacultadDependencia()}"
+                                       onstart="PF('cargando').show()"  onsuccess="PF('cargando').hide()"/>
+                    </p:column>
+                </p:row>
+
+                <p:row rendered="#{editarUsuarioController.campoNombreUsuario}">
+                    <p:column>
+                        <p:outputLabel style="font-size: 15px;" value="Nombre de Usuario: "/>
+                    </p:column>
+                    <p:column>
+                        <p:outputLabel value="#{editarUsuarioController.usuario.usuNombreUsuario}"/>
+                    </p:column>
+                    <p:column>
+                        <p:commandLink style="color: blue;" value="Modificar" action="#{editarUsuarioController.mostrarModificarNombreUsuario()}"/>
+                    </p:column>
+                </p:row>
+                <p:row rendered="#{!editarUsuarioController.campoNombreUsuario}">
+                    <p:column>
+                        <p:outputLabel style="font-size: 15px;" value="Nombre de Usuario: "/>
+                        <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
+                                       value="* "/>
+                    </p:column>
+                    <p:column>
+                        <p:inputText value="#{editarUsuarioController.nombreUsuario}"/>  
+                    </p:column>
+                    <p:column>
+                        <p:commandLink style="color: blue;" value="Aceptar" action="#{editarUsuarioController.actualizarNombreUsuario()}"
+                                       onstart="PF('cargando').show()"  onsuccess="PF('cargando').hide()"/>
+                        <p:commandLink style="margin-left: 10px;color: blue;" value="Cancelar" 
+                                       action="#{editarUsuarioController.cancelarActualizarNombreUsuario()}"
+                                       onstart="PF('cargando').show()"  onsuccess="PF('cargando').hide()"/>
+                    </p:column>
+                </p:row>                    
+                <p:row rendered="#{editarUsuarioController.campoContrasena}">
+                    <p:column>
+                        <p:outputLabel style="font-size: 15px;" value="Contraseña: "/>
+                    </p:column>
+                    <p:column style="background: #eff5fa">
+                        <p:outputLabel value="***********"/>
+                    </p:column>
+                    <p:column style="background: #eff5fa" colspan="2">
+                        <p:commandLink style="color: blue;" value="Modificar" action="#{editarUsuarioController.mostrarModificarContrasena()}"/>
+                    </p:column>
+                </p:row>
+                <p:row rendered="#{!editarUsuarioController.campoContrasena}">
+                    <p:column>
+                        <p:outputLabel style="font-size: 15px;" value="Contraseña: "/>
+                        <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
+                                       value="* "/>
+                    </p:column>
+                    <p:column style="background: #eff5fa">
+                        <p:password value="#{editarUsuarioController.contrasena}"/>  
+                    </p:column>
+                    <p:column style="background: #eff5fa" colspan="2">
+                        <p:commandLink style="color: blue;" value="Aceptar" action="#{editarUsuarioController.actualizarContrasena()}"
+                                       onstart="PF('cargando').show()"  onsuccess="PF('cargando').hide()"/>
+                        <p:commandLink style="margin-left: 10px;color: blue;" value="Cancelar" 
+                                       action="#{editarUsuarioController.cancelarActualizarContrasena()}"
+                                       onstart="PF('cargando').show()"  onsuccess="PF('cargando').hide()"/>
+                    </p:column>
+                </p:row>
+            </p:panelGrid>    
+        </h:form> 
+    </p:dialog>
+</html>

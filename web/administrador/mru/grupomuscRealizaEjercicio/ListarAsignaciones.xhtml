@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+
+    <header>
+
+    </header>
+
+    <body>
+        <p:growl id="growl" life="2000" />
+        <h:panelGrid>
+            <h:form id="GrupomuscRealizaEjercicioListForm">
+                <p:panel header="#{mru_Bundle.ListGrupomuscRealizaEjercicioTitle}">
+                    <p:dataTable id="datalist" value="#{grupomuscRealizaEjercicioController.items}" var="item"
+                                 selectionMode="single" selection="#{grupomuscRealizaEjercicioController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.grupomuscRealizaEjercicioPK}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 emptyMessage="#{mru_Bundle.ListGrupomuscRealizaEjercicioEMPTY}"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{mru_Bundle.ListGrupomuscRealizaEjercicioTitle_greRepeticiones}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.greRepeticiones}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{mru_Bundle.ListGrupomuscRealizaEjercicioTitle_greTiempo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.greTiempo}">
+                                <f:convertDateTime pattern="HH:mm:ss" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{mru_Bundle.ListGrupomuscRealizaEjercicioTitle_variacionpeso}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.variacionpeso}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{mru_Bundle.ListGrupomuscRealizaEjercicioTitle_mruEjercicio}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.mruEjercicio}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{mru_Bundle.ListGrupomuscRealizaEjercicioTitle_mruGrupomuscular}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.mruGrupomuscular}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{mru_Bundle.Create}" actionListener="#{grupomuscRealizaEjercicioController.prepareCreate}" update=":GrupomuscRealizaEjercicioCreateForm" oncomplete="PF('GrupomuscRealizaEjercicioCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{mru_Bundle.View}" update=":GrupomuscRealizaEjercicioViewForm" oncomplete="PF('GrupomuscRealizaEjercicioViewDialog').show()" disabled="#{empty grupomuscRealizaEjercicioController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{mru_Bundle.Edit}" update=":GrupomuscRealizaEjercicioEditForm" oncomplete="PF('GrupomuscRealizaEjercicioEditDialog').show()" disabled="#{empty grupomuscRealizaEjercicioController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{mru_Bundle.Delete}" actionListener="#{grupomuscRealizaEjercicioController.destroy}" update=":growl,datalist" disabled="#{empty grupomuscRealizaEjercicioController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+        </h:panelGrid>
+        
+        <ui:include src="Create.xhtml"/>
+        <ui:include src="Edit.xhtml"/>
+        <ui:include src="View.xhtml"/>
+    </body>
+
+
+</html>

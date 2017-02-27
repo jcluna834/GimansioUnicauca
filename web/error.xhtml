@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <h:outputStylesheet name="./css/styleerror.css"/>
+        <h:outputStylesheet name="./css/ses.css"/>
+    </h:head>
+    <h:body>
+        <h:form>
+            <header>Iniciar sesión</header>
+            <p:panelGrid  style="text-align:left; width: 470px;" styleClass="panelgrid" >
+                <p:row>
+                    <p:column style="font-size: 15px; width: 180px">
+                        <p:outputLabel   value="Nombre de Usuario:" />
+                        <p:outputLabel style="color:red; text-align: left"  value=" * " />
+                    </p:column>
+                    <p:column style="font-size: 15px">
+                        <br/>
+                        <p:inputText id="firstname" value="#{usuarioSessionController.nombreDeUsuario}" 
+                                     required="true" label="Firstname" requiredMessage="Ingrese nombre de usuario"/>
+                    </p:column>
+                    <p:column style="width: 30px; ">
+                        <br/>
+                        <p:message for="firstname" id="msgUsuario" display="icon" />
+                    </p:column>
+                </p:row>
+               
+                <p:row>
+                    <p:column style="font-size: 15px">
+                        <p:outputLabel  value="Contraseña:" />
+                        <p:outputLabel style="color:red; text-align: left"  value=" * " />
+                    </p:column>
+                    <p:column>
+                        <br/>
+                        <p:password id="contrasena" value="#{usuarioSessionController.contrasena}" 
+                                    label="Lastname" required="true" requiredMessage="Ingrese una contraseña">
+                            <f:validateLength minimum="6" />
+                            <p:ajax update="msgContrasena" event="keyup" />
+                        </p:password>                          
+                    </p:column>
+                    <p:column style="width: 30px; ">
+                        <br/>
+                        <p:message for="contrasena" id="msgContrasena" display="icon" />
+                    </p:column>
+                </p:row>
+                
+                <p:row>
+                    <p:column colspan="3" style="text-align: center">
+                        <div class="help">Entre 6 y 20 caracteres </div>
+                    </p:column>
+                </p:row>
+                <br/>
+                <p:row>
+                    <p:column colspan="3">
+                        <div style="text-align: center; "><p:link  style="color: blue; font-size: 14px" value="¿Has olvidado tu contraseña?">                                
+                            </p:link> </div>
+                        <p:commandButton style="background: gainsboro; width: 150px; color:#000000; font-weight: bold; "
+                                 value="Iniciar sesión"  action="#{usuarioSessionController.login()}"
+                                 onstart="PF('cargando').show()"  onsuccess="PF('cargando').hide()"/>
+                    </p:column>
+                </p:row>
+                
+                
+            </p:panelGrid>
+        </h:form>
+        
+        <p:dialog modal="true" resizable="false" header="Error" widgetVar="errorIniciarSesion" closable="false">
+
+            <p:panelGrid style="text-align:left;" styleClass="panelgrid">
+                <p:row>
+                    <p:column style="font-size: 13px">
+                        <h:outputLabel style="color: red;" value="Usuario o contraseña incorrectos"/>
+                    </p:column>                                
+                </p:row>
+                <p:row>
+                    <p:column width="200px;">
+                        <p:commandButton style="background: #C8CDD6;color:#000000;font-style: italic;margin-left: 100px;font-weight: normal;" 
+                                         value="Aceptar" onclick="PF('errorIniciarSesion').hide()"/>                                    
+                    </p:column>
+
+                </p:row>
+            </p:panelGrid>
+        </p:dialog>
+    </h:body>
+</html>
+

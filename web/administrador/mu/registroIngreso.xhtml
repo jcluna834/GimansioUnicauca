@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>registro </title>
+    </h:head>
+    <h:body>
+
+        <h:form id="datosIngreso">
+            <h:panelGrid columns="3"> 
+                <p:outputLabel styleClass="CampoLabel" value="Seleccione un Usuario " />                      
+                <p:commandButton value="Seleccionar" 
+                             onstart="PF('cargando').show()"  onsuccess="PF('cargando').hide()"
+                             onclick="PF('seleccionarUsuario').show()" />
+            </h:panelGrid>
+        </h:form>
+        <p:separator/>
+        <h:form id="usuarioSeleccionado">
+        <p:panelGrid style="text-align:left;" styleClass="panelgrid" id="panel">
+            <p:row rendered="#{registrarDatosIngresoController.usuarioSeleccionado}">
+                <p:column>
+                    <p:outputLabel style="font-weight: bold; font-size: 15px " value="Va ha registrar información del usuario: "/>
+                </p:column>
+                <p:column>
+                    <p:outputLabel style="font-weight: bold; font-size: 13px " value="#{registrarDatosIngresoController.usuario.usuNombres} "/>
+                    <p:outputLabel style="font-weight: bold; font-size: 13px " value="#{registrarDatosIngresoController.usuario.usuApellido1} "/>
+                    <p:outputLabel style="font-weight: bold; font-size: 13px " value="#{registrarDatosIngresoController.usuario.usuApellido2}"/>
+                </p:column>
+            </p:row>
+        </p:panelGrid>
+        </h:form>    
+        <p:separator/>
+        <br/>
+        <h:form id="registroDatosIngreso">
+            <p:panelGrid style="text-align:left;" styleClass="panelgrid"  id="panel" >
+            <p:row rendered="#{registrarDatosIngresoController.usuarioSeleccionado}">
+                <p:column>
+                Examen fisico
+                </p:column>
+                <p:column>
+                    <p:commandButton value="Agregar" onclick="PF('RegistrarExamenFisico').show()"/>
+                </p:column>
+                
+            </p:row>
+            <p:row rendered="#{registrarDatosIngresoController.usuarioSeleccionado}">
+                <p:column>
+                 Medicamentos
+                </p:column>
+                <p:column>
+                    <p:commandButton value="Agregar" onclick="PF('RegistrarMedicamentos').show()"/>
+                </p:column>
+            </p:row>
+            <p:row rendered="#{registrarDatosIngresoController.usuarioSeleccionado}">
+                <p:column>
+                    Antecedentes de salud previos
+                </p:column>
+                <p:column>
+                        <p:commandButton value="Agregar" onclick="PF('NuevoAntecedente').show()" />
+                </p:column>
+            </p:row>
+            <p:row rendered="#{registrarDatosIngresoController.usuarioSeleccionado}">
+                <p:column>
+                    Evaluación de las capacidades condicionales
+                </p:column>
+                <p:column>
+                    <p:commandButton value="Agregar"/>
+                </p:column>
+            </p:row>
+             </p:panelGrid >   
+            </h:form>
+        
+        <ui:include src="RegistroExamenFisico.xhtml"/>
+        <ui:include src="RegistroMedicamentos.xhtml"/>
+        <ui:include src="NuevoAntecedente.xhtml"/>
+         <ui:include src="Create.xhtml"/>
+        <ui:include src="/EfectodeCarga.xhtml"/>
+        <p:separator/> 
+        
+        
+        <p:dialog header="Seleccionar usuario" resizable="false" width="850" position="center" modal="true"  widgetVar="seleccionarUsuario">
+            <h:form id="seleccionUsuario">
+                <br/>
+                <h:panelGrid columns="2">
+                    <p:outputLabel value="Nombre del usuario:" />
+                    <p:inputText  placeholder="Nombres, apellidos o identificación " style="width: 240px;" value="#{registrarUsuarioController.nombreOApellidos}"  >
+                        <p:ajax event="keyup" update="tablaSeleccionUsuario" listener="#{registrarUsuarioController.buscarPorNombresOApellidos()}" />                                
+                    </p:inputText>                          
+                </h:panelGrid>
+                <br/>
+                <p:panel id="tablaSeleccionUsuario">
+                    <p:dataTable  style="width: 800px" var="usuario" value="#{registrarUsuarioController.listaUsuarios}" 
+                                  paginator="true" rows="6"  
+                                  paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                                  rowsPerPageTemplate="5,8,12">
+                        <p:column headerText="No. Identificacion" width="110" >
+                            #{usuario.usuIdentificacion} 
+                        </p:column> 
+                        <p:column headerText="Nombres" width="130" >
+                            #{usuario.usuNombres}
+                        </p:column>
+                        <p:column headerText="Primer apellido" width="120">
+                            #{usuario.usuApellido1}
+                        </p:column>
+                        <p:column headerText="Segundo apellido" width="120">
+                            #{usuario.usuApellido2}
+                        </p:column>
+                        <p:column headerText="Ocupación" width="80">
+                            #{usuario.ocuId.ocuDescripcion}
+                        </p:column>
+                        <p:column headerText="Acciones" width="80">
+                            <p:commandButton icon="ui-icon-plus" actionListener="#{registrarDatosIngresoController.seleccionarUsuario(usuario)}" 
+                                             id="seleccionar" value="Seleccionar"
+                                           />      
+                        </p:column> 
+
+                    </p:dataTable>
+                </p:panel>
+
+            </h:form>
+        </p:dialog>
+    </h:body>    
+</html>

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <p:dialog header="Ver Usuario" modal="true" resizable="false" position="center"  widgetVar="verUsuario" closable="true">
+        <h:form id="informacionUsuario">
+            <p:panelGrid styleClass="panelgrid" id="panel">
+                <p:row>
+                    <p:column>
+                        <p:outputLabel style="font-size: 15px;" value="Número de cédula "/>
+                    </p:column>
+                    <p:column style="background: #eff5fa">
+                        <p:outputLabel value="#{verUsuarioController.usuario.usuIdentificacion}"/>
+                    </p:column>
+                    <p:column rowspan="5" style="text-align: center">
+                        <p:graphicImage value="#{verUsuarioController.imagenFlujo}" >
+                            <f:param name="idUsu" value="#{verUsuarioController.usuario.usuIdentificacion}" />
+                        </p:graphicImage>
+                    </p:column>
+                </p:row>
+                <p:row>
+                    <p:column>
+                        <p:outputLabel style="font-size: 15px;" value="Codigo: "/>
+                    </p:column>
+                    <p:column >
+                        <p:outputLabel value="#{verUsuarioController.usuario.usuCodigo}"/>
+                    </p:column>
+                </p:row>
+                <p:row>
+                    <p:column>
+                        <p:outputLabel style="font-size: 15px;" value="Nombre(s): "/>
+                    </p:column>
+                    <p:column style="background: #eff5fa">
+                        <p:outputLabel value="#{verUsuarioController.usuario.usuNombres}"/>
+                    </p:column>
+                </p:row>
+                <p:row >
+                    <p:column>
+                        <p:outputLabel style="font-size: 15px;" value="Apellido(s): "/>
+                    </p:column>
+                    <p:column>
+                        <p:outputLabel value="#{verUsuarioController.usuario.usuApellido1} #{verUsuarioController.usuario.usuApellido2}"/>
+                    </p:column>
+
+                </p:row>
+                <p:row >
+
+                    <p:column>
+                        <p:outputLabel style="font-size: 15px;" value="Fecha de Nacimiento: "/>
+                    </p:column>
+                    <p:column style="background: #eff5fa" >
+                        <p:outputLabel value="#{verUsuarioController.fechaDeNacimiento}"/>
+                    </p:column>
+                </p:row>
+                <p:row >
+                    <p:column>
+                        <p:outputLabel style="font-size: 15px;" value="Nombre de Usuario: "/>
+                    </p:column>
+                    <p:column colspan="2">
+                        <p:outputLabel value="#{verUsuarioController.usuario.usuNombreUsuario}"/>
+                    </p:column>
+
+                </p:row>
+                <p:row >
+                    <p:column>
+                        <p:outputLabel style="font-size: 15px;" value="Ocupacón: "/>
+                    </p:column>
+                    <p:column colspan="2" style="background: #eff5fa">
+                        <p:outputLabel value="#{verUsuarioController.usuario.ocuId.ocuDescripcion}"/>
+                    </p:column>
+
+                </p:row>
+                <p:row >
+                    <p:column>
+                        <p:outputLabel style="font-size: 15px;" value="Teléfono: "/>
+                    </p:column>
+                    <p:column colspan="2">
+                        <p:outputLabel value="#{verUsuarioController.usuario.usuTelefono}"/>
+                    </p:column>
+
+                </p:row>
+                <p:row >
+                    <p:column>
+                        <p:outputLabel style="font-size: 15px;" value="Celular: "/>
+                    </p:column>
+                    <p:column colspan="2" style="background: #eff5fa">
+                        <p:outputLabel value="#{verUsuarioController.usuario.usuCelular}"/>  
+                    </p:column>
+
+                </p:row>
+                <!-- Sexo -->
+
+                <p:row >
+                    <p:column>
+                        <p:outputLabel style="font-size: 15px;" value="Sexo "/>
+                    </p:column>
+                    <p:column colspan="2">
+                        <p:outputLabel value="#{verUsuarioController.usuario.usuGenero}"/>
+                    </p:column>
+
+                </p:row>
+                <p:row>
+                    <p:column>
+                        <p:outputLabel style="font-size: 15px;" value="Edad: "/>
+                    </p:column>
+                    <p:column colspan="2" style="background: #eff5fa">
+                        <p:outputLabel value="#{verUsuarioController.usuario.calcularEdad()}"/>
+                        <p:outputLabel value=" años"/>
+                    </p:column>
+                </p:row>
+                <p:row >
+                    <p:column>
+                        <p:outputLabel style="font-size: 15px;" value="Correo Electróncio: "/>
+                    </p:column>
+                    <p:column colspan="2">
+                        <p:outputLabel value="#{verUsuarioController.usuario.usuEmail}"/>
+                    </p:column>
+
+                </p:row>
+                <p:row >
+                    <p:column>
+                        <p:outputLabel style="font-size: 15px;" value="Facultad o dependencia: "/>
+                    </p:column>
+                    <p:column colspan="2" style="background: #eff5fa">
+                        <p:outputLabel value="#{verUsuarioController.usuario.facDepId.facDepNombre}"/>
+                    </p:column>                        
+                </p:row>          
+                <p:row>
+                    <p:column>
+                        <p:outputLabel style="font-size: 15px;" value="Estado: "/>
+                    </p:column>
+                    <p:column colspan="2" rendered="#{verUsuarioController.estado}" >
+                        <p:outputLabel value="#{verUsuarioController.usuario.usuEstado}" style="color: green;"/>
+                    </p:column>           
+                    <p:column colspan="2" rendered="#{!verUsuarioController.estado}"  >
+                        <p:outputLabel value="#{verUsuarioController.usuario.usuEstado}" style="color: red;"/>
+                    </p:column>
+                </p:row>       
+            </p:panelGrid>
+        </h:form>
+    </p:dialog>
+
+
+</html>

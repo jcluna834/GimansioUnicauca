@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MuUsuarioViewDlg" widgetVar="MuUsuarioViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{mru_Bundle.ViewMuUsuarioTitle}">
+            <h:form id="MuUsuarioViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{muUsuarioController.usuario != null}">
+                        <h:outputText value="#{mru_Bundle.ViewMuUsuarioLabel_usuIdentificacion}"/>
+                        <h:outputText value="#{muUsuarioController.usuario.usuIdentificacion}" title="#{mru_Bundle.ViewMuUsuarioTitle_usuIdentificacion}"/>
+<!--                        <h:outputText value="#{mru_Bundle.ViewMuUsuarioLabel_facId}"/>
+                        <h:outputText value="#{muUsuarioController.usuario.facDepId}" title="#{mru_Bundle.ViewMuUsuarioTitle_facId}"/>
+                        <h:outputText value="#{mru_Bundle.ViewMuUsuarioLabel_ocuId}"/>
+                        <h:outputText value="#{muUsuarioController.usuario.ocuId}" title="#{mru_Bundle.ViewMuUsuarioTitle_ocuId}"/>
+                        <h:outputText value="#{mru_Bundle.ViewMuUsuarioLabel_depId}"/>
+                        -->
+                        <h:outputText value="#{mru_Bundle.ViewMuUsuarioLabel_usuCodigo}"/>
+                        <h:outputText value="#{muUsuarioController.usuario.usuCodigo}" title="#{mru_Bundle.ViewMuUsuarioTitle_usuCodigo}"/>
+                        <h:outputText value="#{mru_Bundle.ViewMuUsuarioLabel_usuNombres}"/>
+                        <h:outputText value="#{muUsuarioController.usuario.usuNombres}" title="#{mru_Bundle.ViewMuUsuarioTitle_usuNombres}"/>
+                        <h:outputText value="#{mru_Bundle.ViewMuUsuarioLabel_usuApellido1}"/>
+                        <h:outputText value="#{muUsuarioController.usuario.usuApellido1}" title="#{mru_Bundle.ViewMuUsuarioTitle_usuApellido1}"/>
+                        <h:outputText value="#{mru_Bundle.ViewMuUsuarioLabel_usuApellido2}"/>
+                        <h:outputText value="#{muUsuarioController.usuario.usuApellido2}" title="#{mru_Bundle.ViewMuUsuarioTitle_usuApellido2}"/>
+                        <h:outputText value="#{mru_Bundle.ViewMuUsuarioLabel_usuFechaNacimiento}"/>
+                        <h:outputText value="#{muUsuarioController.usuario.usuFechaNacimiento}" title="#{mru_Bundle.ViewMuUsuarioTitle_usuFechaNacimiento}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{mru_Bundle.ViewMuUsuarioLabel_usuGenero}"/>
+                        <h:outputText value="#{muUsuarioController.usuario.usuGenero}" title="#{mru_Bundle.ViewMuUsuarioTitle_usuGenero}"/>
+                        <h:outputText value="#{mru_Bundle.ViewMuUsuarioLabel_usuTelefono}"/>
+                        <h:outputText value="#{muUsuarioController.usuario.usuTelefono}" title="#{mru_Bundle.ViewMuUsuarioTitle_usuTelefono}"/>
+                        <h:outputText value="#{mru_Bundle.ViewMuUsuarioLabel_usuCelular}"/>
+                        <h:outputText value="#{muUsuarioController.usuario.usuCelular}" title="#{mru_Bundle.ViewMuUsuarioTitle_usuCelular}"/>
+                        <h:outputText value="#{mru_Bundle.ViewMuUsuarioLabel_usuEmail}"/>
+                        <h:outputText value="#{muUsuarioController.usuario.usuEmail}" title="#{mru_Bundle.ViewMuUsuarioTitle_usuEmail}"/>
+                        <h:outputText value="#{mru_Bundle.ViewMuUsuarioLabel_usuFoto}"/>
+                        <h:outputText value="#{muUsuarioController.usuario.usuFoto}" title="#{mru_Bundle.ViewMuUsuarioTitle_usuFoto}"/>
+<!--                        <h:outputText value="#{mru_Bundle.ViewMuUsuarioLabel_usuContrasena}"/>
+                        <h:outputText value="#{muUsuarioController.usuario.usuContrasena}" title="#{mru_Bundle.ViewMuUsuarioTitle_usuContrasena}"/>-->
+                        <h:outputText value="#{mru_Bundle.ViewMuUsuarioLabel_usuNombreUsuario}"/>
+                        <h:outputText value="#{muUsuarioController.usuario.usuNombreUsuario}" title="#{mru_Bundle.ViewMuUsuarioTitle_usuNombreUsuario}"/>
+                        <h:outputText value="#{mru_Bundle.ViewMuUsuarioLabel_usuEstado}"/>
+                        <h:outputText value="#{muUsuarioController.usuario.usuEstado}" title="#{mru_Bundle.ViewMuUsuarioTitle_usuEstado}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{mru_Bundle.Accept}" onclick="MuUsuarioViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

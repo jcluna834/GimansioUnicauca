@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="GrupomuscRealizaEjercicioEditDlg" widgetVar="GrupomuscRealizaEjercicioEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditGrupomuscRealizaEjercicioTitle}">
+            <h:form id="GrupomuscRealizaEjercicioEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{grupomuscRealizaEjercicioController.selected != null}">
+                        <p:outputLabel value="#{mru_Bundle.EditGrupomuscRealizaEjercicioLabel_greRepeticiones}" for="greRepeticiones" />
+                        <p:inputText id="greRepeticiones" value="#{grupomuscRealizaEjercicioController.selected.greRepeticiones}" title="#{mru_Bundle.EditGrupomuscRealizaEjercicioTitle_greRepeticiones}" />
+                        <p:outputLabel value="#{mru_Bundle.EditGrupomuscRealizaEjercicioLabel_greTiempo}" for="greTiempo" />
+                        <p:calendar id="greTiempo" pattern="HH:mm:ss" value="#{grupomuscRealizaEjercicioController.selected.greTiempo}" title="#{mru_Bundle.EditGrupomuscRealizaEjercicioTitle_greTiempo}"  showOn="button"/>
+                        <p:outputLabel value="#{mru_Bundle.EditGrupomuscRealizaEjercicioLabel_variacionpeso}" for="variacionpeso" />
+                        <!--<p:inputText id="variacionpeso" value="#{grupomuscRealizaEjercicioController.selected.variacionpeso}" title="#{mru_Bundle.EditGrupomuscRealizaEjercicioTitle_variacionpeso}" />-->
+                        <p:selectOneMenu id="variacionpeso" value="#{grupomuscRealizaEjercicioController.selected.variacionpeso}">
+                            <f:selectItem itemLabel="#{mru_Bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{mruVariaciondepesoController.itemsAvailableSelectOne}"
+                                           var="mruVariacionPesoItem"
+                                           itemValue="#{mruVariacionPesoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{mru_Bundle.EditGrupomuscRealizaEjercicioLabel_mruEjercicio}" for="mruEjercicio" />
+                        <p:selectOneMenu id="mruEjercicio" value="#{grupomuscRealizaEjercicioController.selected.mruEjercicio}" required="true" requiredMessage="#{mru_Bundle.EditGrupomuscRealizaEjercicioRequiredMessage_mruEjercicio}">
+                            <f:selectItem itemLabel="#{mru_Bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{mruEjercicioController.itemsAvailableSelectOne}"
+                                           var="mruEjercicioItem"
+                                           itemValue="#{mruEjercicioItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{mru_Bundle.EditGrupomuscRealizaEjercicioLabel_mruGrupomuscular}" for="mruGrupomuscular" />
+                        <p:selectOneMenu id="mruGrupomuscular" value="#{grupomuscRealizaEjercicioController.selected.mruGrupomuscular}" required="true" requiredMessage="#{mru_Bundle.EditGrupomuscRealizaEjercicioRequiredMessage_mruGrupomuscular}">
+                            <f:selectItem itemLabel="#{mru_Bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{mruGrupomuscularController.itemsAvailableSelectOne}"
+                                           var="mruGrupomuscularItem"
+                                           itemValue="#{mruGrupomuscularItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{grupomuscRealizaEjercicioController.update}" value="#{mru_Bundle.Save}" update="display,:GrupomuscRealizaEjercicioListForm:datalist,:growl" oncomplete="handleSubmit(args, 'GrupomuscRealizaEjercicioEditDialog');"/>
+                    <p:commandButton value="#{mru_Bundle.Cancel}" onclick="GrupomuscRealizaEjercicioEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

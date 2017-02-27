@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MvRegistrofotograficoCreateDlg" widgetVar="MvRegistrofotograficoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{mvMensajes.CreateMvRegistrofotograficoTitle}">
+            <h:form enctype="multipart/form-data">
+                <h:panelGroup id="panel">
+                    <p:panelGrid columns="2" rendered="#{mvRegistrofotograficoController.selected != null}">
+                        <p:outputLabel value="#{mvMensajes.CreateMvRegistrofotograficoLabel_imgLatIzq}" for="imgLatIzq" />
+                        <p:fileUpload id="imgLatIzq" fileUploadListener="#{mvRegistrofotograficoController.uploadLatIzq}" mode="advanced"
+                                      update="messages" auto="true" allowTypes="/(\.|\/)(jpe?g)$/"
+                                      invalidFileMessage="Debes seleccionar una imagen con formato JPG" required="true" requiredMessage="Falta subir la foto Lateral Izquierda"
+                                      />
+                        <p:outputLabel value="#{mvMensajes.CreateMvRegistrofotograficoLabel_imgLatDer}" for="imgLatDer" />
+                        <p:fileUpload id="imgLatDer" fileUploadListener="#{mvRegistrofotograficoController.uploadLatDer}" mode="advanced"
+                                      update="messages" auto="true" allowTypes="/(\.|\/)(jpe?g)$/"
+                                      invalidFileMessage="Debes seleccionar una imagen con formato JPG" required="true" requiredMessage="Falta subir la foto Lateral Derecha"
+                                      />
+                        <p:outputLabel value="#{mvMensajes.CreateMvRegistrofotograficoLabel_imgFront}" for="imgFront" />
+                        <p:fileUpload id="imgFront" fileUploadListener="#{mvRegistrofotograficoController.uploadFront}" mode="advanced"
+                                      update="messages" auto="true" allowTypes="/(\.|\/)(jpe?g)$/"
+                                      invalidFileMessage="Debes seleccionar una imagen con formato JPG" required="true" requiredMessage="Falta subir la foto Frontal"
+                                      />
+                        <p:outputLabel value="#{mvMensajes.CreateMvRegistrofotograficoLabel_imgPost}" for="imgPost" />
+                        <p:fileUpload id="imgPost" fileUploadListener="#{mvRegistrofotograficoController.uploadPost}" mode="advanced"
+                                      update="messages" auto="true" allowTypes="/(\.|\/)(jpe?g)$/"
+                                      invalidFileMessage="Debes seleccionar una imagen con formato JPG" required="true" requiredMessage="Falta subir la foto Posterior"
+                                      />
+                        <p:growl id="messages" showDetail="true" />
+                    </p:panelGrid>
+                </h:panelGroup>
+            </h:form>
+            
+            <h:form id="MvRegistrofotograficoCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2">
+                        <p:outputLabel value="#{mvMensajes.CreateMvRegistrofotograficoLabel_valId}" for="valId" />
+                        <p:inputText id="valId" value="#{mvValoracionController.selected}" disabled="true"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{mvRegistrofotograficoController.create}" value="#{mvMensajes.Save}" update="display,:growl" oncomplete="handleSubmit(args,'MvRegistrofotograficoCreateDialog');"/>
+                    <p:commandButton value="#{mvMensajes.Cancel}" onclick="MvRegistrofotograficoCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

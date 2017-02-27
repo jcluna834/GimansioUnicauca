@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MvSiguientevaloracionEditDlg" widgetVar="MvSiguientevaloracionEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{mvMensajes.EditMvSiguientevaloracionTitle}">
+            <h:form id="MvSiguientevaloracionEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{mvSiguientevaloracionController.selected != null}">
+                        <p:outputLabel value="#{mvMensajes.EditMvSiguientevaloracionLabel_sigId}" for="sigId" />
+                        <p:inputText id="sigId" value="#{mvSiguientevaloracionController.selected.sigId}" title="#{mvMensajes.EditMvSiguientevaloracionTitle_sigId}" required="true" requiredMessage="#{mvMensajes.EditMvSiguientevaloracionRequiredMessage_sigId}"/>
+                        <p:outputLabel value="#{mvMensajes.EditMvSiguientevaloracionLabel_sigCliente}" for="sigCliente" />
+                        <p:inputText id="sigCliente" value="#{mvSiguientevaloracionController.selected.sigCliente}" title="#{mvMensajes.EditMvSiguientevaloracionTitle_sigCliente}" required="true" requiredMessage="#{mvMensajes.EditMvSiguientevaloracionRequiredMessage_sigCliente}"/>
+                        <p:outputLabel value="#{mvMensajes.EditMvSiguientevaloracionLabel_sigFecha}" for="sigFecha" />
+                        <p:calendar id="sigFecha" pattern="MM/dd/yyyy" value="#{mvSiguientevaloracionController.selected.sigFecha}" title="#{mvMensajes.EditMvSiguientevaloracionTitle_sigFecha}"  showOn="button"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{mvSiguientevaloracionController.update}" value="#{mvMensajes.Save}" update="display,:MvSiguientevaloracionListForm:datalist,:growl" oncomplete="handleSubmit(args, 'MvSiguientevaloracionEditDialog');"/>
+                    <p:commandButton value="#{mvMensajes.Cancel}" onclick="MvSiguientevaloracionEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

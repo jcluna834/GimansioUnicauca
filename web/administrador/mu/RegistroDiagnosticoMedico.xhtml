@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+        
+        <p:dialog header="Medicamentos y diagnostico medico"  modal="true"  widgetVar="RegistrarDiagnosticoMedico">
+            <h:form id="RegistrarDiagnosticoMedico">
+                <p:panelGrid style="text-align:left;" styleClass="panelgrid"  id="panel">
+                    <p:row>
+                        <p:column>
+                            <h:outputLabel value=" ¿Consume algun medicamento?" />
+                        </p:column>                                
+                        <p:column>
+                            <p:selectOneRadio id="consume" value="No"
+                                              valueChangeListener="#{registrarDatosIngresoController.respuesta}">
+                                <f:selectItem itemLabel="Si" itemValue="Si" />
+                                <f:selectItem itemLabel="No" itemValue="No" />                                            
+                               <f:ajax   execute="consume" render="panel" /> 
+                            </p:selectOneRadio>
+                            
+                        </p:column>
+                    </p:row>   
+                    <p:row>
+                        <p:column rendered="#{registrarDatosIngresoController.consumeMedicamentos}">
+                            <h:outputLabel value=" ¿Cual(es)?" />
+                            <p:inputText placeholder="Separados por coma" value="#{registrarDatosIngresoController.medicamentos}"/>
+                        </p:column>                        
+                    </p:row>
+                    <p:row>
+                        <p:column colspan="3">
+                            <h:outputLabel for="descripcion" style="font-weight: bold; font-size: 13px " value="Diagnostico medico" 
+                                           />
+                            <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
+                                           value="*"/>
+                            <p:message for="descripcion"/>
+                        </p:column>                                
+                    </p:row>
+                    <p:row>
+                        <p:column colspan="3">
+                            <h:inputTextarea  style="width: 450px; height: 250px" id="descripcion"
+                                             value="#{registrarDatosIngresoController.descripcionDiagnostico}"
+                                             required="true" requiredMessage="El diagnóstico médico es obligatorio"
+                                             >
+                            </h:inputTextarea>
+                        </p:column> 
+                        
+                        
+                    </p:row>
+                    <p:row>
+                        <p:column style="text-align: center; " colspan="3">
+                            <p:commandButton    
+                                update="panel"
+                                action="#{registrarDatosIngresoController.registrarDiagnosticoMedico()}" 
+                                value="Registrar" 
+                                ajax="true" 
+                                id="registrar" 
+                                onstart="PF('cargando').show()"  onsuccess="PF('cargando').hide()"
+                                />
+                            <p:commandButton   
+                                value="Cancelar" onclick="PF('RegistrarDiagnosticoMedico').hide()"
+                                id="cancelar" onstart="PF('cargando').show()"  onsuccess="PF('cargando').hide()"
+                                />
+                        </p:column>
+                    </p:row>       
+                </p:panelGrid>
+            </h:form>            
+        </p:dialog>
+
+
+</html>
+
+

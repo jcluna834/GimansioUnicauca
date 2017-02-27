@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MuUsuarioCreateDlg" widgetVar="MuUsuarioCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{mru_Bundle.CreateMuUsuarioTitle}">
+            <h:form id="MuUsuarioCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{muUsuarioController.usuario != null}">
+                        <p:outputLabel value="#{mru_Bundle.CreateMuUsuarioLabel_usuIdentificacion}" for="usuIdentificacion" />
+                        <p:inputText id="usuIdentificacion" value="#{muUsuarioController.usuario.usuIdentificacion}" title="#{mru_Bundle.CreateMuUsuarioTitle_usuIdentificacion}" required="true" requiredMessage="#{mru_Bundle.CreateMuUsuarioRequiredMessage_usuIdentificacion}"/>
+                        <p:outputLabel value="#{mru_Bundle.CreateMuUsuarioLabel_facId}" for="facId" />
+                        <p:inputText id="facId" value="#{muUsuarioController.usuario.facDepId}" title="#{mru_Bundle.CreateMuUsuarioTitle_facId}" required="true" requiredMessage="#{mru_Bundle.CreateMuUsuarioRequiredMessage_facId}"/>
+                        <p:outputLabel value="#{mru_Bundle.CreateMuUsuarioLabel_ocuId}" for="ocuId" />
+                        <p:inputText id="ocuId" value="#{muUsuarioController.usuario.ocuId}" title="#{mru_Bundle.CreateMuUsuarioTitle_ocuId}" required="true" requiredMessage="#{mru_Bundle.CreateMuUsuarioRequiredMessage_ocuId}"/>
+                        <p:outputLabel value="#{mru_Bundle.CreateMuUsuarioLabel_usuCodigo}" for="usuCodigo" />
+                        <p:inputText id="usuCodigo" value="#{muUsuarioController.usuario.usuCodigo}" title="#{mru_Bundle.CreateMuUsuarioTitle_usuCodigo}" />
+                        <p:outputLabel value="#{mru_Bundle.CreateMuUsuarioLabel_usuNombres}" for="usuNombres" />
+                        <p:inputText id="usuNombres" value="#{muUsuarioController.usuario.usuNombres}" title="#{mru_Bundle.CreateMuUsuarioTitle_usuNombres}" required="true" requiredMessage="#{mru_Bundle.CreateMuUsuarioRequiredMessage_usuNombres}"/>
+                        <p:outputLabel value="#{mru_Bundle.CreateMuUsuarioLabel_usuApellido1}" for="usuApellido1" />
+                        <p:inputText id="usuApellido1" value="#{muUsuarioController.usuario.usuApellido1}" title="#{mru_Bundle.CreateMuUsuarioTitle_usuApellido1}" required="true" requiredMessage="#{mru_Bundle.CreateMuUsuarioRequiredMessage_usuApellido1}"/>
+                        <p:outputLabel value="#{mru_Bundle.CreateMuUsuarioLabel_usuApellido2}" for="usuApellido2" />
+                        <p:inputText id="usuApellido2" value="#{muUsuarioController.usuario.usuApellido2}" title="#{mru_Bundle.CreateMuUsuarioTitle_usuApellido2}" required="true" requiredMessage="#{mru_Bundle.CreateMuUsuarioRequiredMessage_usuApellido2}"/>
+                        <p:outputLabel value="#{mru_Bundle.CreateMuUsuarioLabel_usuFechaNacimiento}" for="usuFechaNacimiento" />
+                        <p:calendar id="usuFechaNacimiento" pattern="MM/dd/yyyy" value="#{muUsuarioController.usuario.usuFechaNacimiento}" title="#{mru_Bundle.EditMuUsuarioTitle_usuFechaNacimiento}" required="true" requiredMessage="#{mru_Bundle.EditMuUsuarioRequiredMessage_usuFechaNacimiento}" showOn="button"/>
+                        <p:outputLabel value="#{mru_Bundle.CreateMuUsuarioLabel_usuGenero}" for="usuGenero" />
+                        <p:inputText id="usuGenero" value="#{muUsuarioController.usuario.usuGenero}" title="#{mru_Bundle.CreateMuUsuarioTitle_usuGenero}" required="true" requiredMessage="#{mru_Bundle.CreateMuUsuarioRequiredMessage_usuGenero}"/>
+                        <p:outputLabel value="#{mru_Bundle.CreateMuUsuarioLabel_usuTelefono}" for="usuTelefono" />
+                        <p:inputText id="usuTelefono" value="#{muUsuarioController.usuario.usuTelefono}" title="#{mru_Bundle.CreateMuUsuarioTitle_usuTelefono}" />
+                        <p:outputLabel value="#{mru_Bundle.CreateMuUsuarioLabel_usuCelular}" for="usuCelular" />
+                        <p:inputText id="usuCelular" value="#{muUsuarioController.usuario.usuCelular}" title="#{mru_Bundle.CreateMuUsuarioTitle_usuCelular}" />
+                        <p:outputLabel value="#{mru_Bundle.CreateMuUsuarioLabel_usuEmail}" for="usuEmail" />
+                        <p:inputText id="usuEmail" value="#{muUsuarioController.usuario.usuEmail}" title="#{mru_Bundle.CreateMuUsuarioTitle_usuEmail}" required="true" requiredMessage="#{mru_Bundle.CreateMuUsuarioRequiredMessage_usuEmail}"/>
+                        <p:outputLabel value="#{mru_Bundle.CreateMuUsuarioLabel_usuFoto}" for="usuFoto" />
+                        <p:inputTextarea rows="4" cols="30" id="usuFoto" value="#{muUsuarioController.usuario.usuFoto}" title="#{mru_Bundle.CreateMuUsuarioTitle_usuFoto}" required="true" requiredMessage="#{mru_Bundle.CreateMuUsuarioRequiredMessage_usuFoto}"/>
+                        <p:outputLabel value="#{mru_Bundle.CreateMuUsuarioLabel_usuContrasena}" for="usuContrasena" />
+                        <p:inputText id="usuContrasena" value="#{muUsuarioController.usuario.usuContrasena}" title="#{mru_Bundle.CreateMuUsuarioTitle_usuContrasena}" required="true" requiredMessage="#{mru_Bundle.CreateMuUsuarioRequiredMessage_usuContrasena}"/>
+                        <p:outputLabel value="#{mru_Bundle.CreateMuUsuarioLabel_usuNombreUsuario}" for="usuNombreUsuario" />
+                        <p:inputText id="usuNombreUsuario" value="#{muUsuarioController.usuario.usuNombreUsuario}" title="#{mru_Bundle.CreateMuUsuarioTitle_usuNombreUsuario}" required="true" requiredMessage="#{mru_Bundle.CreateMuUsuarioRequiredMessage_usuNombreUsuario}"/>
+                        <p:outputLabel value="#{mru_Bundle.CreateMuUsuarioLabel_usuEstado}" for="usuEstado" />
+                        <p:inputText id="usuEstado" value="#{muUsuarioController.usuario.usuEstado}" title="#{mru_Bundle.CreateMuUsuarioTitle_usuEstado}" required="true" requiredMessage="#{mru_Bundle.CreateMuUsuarioRequiredMessage_usuEstado}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{muUsuarioController.create}" value="#{mru_Bundle.Save}" update="display,:MuUsuarioListForm:datalist,:growl" oncomplete="handleSubmit(args,'MuUsuarioCreateDialog');"/>
+                    <p:commandButton value="#{mru_Bundle.Cancel}" onclick="MuUsuarioCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

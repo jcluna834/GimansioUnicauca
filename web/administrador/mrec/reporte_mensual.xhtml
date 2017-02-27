@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+   <h:head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Facelets Template</title>
+   </h:head>
+   <h:body>
+      <h2>Reporte mensual de recaudos</h2>
+      <h:form id="form">
+         
+         <p:growl id="msgs" showDetail="true"/>
+         
+         <h:panelGrid columns="1" style="width: 100%">
+            <h:outputText value="Cupos Diponibles: (0)" style="float: right; margin-right: 10px; font-size: 14px;"/>
+         </h:panelGrid>
+         
+         <h:panelGrid columns="2" cellpadding="5">
+            <p:selectOneMenu id="year" value="#{recaudosController.year}" style="width: 100px;">
+               <p:ajax listener="#{recaudosController.onYearChange}" update="month :form:tblRecaudos"/>
+               <f:selectItems value="#{recaudosController.years}"/>
+            </p:selectOneMenu>
+            <p:selectOneMenu id="month" value="#{recaudosController.month}" style="width: 100px;">
+               <p:ajax listener="#{recaudosController.onMonthChange}" update=":form:tblRecaudos"/>
+               <f:selectItems value="#{recaudosController.months}"/>
+            </p:selectOneMenu>
+         </h:panelGrid>
+         
+         <p:commandButton value="Registrar recaudo" ajax="false"
+                          action="#{routingController.goToNuevoRecaudoMREC()}" style="margin-bottom: 5px; margin-top: 15px;"/>
+         
+         <p:dataTable id="tblRecaudos" var="recaudo" value="#{recaudosController.recaudos}" widgetVar="recaudosTable"
+                      emptyMessage="No se han encontrado registros" rowIndexVar="rowIndex"
+                      filteredValue="#{recaudosController.recaudosFiltered}"
+                      styleClass="recaudoTable"
+                      rowStyleClass="#{recaudo.fechaLimite.date lt recaudosController.day and (recaudo.estado ne 'Pagado') ? 'fechaRed' : null}"
+                      rows="10" paginator="true" rowsPerPageTemplate="5,10,20"
+                      paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+            
+            <f:facet name="header">
+               <p:outputPanel>
+                  <p:inputText id="globalFilter" onkeyup="PF('recaudosTable').filter()" 
+                               placeholder="Busca por cualquiera de los campos"
+                               style="width: 350px; text-align: center;"/>
+                  <h:outputText value="Mostrando datos de #{recaudosController.month} del #{recaudosController.year}"
+                                style="float: left; margin-top: 7px"/>
+               </p:outputPanel>
+            </f:facet>
+            
+            <p:column headerText="No." width="20">
+               <h:outputText value="#{rowIndex+1}" />
+            </p:column>
+
+            <p:column headerText="Documento" 
+                      filterBy="#{recaudo.usuario.usuIdentificacion}" filterMatchMode="contains">
+               <h:outputText value="#{recaudo.usuario.usuIdentificacion}" />
+            </p:column>
+
+            <p:column headerText="Referencia"
+                      filterBy="#{recaudo.recibo.rpagReferencia}" filterMatchMode="contains">
+               <h:outputText value="#{recaudo.recibo.rpagReferencia}" />
+            </p:column>
+
+            <p:column headerText="Fecha limite"
+                      filterBy="#{recaudo.strFechaLimite}" filterMatchMode="contains">
+               <h:outputText value="#{recaudo.strFechaLimite}" />
+            </p:column>
+
+            <p:column headerText="Estado de pago"
+                      filterBy="#{recaudo.estado}" filterMatchMode="equals">
+               <f:facet name="filter">
+                  <p:selectOneMenu onchange="PF('recaudosTable').filter()" style="font-size: 10px">
+                     <f:selectItem itemLabel="Todos" itemValue="" />
+                     <f:selectItem itemLabel="Sin recibo" itemValue="Sin recibo" />
+                     <f:selectItem itemLabel="Por pagar" itemValue="Por pagar" />
+                     <f:selectItem itemLabel="Pagado" itemValue="Pagado" />
+                  </p:selectOneMenu>
+               </f:facet>
+               <h:outputText value="#{recaudo.estado}" />
+            </p:column>
+
+            <p:column headerText="Conf." width="30">
+               <p:commandButton update=":form:reciboDetail" oncomplete="PF('generateReciboDialog').show()" 
+                                icon="ui-icon-plus" title="Generar recibo"
+                                onclick="#{recaudosController.loadInfoRecibo()}"
+                                rendered="#{(recaudo.estado eq 'Sin recibo') and (recaudo.fechaLimite.date ge recaudosController.day) 
+                                            and (recaudo.fechaLimite.month ge recaudosController.monthInt) 
+                                            and (recaudo.fechaLimite.year ge recaudosController.year)}">
+                  <f:setPropertyActionListener value="#{recaudo}" target="#{recaudosController.recaudoSelected}"/>
+               </p:commandButton>
+               <p:commandButton oncomplete="PF('confirmPagoDialog').show()" 
+                                icon="ui-icon-check" title="Confirmar Pago"
+                                rendered="#{(recaudo.estado eq 'Por pagar') and (recaudo.fechaLimite.date ge recaudosController.day)
+                                            and (recaudo.fechaLimite.month ge recaudosController.monthInt) 
+                                            and (recaudo.fechaLimite.year ge recaudosController.year)}">
+                  <f:setPropertyActionListener value="#{recaudo}" target="#{recaudosController.recaudoSelected}"/>
+               </p:commandButton>
+            </p:column>
+            
+            <p:column headerText="Acciones">
+               <p:commandButton update=":form:recaudoDetail" oncomplete="PF('viewRecaudoDialog').show()" 
+                                icon="ui-icon-search" title="Ver">
+                  <f:setPropertyActionListener value="#{recaudo}" target="#{recaudosController.recaudoSelected}"/>
+               </p:commandButton>
+               <!--<p:commandButton update=":form:recaudoDetail" oncomplete="PF('recaudoDialog').show()" 
+                                icon="ui-icon-pencil" title="Editar">
+                  <f:setPropertyActionListener value="#{recaudo}" target="#{recaudosController.recaudoSelected}"/>
+               </p:commandButton> -->
+               <p:commandButton oncomplete="PF('deleteRecaudoDialog').show()" 
+                                icon="ui-icon-close" title="Eliminar">
+                  <f:setPropertyActionListener value="#{recaudo}" target="#{recaudosController.recaudoSelected}"/>
+               </p:commandButton>
+            </p:column>
+         </p:dataTable>
+         
+         <h:panelGrid columns="2" cellpadding="5">
+            <p:commandLink style="margin-left: 10px;" ajax="false"
+                           action="#{recaudosController.exportReporte()}">
+               <p:graphicImage name="./img/icon_xls.png" height="40" width="40"/>
+               <p:fileDownload value="#{recaudosController.file}"/>
+            </p:commandLink>
+            <h:outputText value="Click en el icono para descargar el reporte en formato xls"
+                          style="font-size: 14px;"/>
+         </h:panelGrid>
+         
+         <p:dialog header="Informacion de Recaudo" widgetVar="viewRecaudoDialog"
+                   modal="true" showEffect="fade" hideEffect="fade"
+                   resizable="false" position="center" width="450" height="280">
+            <p:outputPanel id="recaudoDetail" style="text-align: center;">
+               <p:panelGrid style="width: 100%;">
+                  
+                  <p:row>
+                     <p:column>
+                        <p:graphicImage library="img" name="foto_base.png" height="150" width="150"/>
+                     </p:column>
+                     <p:column>
+                        <p:panelGrid columns="2" rendered="#{not empty recaudosController.usuarioInfo}"
+                                  columnClasses="label,value" style="width: 100%">       
+
+                           <f:facet name="header">
+                              <h:outputText value="Información del Usuairo"/>
+                           </f:facet>
+
+                           <h:outputText value="Nombre: "/>
+                           <h:outputText value="#{recaudosController.usuarioInfo.usuNombres}"/>
+
+                           <h:outputText value="Apellido: "/>
+                           <h:outputText value="#{recaudosController.usuarioInfo.usuApellido1}"/>
+
+                           <h:outputText value="Telefono: "/>
+                           <h:outputText value="#{recaudosController.usuarioInfo.usuCelular}"/>
+
+                           <h:outputText value="Email: "/>
+                           <h:outputText value="#{recaudosController.usuarioInfo.usuEmail}"/>
+
+                           <h:outputText value="Estado: "/>
+                           <h:outputText value="#{recaudosController.usuarioInfo.usuEstado}"/>
+
+                        </p:panelGrid>
+                     </p:column>
+                  </p:row>
+                  
+                  <p:row>
+                     <p:column colspan="2">
+                        <p:panelGrid columns="2" rendered="#{not empty recaudosController.reciboInfo}"
+                                     columnClasses="label,value" style="width: 100%">       
+
+                           <f:facet name="header">
+                              <h:outputText value="Información del Recibo de pago"/>
+                           </f:facet>
+
+                           <h:outputText value="Referencia: "/>
+                           <h:outputText value="#{recaudosController.reciboInfo.rpagReferencia}"/>
+
+                           <h:outputText value="Fecha de Expedicion: "/>
+                           <h:outputText value="#{recaudosController.reciboInfo.rpagFechaExpedicion}">
+                              <f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
+                           </h:outputText>
+
+                           <h:outputText value="Total: "/>
+                           <h:outputText value="#{recaudosController.reciboInfo.rpagTotalRecibo}">
+                              <f:convertNumber type="currency" maxFractionDigits="0" currencySymbol="$ " 
+                                               locale="es_CO"/>
+                           </h:outputText>
+
+                        </p:panelGrid>
+                     </p:column>
+                  </p:row>
+                  
+               </p:panelGrid>
+               
+            </p:outputPanel>
+         </p:dialog>
+         
+         <p:dialog header="Generar Recibo de Pago" widgetVar="generateReciboDialog"
+                   modal="true" showEffect="fade" hideEffect="fade"
+                   resizable="false">
+            <p:outputPanel id="reciboDetail" style="text-align: center;">
+               <h:panelGrid columns="2" rendered="#{not empty recaudosController.recaudoSelected}"
+                            columnClasses="label,value">       
+                  <h:outputLabel for="referencia" value="Referencia: *"/>
+                  <p:inputText id="referencia" style="text-align: center; margin-bottom: 5px;"
+                               required="true" value="#{recaudosController.referencia}"/>
+                  
+                  <h:outputLabel for="fecha" value="Fecha Expedición: *"/>
+                  <p:calendar id="fecha" showOn="button" style="margin-bottom: 5px;"
+                              required="true" pattern="yyyy-MM-dd"
+                              value="#{recaudosController.fechaEspedicion}"/>
+                  
+                  <h:outputLabel for="sesiones" value="Número Sesiones: *"/>
+                  <p:spinner id="sesiones"  style="margin-bottom: 5px;"
+                             required="true" value="#{recaudosController.sesiones}"/>
+                  
+                  <h:outputLabel for="mensualidad" value="Mensualidad: *"/>
+                  <p:selectBooleanButton id="mensualidad" onLabel="Si" offLabel="No" 
+                                         onIcon="ui-icon-check" offIcon="ui-icon-close"
+                                         required="true" value="#{recaudosController.mensualidad}"/>
+                  
+                  <f:facet name="footer">
+                     <h:panelGrid columns="2" style="width: 100%; margin-top: 20px; text-align: center;">
+                        <p:commandButton value="Agregar" actionListener="#{recaudosController.generarRecibo()}"
+                                         icon="ui-icon-check" update=":form:tblRecaudos :form:msgs"
+                                         oncomplete="PF('generateReciboDialog').hide()" />
+                        <p:commandButton value="Cancelar" icon="ui-icon-close" 
+                                         oncomplete="PF('generateReciboDialog').hide()"/>
+                     </h:panelGrid>
+                  </f:facet>
+               </h:panelGrid>
+            </p:outputPanel>
+         </p:dialog>
+         
+         <p:dialog header="¿Esta seguro que desea eliminar este recaudo?" widgetVar="deleteRecaudoDialog"
+                   modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+            <p:outputPanel style="text-align: center;">
+               <h:panelGrid columns="2" style="width: 100%; text-align: center;">
+                  <p:commandButton value="Si" actionListener="#{recaudosController.deleteRecaudo()}"
+                                   icon="ui-icon-check" update=":form:tblRecaudos :form:msgs"
+                                   oncomplete="PF('deleteRecaudoDialog').hide()"
+                                   style="width: 100px;"/>
+                  <p:commandButton value="No" icon="ui-icon-close" 
+                                   oncomplete="PF('deleteRecaudoDialog').hide()"
+                                   style="width: 100px;"/>
+               </h:panelGrid>
+            </p:outputPanel>
+         </p:dialog>
+         
+         <p:dialog header="¿Esta seguro que desea confirmar el pago?" widgetVar="confirmPagoDialog"
+                   modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+            <p:outputPanel style="text-align: center;">
+               <h:panelGrid columns="2" style="width: 100%; text-align: center;">
+                  <p:commandButton value="Si" actionListener="#{recaudosController.registrarPago()}"
+                                   icon="ui-icon-check" update=":form:tblRecaudos :form:msgs"
+                                   oncomplete="PF('confirmPagoDialog').hide()"
+                                   style="width: 100px;"/>
+                  <p:commandButton value="No" icon="ui-icon-close" 
+                                   oncomplete="PF('confirmPagoDialog').hide()"
+                                   style="width: 100px;"/>
+               </h:panelGrid>
+            </p:outputPanel>
+         </p:dialog>
+         
+         
+      </h:form>
+      
+    
+      
+   </h:body>
+</html>

@@ -1,0 +1,129 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <h:head>
+        <title>Nueva Rutina</title>
+
+    </h:head>
+    <h:body>
+
+
+        <br/>
+        <h2>Agregar una nueva Rutina</h2>
+
+        <br/>
+        <br/>
+        <h3>Datos Preliminares</h3>
+        <h:panelGrid columns="1">
+            <!--<p:tabView>-->
+                <!--<p:tab title="Datos preliminares" >-->
+                
+                    <h:form id="MruRutinaCreateForm">
+                        <p:outputLabel value="#{mru_Bundle.requiredFieldsMessage}"/>
+                        <br/>
+                        <br/>
+                        <p:panel>
+
+                            <h:panelGrid columns="6">
+<!--                                    <p:outputLabel value="#{mru_Bundle.CreateMruRutinaLabel_ruId}" for="ruId" />
+                                <p:inputText id="ruId" value="#{mruRutinaController.selected.ruId}" title="#{mru_Bundle.CreateMruRutinaTitle_ruId}" required="true" requiredMessage="#{mru_Bundle.CreateMruRutinaRequiredMessage_ruId}"/>
+                                <h:panelGroup/>
+                                <h:panelGroup/>-->
+                                <div id="unkown">
+                                    <p:outputLabel value="#{mru_Bundle.CreateMruRutinaLabel_ruUsuario}" for="ruUsuario" />
+                                    <p:inputText id="ruUsuario" value="#{mruRutinaController.selected.usuIdentificacion}" title="#{mru_Bundle.CreateMruRutinaTitle_ruUsuario}" required="true" requiredMessage="#{mru_Bundle.CreateMruRutinaRequiredMessage_ruUsuario}"/>
+                                </div>
+                                <!-- LAS LINEAS DE ABAJO PERMITEN SETEAR EL ID DEL USUARIO -->
+                                <script>
+                                    document.getElementById("MruRutinaCreateForm:ruUsuario").value = "#{mruRutinaController.selectedUsuario.usuIdentificacion}";
+                                </script>
+                                <!-- LAS LINEAS DE ARRIBA PERMITEN SETEAR EL ID DEL USUARIO -->
+
+                            </h:panelGrid>
+                            <h3>Periodo de vigencia de la rutina</h3>
+                            <h:panelGrid columns="4">
+                                <p:outputLabel value="#{mru_Bundle.CreateMruRutinaLabel_ruFechaini}" for="ruFechaini" />
+                                <p:calendar id="ruFechaini" pattern="MM/dd/yyyy" value="#{mruRutinaController.selected.ruFechaini}" title="#{mru_Bundle.CreateMruRutinaTitle_ruFechaini}" required="true" requiredMessage="#{mru_Bundle.CreateMruRutinaRequiredMessage_ruFechaini}" showOn="button"/>
+                                <p:outputLabel value="#{mru_Bundle.CreateMruRutinaLabel_ruFechafin}" for="ruFechafin" />
+                                <p:calendar id="ruFechafin" pattern="MM/dd/yyyy" value="#{mruRutinaController.selected.ruFechafin}" title="#{mru_Bundle.CreateMruRutinaTitle_ruFechafin}" required="true" requiredMessage="#{mru_Bundle.CreateMruRutinaRequiredMessage_ruFechafin}" showOn="button"/>
+                            </h:panelGrid>
+
+                            <h3>Datos personales</h3>
+                            <p:panel>
+                                <br/>
+                                <h:panelGrid columns="6">
+                                    <p:outputLabel value="#{mru_Bundle.CreateMruRutinaLabel_ruPeso}" for="ruPeso" />
+                                    <p:inputMask id="ruPeso" value="#{mruRutinaController.selected.ruPeso}" mask="99.99" title="#{mru_Bundle.CreateMruRutinaTitle_ruPeso}" required="true" requiredMessage="#{mru_Bundle.CreateMruRutinaRequiredMessage_ruPeso}"/>
+<!--<p:inputText id="ruPeso" value="#{mruRutinaController.selected.ruPeso}" title="#{mru_Bundle.CreateMruRutinaTitle_ruPeso}" required="true" requiredMessage="#{mru_Bundle.CreateMruRutinaRequiredMessage_ruPeso}"/>-->
+                                    <p:outputLabel value="#{mru_Bundle.CreateMruRutinaLabel_ruTalla}" for="ruTalla" />
+                                    <p:inputMask id="ruTalla" value="#{mruRutinaController.selected.ruTalla}" mask="9.99" title="#{mru_Bundle.CreateMruRutinaTitle_ruTalla}" required="true" requiredMessage="#{mru_Bundle.CreateMruRutinaRequiredMessage_ruTalla}"/>
+<!--<p:inputText id="ruTalla" value="#{mruRutinaController.selected.ruTalla}" title="#{mru_Bundle.CreateMruRutinaTitle_ruTalla}" required="true" requiredMessage="#{mru_Bundle.CreateMruRutinaRequiredMessage_ruTalla}"/>-->
+                                    <p:outputLabel value="IMC: " for="ruIMC" />
+                                    <p:inputText disabled="true" id="ruIMC" value="" title="" required="false"/>
+                                </h:panelGrid>
+                                <br/>
+
+                            </p:panel>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <h:panelGrid columns="2">
+                                <h:panelGrid columns="2">
+                                    <p:outputLabel style="vertical-align: text-top;" value="#{mru_Bundle.CreateMruRutinaLabel_ruObservaciones}" for="ruObservaciones" />
+                                    <p:inputTextarea id="ruObservaciones" value="#{mruRutinaController.selected.ruObservaciones}" title="#{mru_Bundle.CreateMruRutinaTitle_ruObservaciones}" />
+                                </h:panelGrid>
+                            </h:panelGrid>
+
+                        </p:panel>
+                        <p:growl id="growl1" life="3000" showDetail="true"/>
+                        <p:commandButton ajax="false" actionListener="#{mruRutinaController.create}" value="#{mru_Bundle.Save}" update="growl1" />
+                        <!--<p:commandButton ajax="false" actionListener="#{mruRutinaController.clearFields}" value="#{mru_Bundle.clearFields}" update="growl1" />-->
+                    </h:form>
+                <!--</p:tab>-->
+            <!--</p:tabView>-->
+        </h:panelGrid>
+        <!--</h:panelGrid>-->
+        <!--</h:panelGroup>--> 
+        <br/>
+        <br/>
+        <!--        <h2>Agregar nuevo día a una rutina</h2>
+                <p:outputLabel value="#{mru_Bundle.requiredFieldsMessage}"/>
+                <br/><br/>
+                <h:form id="MruDiaCreateForm">
+                    <p:panel>
+                        <h3>Seleccione Aquí la rutina a la cual pertenece este día</h3>
+                        <h:panelGrid columns="4">
+                            <p:outputLabel value="#{mru_Bundle.CreateMruDiaLabel_ruId}" for="ruId" />
+                            <p:selectOneMenu id="ruId" value="#{mruDiaController.selected.ruId}" required="true" requiredMessage="#{mru_Bundle.EditMruDiaRequiredMessage_ruId}">
+                                <f:selectItems value="#{mruRutinaController.itemsAvailableSelectOne}"
+                                               var="ruIdItem"
+                                               itemValue="#{ruIdItem}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel/>
+                            <p:outputLabel/>
+                        </h:panelGrid>
+                        <h3>Datos correspondientes al día</h3>
+                        <h:panelGrid columns="4">
+                            <p:outputLabel value="#{mru_Bundle.CreateMruDiaLabel_diaId}" for="diaId" />
+                            <p:inputText id="diaId" value="#{mruDiaController.selected.diaId}" title="#{mru_Bundle.CreateMruDiaTitle_diaId}" required="true" requiredMessage="#{mru_Bundle.CreateMruDiaRequiredMessage_diaId}"/>
+                            <p:outputLabel value="#{mru_Bundle.CreateMruDiaLabel_diaNumero}" for="diaNumero" />
+                            <p:inputText id="diaNumero" value="#{mruDiaController.selected.diaNumero}" title="#{mru_Bundle.CreateMruDiaTitle_diaNumero}" required="true" requiredMessage="#{mru_Bundle.CreateMruDiaRequiredMessage_diaNumero}"/>
+                            <p:outputLabel value="#{mru_Bundle.CreateMruDiaLabel_diaTiempomin}" for="diaTiempomin" />
+                            <p:calendar id="diaTiempomin" pattern="HH:mm:ss" value="#{mruDiaController.selected.diaTiempomin}" title="#{mru_Bundle.EditMruDiaTitle_diaTiempomin}" required="true" requiredMessage="#{mru_Bundle.EditMruDiaRequiredMessage_diaTiempomin}" showOn="button"/>
+        
+                        </h:panelGrid>
+                    </p:panel>
+                    <p:growl id="growl2" life="2000" />
+                    <p:commandButton actionListener="#{mruDiaController.create}" value="#{mru_Bundle.Save}" update="growl2"/>
+                    <p:commandButton ajax="false" actionListener="#{mruDiaController.clearFields}" value="#{mru_Bundle.clearFields}" update="growl2" />
+                </h:form>-->
+    </h:body>
+</html>
+

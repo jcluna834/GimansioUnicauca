@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MruRutinaEditDlg" widgetVar="MruRutinaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditMruRutinaTitle}">
+            <h:form id="MruRutinaEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{mruRutinaController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditMruRutinaLabel_ruId}" for="ruId" />
+                        <p:inputText id="ruId" value="#{mruRutinaController.selected.ruId}" title="#{bundle.EditMruRutinaTitle_ruId}" required="true" requiredMessage="#{bundle.EditMruRutinaRequiredMessage_ruId}"/>
+                        <p:outputLabel value="#{bundle.EditMruRutinaLabel_ruFechaini}" for="ruFechaini" />
+                        <p:calendar id="ruFechaini" pattern="MM/dd/yyyy" value="#{mruRutinaController.selected.ruFechaini}" title="#{bundle.EditMruRutinaTitle_ruFechaini}" required="true" requiredMessage="#{bundle.EditMruRutinaRequiredMessage_ruFechaini}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditMruRutinaLabel_ruFechafin}" for="ruFechafin" />
+                        <p:calendar id="ruFechafin" pattern="MM/dd/yyyy" value="#{mruRutinaController.selected.ruFechafin}" title="#{bundle.EditMruRutinaTitle_ruFechafin}" required="true" requiredMessage="#{bundle.EditMruRutinaRequiredMessage_ruFechafin}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditMruRutinaLabel_ruPeso}" for="ruPeso" />
+                        <p:inputText id="ruPeso" value="#{mruRutinaController.selected.ruPeso}" title="#{bundle.EditMruRutinaTitle_ruPeso}" required="true" requiredMessage="#{bundle.EditMruRutinaRequiredMessage_ruPeso}"/>
+                        <p:outputLabel value="#{bundle.EditMruRutinaLabel_ruTalla}" for="ruTalla" />
+                        <p:inputText id="ruTalla" value="#{mruRutinaController.selected.ruTalla}" title="#{bundle.EditMruRutinaTitle_ruTalla}" required="true" requiredMessage="#{bundle.EditMruRutinaRequiredMessage_ruTalla}"/>
+                        <p:outputLabel value="#{bundle.EditMruRutinaLabel_ruObservaciones}" for="ruObservaciones" />
+                        <p:inputText id="ruObservaciones" value="#{mruRutinaController.selected.ruObservaciones}" title="#{bundle.EditMruRutinaTitle_ruObservaciones}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{mruRutinaController.update}" value="#{bundle.Save}" update="display,:MruRutinaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'MruRutinaEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="MruRutinaEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

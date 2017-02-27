@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <p:dialog header="Diagnostico medico" modal="true" resizable="false" position="center"  widgetVar="editarDiagnosticoMedico" closable="true">
+        <h:form id="editarDiagnostico">
+            <p:panelGrid styleClass="panelgrid" id="panelDiagnostico">
+                <p:row>
+                    <p:column>
+                        <p:outputLabel style="font-size: 15px; font-weight: bold;" value="Medicamentos "/>
+                    </p:column>
+
+                </p:row>
+                <p:row>
+                    <p:column>
+                        <h:inputText value="#{editarRegistrosIngresoController.medicamentos}"
+                                     />
+                    </p:column>
+
+                </p:row>
+
+                <p:row>
+                    <p:column>
+                        <p:outputLabel style="font-size: 15px; font-weight: bold;" value="Descripción diagnostico medico: "/>
+                    </p:column>
+                </p:row>
+                <p:row>
+                    <p:column colspan="3">
+                        <h:inputTextarea style="width: 450px; height: 250px" id="diagnosticoText"
+                                         value="#{editarRegistrosIngresoController.descripcionDiagnosticoMedico}"
+                                         >
+                        </h:inputTextarea>
+                    </p:column> 
+
+                </p:row>
+                <p:row>
+                    <p:column style="text-align: center; " colspan="3">
+                        <p:commandButton   
+                            value="Actualizar" action="#{editarRegistrosIngresoController.actualizarDatos()}"
+                            id="Actualizar" onstart="PF('cargando').show()"  onsuccess="PF('cargando').hide()"
+                            />
+                        <p:commandButton   
+                            value="Cancelar" onclick="PF('editarDiagnosticoMedico').hide()"
+                            id="cancelar" onstart="PF('cargando').show()"  onsuccess="PF('cargando').hide()"
+                            />
+                    </p:column>
+                </p:row>       
+
+
+            </p:panelGrid>
+        </h:form>
+    </p:dialog>
+
+    <p:dialog header="Examen fisico" modal="true" resizable="false" position="center"  widgetVar="editarExamenFisico" closable="true">
+        <h:form id="editarExamenFisico">
+            <p:panelGrid styleClass="panelgrid" id="panelExamenFisico">
+                <p:row>
+                    <p:column>
+                        <p:outputLabel style="font-size: 15px;" value="Medicamentos "/>
+                    </p:column>
+
+                </p:row>
+                <p:row>
+                    <p:column>
+                        <h:inputText disabled="true"
+                                     value="#{verAntecedentesSaludController.medicamentos}"
+                                     />
+                    </p:column>
+
+                </p:row>
+
+                <p:row>
+                    <p:column>
+                        <p:outputLabel style="font-size: 15px;" value="Descripción diagnostico medico: "/>
+                    </p:column>
+                </p:row>
+                <p:row>
+                    <p:column colspan="3">
+                        <h:inputTextarea disabled="true" style="width: 450px; height: 250px" id="diagnosticoText"
+                                         value="#{verAntecedentesSaludController.descripcionDiagnosticoMedico}"
+                                         >
+                        </h:inputTextarea>
+                    </p:column> 
+
+                </p:row>
+                <p:row>
+                    <p:column style="text-align: center; " colspan="3">
+                        <p:commandButton   
+                            value="Cerrar" onclick="PF('verDiagnosticoMedico').hide()"
+                            id="cancelar" onstart="PF('cargando').show()"  onsuccess="PF('cargando').hide()"
+                            />
+                    </p:column>
+                </p:row>       
+
+
+            </p:panelGrid>
+        </h:form>
+    </p:dialog>
+
+
+</html>

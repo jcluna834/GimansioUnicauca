@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{mvMensajes.ListMvValoracionTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <div class="list-center-content">
+                <p:outputPanel id="panelDocenteAdministracion">
+                    <div class="container-fluid">
+                        <p:separator/>
+                        <h:form id="formDocenteAdministracion">
+                            <p:outputPanel rendered="#{mvValoracionController.selected!=null}">
+                                <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+                                <p:tabView id="tabResultado">
+                                    <p:tab title="Método Ross y Guimaraes">
+                                        <h:panelGrid columns="4" cellpadding="10" cellspacing="true" border="1">
+                                            <h:outputText value="ITEM" style="font-weight: bolder"/>
+                                            <h:outputText value="VALOR" style="font-weight: bolder"/>
+                                            <h:outputText value="ITEM" style="font-weight: bolder"/>
+                                            <h:outputText value="VALOR" style="font-weight: bolder"/>
+                                            <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resId}" style="font-weight: bolder"/>
+                                            <h:outputText value="#{mvValoracionController.result.resId}" title="#{mvMensajes.ViewMvResultadoTitle_resId}"/>
+                                            <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_valId}" style="font-weight: bolder"/>
+                                            <h:outputText value="#{mvValoracionController.result.valId}" title="#{mvMensajes.ViewMvResultadoTitle_valId}"/>
+                                            <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resSumatoria6pliegues}" style="font-weight: bolder"/>
+                                            <h:outputText value="#{mvValoracionController.decformat.format(mvValoracionController.result.resSumatoria6pliegues)}" title="#{mvMensajes.ViewMvResultadoTitle_resSumatoria6pliegues}"/>
+                                            <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resPesoideal}" style="font-weight: bolder"/>
+                                            <h:outputText value="#{mvValoracionController.decformat.format(mvValoracionController.result.resPesoideal)}" title="#{mvMensajes.ViewMvResultadoTitle_resPesoideal}"/>
+                                            <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resPesototal}"/>
+                                            <h:outputText value="#{mvValoracionController.decformat.format(mvValoracionController.result.resPesototal)}" title="#{mvMensajes.ViewMvResultadoTitle_resPesototal}"/>
+                                            <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resPesograsoideal}"/>
+                                            <h:outputText value="#{mvValoracionController.decformat.format(mvValoracionController.result.resPesograsoideal)}" title="#{mvMensajes.ViewMvResultadoTitle_resPesograsoideal}"/>
+                                            <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resPesograso}"/>
+                                            <h:outputText value="#{mvValoracionController.decformat.format(mvValoracionController.result.resPesograso)}" title="#{mvMensajes.ViewMvResultadoTitle_resPesograso}"/>
+                                            <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resPorcentajegrasacorporaltotal}"/>
+                                            <h:outputText value="#{mvValoracionController.decformat.format(mvValoracionController.result.resPorcentajegrasacorporaltotal)}" title="#{mvMensajes.ViewMvResultadoTitle_resPorcentajegrasacorporaltotal}"/>
+                                            <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resPesooseo}"/>
+                                            <h:outputText value="#{mvValoracionController.decformat.format(mvValoracionController.result.resPesooseo)}" title="#{mvMensajes.ViewMvResultadoTitle_resPesooseo}"/>
+                                            <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resPorcentajepesooseo}"/>
+                                            <h:outputText value="#{mvValoracionController.decformat.format(mvValoracionController.result.resPorcentajepesooseo)}" title="#{mvMensajes.ViewMvResultadoTitle_resPorcentajepesooseo}"/>
+                                            <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resPesomuscular}"/>
+                                            <h:outputText value="#{mvValoracionController.decformat.format(mvValoracionController.result.resPesomuscular)}" title="#{mvMensajes.ViewMvResultadoTitle_resPesomuscular}"/>
+                                            <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resPesomuscularideal}"/>
+                                            <h:outputText value="#{mvValoracionController.decformat.format(mvValoracionController.result.resPesomuscularideal)}" title="#{mvMensajes.ViewMvResultadoTitle_resPesomuscularideal}"/>
+                                            <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resPorcentajepesomuscular}"/>
+                                            <h:outputText value="#{mvValoracionController.decformat.format(mvValoracionController.result.resPorcentajepesomuscular)}" title="#{mvMensajes.ViewMvResultadoTitle_resPorcentajepesomuscular}"/>                                        
+                                            <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resPorcentajepesomuscularideal}"/>
+                                            <h:outputText value="#{mvValoracionController.decformat.format(mvValoracionController.result.resPorcentajepesomuscularideal)}" title="#{mvMensajes.ViewMvResultadoTitle_resPorcentajepesomuscularideal}"/>
+                                            <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resTmb24horas}"/>
+                                            <h:outputText value="#{mvValoracionController.decformat.format(mvValoracionController.result.resTmb24horas)}" title="#{mvMensajes.ViewMvResultadoTitle_resTmb24horas}"/>
+                                            <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resPesoidealinferior}"/>
+                                            <h:outputText value="#{mvValoracionController.decformat.format(mvValoracionController.result.resPesoidealinferior)}" title="#{mvMensajes.ViewMvResultadoTitle_resPesoidealinferior}"/>
+                                            <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resPesoresidual}"/>
+                                            <h:outputText value="#{mvValoracionController.decformat.format(mvValoracionController.result.resPesoresidual)}" title="#{mvMensajes.ViewMvResultadoTitle_resPesoresidual}"/>
+                                            <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resPorcentajepesoresidual}"/>
+                                            <h:outputText value="#{mvValoracionController.decformat.format(mvValoracionController.result.resPorcentajepesoresidual)}" title="#{mvMensajes.ViewMvResultadoTitle_resPorcentajepesoresidual}"/>                                       
+                                            <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resMasacorporalmagra}"/>
+                                            <h:outputText value="#{mvValoracionController.decformat.format(mvValoracionController.result.resMasacorporalmagra)}" title="#{mvMensajes.ViewMvResultadoTitle_resMasacorporalmagra}"/>
+                                            <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resMasacorporalmagraideal}"/>
+                                            <h:outputText value="#{mvValoracionController.decformat.format(mvValoracionController.result.resMasacorporalmagraideal)}" title="#{mvMensajes.ViewMvResultadoTitle_resMasacorporalmagraideal}"/>                                        
+                                            <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resPorcentajeoseoideal}"/>
+                                            <h:outputText value="#{mvValoracionController.decformat.format(mvValoracionController.result.resPorcentajeoseoideal)}" title="#{mvMensajes.ViewMvResultadoTitle_resPorcentajeoseoideal}"/>
+                                            <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resTmb1hora}"/>
+                                            <h:outputText value="#{mvValoracionController.decformat.format(mvValoracionController.result.resTmb1hora)}" title="#{mvMensajes.ViewMvResultadoTitle_resTmb1hora}"/>
+                                            <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resRelacioncinturacadera}"/>
+                                            <h:outputText value="#{mvValoracionController.decformat.format(mvValoracionController.result.resRelacioncinturacadera)}" title="#{mvMensajes.ViewMvResultadoTitle_resRelacioncinturacadera}"/>
+                                            <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resPesoideallimite}"/>
+                                            <h:outputText value="#{mvValoracionController.decformat.format(mvValoracionController.result.resPesoideallimite)}" title="#{mvMensajes.ViewMvResultadoTitle_resPesoideallimite}"/>
+                                            <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resPorcentajegrasaideal}"/>
+                                            <h:outputText value="#{mvValoracionController.decformat.format(mvValoracionController.result.resPorcentajegrasaideal)}" title="#{mvMensajes.ViewMvResultadoTitle_resPorcentajegrasaideal}"/>
+                                        </h:panelGrid>
+                                    </p:tab>
+                                    <p:tab title="Somototipo de Heath-Carter">
+                                        <h:panelGrid columns="1" cellpadding="10" style="height: 200px; width: 100%">
+                                            <h:panelGrid columns="2" cellpadding="10" cellspacing="true">
+                                                <h:panelGrid columns="2" cellpadding="10" cellspacing="true" border="2">
+                                                    <h:outputText value="ETIQUETA" style="font-weight: bolder"/>
+                                                    <h:outputText value="VALOR" style="font-weight: bolder"/>
+                                                    <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resEndomorfia}" style="font-weight: bolder"/>
+                                                    <h:outputText value="#{mvValoracionController.decformat.format(mvValoracionController.result.resEndomorfia)}" title="#{mvMensajes.ViewMvResultadoTittle_resEndomorfia}"/>
+                                                    <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resMesomorfia}" style="font-weight: bolder"/>
+                                                    <h:outputText value="#{mvValoracionController.decformat.format(mvValoracionController.result.resMesomorfia)}" title="#{mvMensajes.ViewMvResultadoTittle_resMesomorfia}"/>
+                                                    <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resEctomorfia}" style="font-weight: bolder"/>
+                                                    <h:outputText value="#{mvValoracionController.decformat.format(mvValoracionController.result.resEctomorfia)}" title="#{mvMensajes.ViewMvResultadoTittle_resEctomorfia}"/>
+                                                </h:panelGrid>
+                                                <h:panelGrid columns="2" cellpadding="10" cellspacing="true" >
+                                                    <h:outputText value="SOMATOTIPO:" style="font-weight: bolder"/>
+                                                    <h:outputText value="#{mvValoracionController.valorSomatotipo(mvValoracionController.result)}" style="font-weight: bolder"/>
+                                                </h:panelGrid>
+                                            </h:panelGrid>
+                                            <p:chart type="line" model="#{mvValoracionController.getLineModel()}" style="height: 500px; width: 70%"/>
+                                        </h:panelGrid>
+                                    </p:tab>
+                                    <p:tab title="Resumen y resultados">
+                                        <p:tabView id="tabResumenYResultado">
+                                            <p:tab title="Resumen composición corporal">
+                                                <center>
+                                                    <div style="width: 75%;text-align: justify;text-justify: distribute; font-size: 20px;">
+                                                        <p>
+                                                            Su porcentaje de grasa está en: <font color="blue">#{mvValoracionController.decformat.format(mvValoracionController.result.resPorcentajegrasacorporaltotal)}</font> considerandose: 
+                                                            <font color="blue">#{mvValoracionController.result.resEstado}</font> para su edad y peso.
+                                                            El porcentaje de grasa ideal para usted es de <font color="blue">#{mvValoracionController.result.resPorcentajegrasaideal}</font> %. 
+                                                            El peso ideal en kilos para su contextura es de: <font color="blue">#{mvValoracionController.decformat.format(mvValoracionController.result.resPesoideal)}</font> . 
+                                                            Su índice de masa corporal esta en: <font color="blue">#{mvValoracionController.decformat.format(mvValoracionController.valorImc())}</font>  
+                                                            considerándose <font color="blue">#{mvValoracionController.result.resContextura}</font> según su contextura. 
+                                                            La relación de la cintura y la cadera es <font color="blue">#{mvValoracionController.decformat.format(mvValoracionController.result.resRelacioncinturacadera)}</font> 
+                                                            considerandose <font color="blue">#{mvValoracionController.result.resEnfermedadcoronaria}</font> de enfermedad coronaria. 
+                                                            Su concentración de agua esta en <font color="blue">#{mvValoracionController.decformat.format(mvValoracionController.selected.valPorcentajeaguacorporal)}</font> 
+                                                            considerandose <font color="blue">#{mvValoracionController.result.resHidratacion}</font>. <font color="blue">#{mvValoracionController.textoPorcentajeAgua(mvValoracionController.selected)}</font> 
+                                                            De tu peso has cumplido el <font color="blue">#{mvValoracionController.cumplidoPeso(mvValoracionController.result)}</font> de tus objetivos 
+                                                            De tu porcentaje de grasa has cumplido el <font color="blue">#{mvValoracionController.cumplidoPorcentajeGrasa(mvValoracionController.result)}</font> de tus objetivos 
+                                                            De tu masa corporal has cumplido el <font color="blue">#{mvValoracionController.cumplidoMasaCorporal(mvValoracionController.result)}</font> de tus objetivos 
+                                                            Vo2 max estimado: <font color="blue">#{mvValoracionController.decformat.format(mvValoracionController.result.resVo2maxextimado)}</font> 
+                                                            Vo2 max real: <font color="blue">#{mvValoracionController.selected.valVo2max}</font> 
+                                                            Capacidad funcional: <font color="blue">#{mvValoracionController.result.resCapacidadfuncional}</font>. Déficit aeróbico: <font color="blue">#{mvValoracionController.result.resDeficitaerobico*100}</font>%
+                                                        </p>
+                                                    </div>
+                                                </center>
+                                            </p:tab>
+                                            <p:tab title="Información nutricional - Actividad física">
+                                                <h:panelGrid columns="2" cellpadding="10" cellspacing="true" border="2">
+                                                    <h:outputText value="ITEM" style="font-weight: bolder"/>
+                                                    <h:outputText value="VALOR" style="font-weight: bolder"/>
+                                                    <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resCaloriasrequeridadieta}" style="font-weight: bolder"/>
+                                                    <h:outputText value="#{mvValoracionController.result.resCaloriasrequeridadieta}" title="#{mvMensajes.ViewMvResultadoTittle_resCaloriasrequeridadieta}">
+                                                        <f:convertNumber pattern="#0.00" />
+                                                    </h:outputText>
+                                                    <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resGramoproteinadia}" style="font-weight: bolder"/>
+                                                    <h:outputText value="#{mvValoracionController.decformat.format(mvValoracionController.result.resGramoproteinadia)}" title="#{mvMensajes.ViewMvResultadoTittle_resGramoproteinadia}"/>
+                                                    <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resQuemacaloriassemana}" style="font-weight: bolder"/>
+                                                    <h:outputText value="#{mvValoracionController.decformat.format(mvValoracionController.result.resQuemacaloriassemana)}" title="#{mvMensajes.ViewMvResultadoTittle_resQuemacaloriassemana}"/>
+                                                    <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resQuemacaloriassesion}" style="font-weight: bolder"/>
+                                                    <h:outputText value="#{mvValoracionController.decformat.format(mvValoracionController.result.resQuemacaloriassesion)}" title="#{mvMensajes.ViewMvResultadoTittle_resQuemacaloriassesion}"/>
+                                                    <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resSemanaprograma}" style="font-weight: bolder"/>
+                                                    <h:outputText value="#{mvValoracionController.result.resSemanaprograma}" title="#{mvMensajes.ViewMvResultadoTittle_resSemanaprograma}"/>
+                                                    <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resSesionessemana}" style="font-weight: bolder"/>
+                                                    <h:outputText value="#{mvValoracionController.result.resSesionessemana}" title="#{mvMensajes.ViewMvResultadoTittle_resSesionessemana}"/>
+                                                    <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resRangosfreccardquemagrasamin}" style="font-weight: bolder"/>
+                                                    <h:outputText value="#{mvValoracionController.decformat.format(mvValoracionController.result.resRangosfreccardquemagrasamin)}" title="#{mvMensajes.ViewMvResultadoTittle_resRangosfreccardquemagrasamin}"/>
+                                                    <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resRangosfreccardquemagrasamax}" style="font-weight: bolder"/>
+                                                    <h:outputText value="#{mvValoracionController.decformat.format(mvValoracionController.result.resRangosfreccardquemagrasamax)}" title="#{mvMensajes.ViewMvResultadoTittle_resRangosfreccardquemagrasamax}"/>
+                                                    <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resPesoanterior}" style="font-weight: bolder"/>
+                                                    <h:outputText value="#{mvValoracionController.result.resPesoanterior}" title="#{mvMensajes.ViewMvResultadoTittle_resPesoanterior}"/>
+                                                    <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resPorcentajegrasaanterior}" style="font-weight: bolder"/>
+                                                    <h:outputText value="#{mvValoracionController.result.resPorcentajegrasaanterior}" title="#{mvMensajes.ViewMvResultadoTittle_resPorcentajegrasaanterior}"/>
+                                                    <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resPesomuscularanterior}" style="font-weight: bolder"/>
+                                                    <h:outputText value="#{mvValoracionController.result.resPesomuscularanterior}" title="#{mvMensajes.ViewMvResultadoTittle_resPesomuscularanterior}"/>
+                                                </h:panelGrid>
+                                            </p:tab>
+                                            <p:tab title="Resultados composición corporal">
+                                                <h:panelGrid columns="1" cellpadding="10" style="height: 500px; width: 80%">
+                                                    <p:chart type="pie" model="#{mvValoracionController.getPieModel(0)}" style="width:600px;height:300px" />
+                                                    <p:chart type="bar" model="#{mvValoracionController.getBarModel()}" style="height:300px"/>
+                                                    <p:commandButton id="viewRegistroFoto" actionListener="#{mvRegistrofotograficoController.setValoracion(mvValoracionController.selected)}" icon="ui-icon-search" value="Ver Registro Fotografico" update="MvRegistrofotograficoViewForm" oncomplete="PF('MvRegistrofotograficoViewDialog').show()" rendered="#{mvRegistrofotograficoController.existeRegistro(mvValoracionController.selected)}" disabled="#{empty mvValoracionController.selected}"/>
+                                                </h:panelGrid>
+                                                <ui:include src="../mvRegistrofotografico/View.xhtml"/>
+                                            </p:tab>
+                                            <p:tab title="Historial">
+                                                <h:panelGrid columns="3" style="height: 80px; width: 100%">
+                                                    <p:outputLabel for="valoracionesEscoger" value="Fecha de la valoración a comparar:"/>
+                                                    <p:selectOneMenu id="valoracionesEscoger" value="#{mvValoracionController.comparar}" var="p"
+                                                                     valueChangeListener="#{mvValoracionController.setComparar(valoracion)}"
+                                                                     effect="fold" editable="false">
+                                                        <f:selectItem itemLabel="--Selecciona un fecha--" itemValue="" />
+                                                        <f:selectItems value="#{mvValoracionController.valoracionesUsuario}" var="valoracion"
+                                                                       itemLabel="#{mvValoracionController.dateformat.format(valoracion.valFechavaloracion)}" itemValue="#{valoracion}"/>
+                                                        <p:column>
+                                                            #{mvValoracionController.dateformat.format(p.valFechavaloracion)}
+                                                        </p:column>
+                                                        <p:ajax update="valoracionesEscoger"/>
+                                                    </p:selectOneMenu>
+                                                    <p:commandButton id="mostrarGrafica" value="Comparar"
+                                                                     update="CompararForm,graficaDlg" oncomplete="PF('graficaDialog').show()" disabled="#{empty mvValoracionController.selected}"/>
+                                                </h:panelGrid>
+                                                <ui:include src="Comparar.xhtml"/>
+                                                <h:panelGrid columns="1" cellpadding="10" style="height: 400px;">
+                                                    <p:dataTable value="#{mvValoracionController.valoracionesUsuario}"
+                                                                 var="valoraciones"
+                                                                 paginator="#{evaluacionDocenteControl.valoracionesUsuario.size() gt 1}"
+                                                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                                 currentPageReportTemplate="Página: {currentPage} de {totalPages}"
+                                                                 rows="10" resizableColumns="true">
+                                                        <f:facet name="header">
+                                                            <h:outputText value="Tabla de Resultados" />
+                                                        </f:facet>
+                                                        <p:column style="text-align:center;">
+                                                            <f:facet name="header">
+                                                                <h:outputText value="Fecha de la valoración"></h:outputText>
+                                                            </f:facet>
+                                                            <h:outputText value="#{mvValoracionController.dateformat.format(valoraciones.valFechavaloracion)}" />
+                                                        </p:column>
+                                                        <p:column style="text-align:center;">
+                                                            <f:facet name="header">
+                                                                <h:outputText value="Porcentaje de peso muscular"></h:outputText>
+                                                            </f:facet>
+                                                            <h:outputText value="#{mvValoracionController.decformat.format(valoraciones.resId.resPorcentajepesomuscular)}" />
+                                                        </p:column>
+                                                        <p:column style="text-align:center;">
+                                                            <f:facet name="header">
+                                                                <h:outputText value="Porcentaje de grasa corporal"></h:outputText>
+                                                            </f:facet>
+                                                            <h:outputText value="#{mvValoracionController.decformat.format(valoraciones.resId.resPorcentajegrasacorporaltotal)}" />
+                                                        </p:column>
+                                                    </p:dataTable>
+                                                    <p:panelGrid id="graficaComparar" columns="1">
+                                                        <p:chart type="line" model="#{mvValoracionController.getLineModelComparation()}" style="height:400px" />
+                                                    </p:panelGrid>
+                                                </h:panelGrid>
+                                            </p:tab>
+                                            <p:tab title="Recomendaciones">
+                                                <h:panelGrid columns="1" cellpadding="10">
+                                                    <p:outputLabel value="#{mvBundle.EditMvResultadoLabel_resRecomendaciones}" for="resRecomendaciones" />
+                                                    <p:inputTextarea rows="6" cols="60" id="resRecomendaciones" value="#{mvValoracionController.selected.resId.resRecomendaciones}" title="#{mvBundle.EditMvResultadoTitle_resRecomendaciones}" />
+                                                    <p:commandButton id="recomendacionButton" icon="ui-icon-save" value="Guardar" actionListener="#{mvValoracionController.guardarRecomendaciones()}" update=":formDocenteAdministracion:tabResultado:tabResumenYResultado"/>
+                                                </h:panelGrid>
+                                            </p:tab>
+                                        </p:tabView>
+                                    </p:tab>
+                                </p:tabView>
+                            </p:outputPanel>
+                        </h:form>
+                    </div>
+                </p:outputPanel>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>

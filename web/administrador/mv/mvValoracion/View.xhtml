@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MvValoracionViewDlg" widgetVar="MvValoracionViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{mvMensajes.ViewMvValoracionTitle}">
+            <h:form id="MvValoracionViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{mvValoracionController.selected != null}">
+                        <h:outputText value="#{mvMensajes.ViewMvValoracionLabel_valId}"/>
+                        <h:outputText value="#{mvValoracionController.selected.valId}" title="#{mvMensajes.ViewMvValoracionTitle_valId}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvValoracionLabel_resId}"/>
+                        <h:outputText value="#{mvValoracionController.selected.resId}" title="#{mvMensajes.ViewMvValoracionTitle_resId}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvValoracionLabel_valAbdomeninferior}"/>
+                        <h:outputText value="#{mvValoracionController.selected.valAbdomeninferior}" title="#{mvMensajes.ViewMvValoracionTitle_valAbdomeninferior}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvValoracionLabel_valAbdominal}"/>
+                        <h:outputText value="#{mvValoracionController.selected.valAbdominal}" title="#{mvMensajes.ViewMvValoracionTitle_valAbdominal}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvValoracionLabel_valBiepicondilarfemoral}"/>
+                        <h:outputText value="#{mvValoracionController.selected.valBiepicondilarfemoral}" title="#{mvMensajes.ViewMvValoracionTitle_valBiepicondilarfemoral}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvValoracionLabel_valBiepicondilarhumeral}"/>
+                        <h:outputText value="#{mvValoracionController.selected.valBiepicondilarhumeral}" title="#{mvMensajes.ViewMvValoracionTitle_valBiepicondilarhumeral}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvValoracionLabel_valBicepscontraidoder}"/>
+                        <h:outputText value="#{mvValoracionController.selected.valBicepscontraidoder}" title="#{mvMensajes.ViewMvValoracionTitle_valBicepscontraidoder}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvValoracionLabel_valBicepsrelajadoder}"/>
+                        <h:outputText value="#{mvValoracionController.selected.valBicepsrelajadoder}" title="#{mvMensajes.ViewMvValoracionTitle_valBicepsrelajadoder}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvValoracionLabel_valCadera}"/>
+                        <h:outputText value="#{mvValoracionController.selected.valCadera}" title="#{mvMensajes.ViewMvValoracionTitle_valCadera}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvValoracionLabel_valFrecuenciacardiacareposo}"/>
+                        <h:outputText value="#{mvValoracionController.selected.valFrecuenciacardiacareposo}" title="#{mvMensajes.ViewMvValoracionTitle_valFrecuenciacardiacareposo}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvValoracionLabel_valMedialpierna}"/>
+                        <h:outputText value="#{mvValoracionController.selected.valMedialpierna}" title="#{mvMensajes.ViewMvValoracionTitle_valMedialpierna}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvValoracionLabel_valMusloanterior}"/>
+                        <h:outputText value="#{mvValoracionController.selected.valMusloanterior}" title="#{mvMensajes.ViewMvValoracionTitle_valMusloanterior}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvValoracionLabel_valMuslosuperiorder}"/>
+                        <h:outputText value="#{mvValoracionController.selected.valMuslosuperiorder}" title="#{mvMensajes.ViewMvValoracionTitle_valMuslosuperiorder}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvValoracionLabel_valPantorrillader}"/>
+                        <h:outputText value="#{mvValoracionController.selected.valPantorrillader}" title="#{mvMensajes.ViewMvValoracionTitle_valPantorrillader}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvValoracionLabel_valPectoral}"/>
+                        <h:outputText value="#{mvValoracionController.selected.valPectoral}" title="#{mvMensajes.ViewMvValoracionTitle_valPectoral}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvValoracionLabel_valPorcentajeaguacorporal}"/>
+                        <h:outputText value="#{mvValoracionController.selected.valPorcentajeaguacorporal}" title="#{mvMensajes.ViewMvValoracionTitle_valPorcentajeaguacorporal}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvValoracionLabel_valPorcentajegrasaimpedanciometria}"/>
+                        <h:outputText value="#{mvValoracionController.selected.valPorcentajegrasaimpedanciometria}" title="#{mvMensajes.ViewMvValoracionTitle_valPorcentajegrasaimpedanciometria}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvValoracionLabel_valRadiocubital}"/>
+                        <h:outputText value="#{mvValoracionController.selected.valRadiocubital}" title="#{mvMensajes.ViewMvValoracionTitle_valRadiocubital}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvValoracionLabel_valSubescapular}"/>
+                        <h:outputText value="#{mvValoracionController.selected.valSubescapular}" title="#{mvMensajes.ViewMvValoracionTitle_valSubescapular}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvValoracionLabel_valSupraiiatico}"/>
+                        <h:outputText value="#{mvValoracionController.selected.valSupraiiatico}" title="#{mvMensajes.ViewMvValoracionTitle_valSupraiiatico}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvValoracionLabel_valTorax}"/>
+                        <h:outputText value="#{mvValoracionController.selected.valTorax}" title="#{mvMensajes.ViewMvValoracionTitle_valTorax}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvValoracionLabel_valTricepts}"/>
+                        <h:outputText value="#{mvValoracionController.selected.valTricepts}" title="#{mvMensajes.ViewMvValoracionTitle_valTricepts}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvValoracionLabel_valVo2max}"/>
+                        <h:outputText value="#{mvValoracionController.selected.valVo2max}" title="#{mvMensajes.ViewMvValoracionTitle_valVo2max}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvValoracionLabel_valCliente}"/>
+                        <h:outputText value="#{mvValoracionController.selected.valCliente}" title="#{mvMensajes.ViewMvValoracionTitle_valCliente}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvValoracionLabel_valValorador}"/>
+                        <h:outputText value="#{mvValoracionController.selected.valValorador}" title="#{mvMensajes.ViewMvValoracionTitle_valValorador}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvValoracionLabel_valFechavaloracion}"/>
+                        <h:outputText value="#{mvValoracionController.selected.valFechavaloracion}" title="#{mvMensajes.ViewMvValoracionTitle_valFechavaloracion}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{mvMensajes.ViewMvValoracionLabel_valEdaddecimal}"/>
+                        <h:outputText value="#{mvValoracionController.selected.valEdaddecimal}" title="#{mvMensajes.ViewMvValoracionTitle_valEdaddecimal}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{mvMensajes.Close}" onclick="MvValoracionViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

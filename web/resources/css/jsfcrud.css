@@ -1,0 +1,29 @@
+.ui-widget {
+    font-size: 12px !important;
+}
+.ui-layout-north {
+    z-index: 20 !important;
+    overflow: visible !important;;
+}
+.ui-layout-north .ui-layout-unit-content {
+    overflow: visible !important;
+}
+.ui-widget-header {
+    text-align: center;
+}
+.ui-button {
+    margin-top: 10px !important;
+}
+.list-center-content {
+    clear: both;
+    position: relative;
+    width: 100%;
+    top: -200px;
+    height: 100%;
+}
+.ui-panel .ui-panel-titlebar {
+    padding: 3px;
+    height: 3%;
+}
+
+

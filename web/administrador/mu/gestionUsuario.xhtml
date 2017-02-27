@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Gestion de usuarios</title>
+    </h:head>
+    <h:body>
+        <div>
+            Gestión de Usuarios                    
+        </div>
+        <br/>
+        <h:form id="seleccionarUsuarios">
+            <h:panelGrid columns="3"> 
+                <p:outputLabel styleClass="CampoLabel" value="Seleccione Tipo Usuario:" />                      
+                <p:selectOneMenu  id="tipoUsuario" style="width:150px;font-size: 15px;" required="true"
+                                  requiredMessage="Seleccione un Tipo Usuario."
+                                  valueChangeListener="#{mostrarUsuariosController.cambiarTipoUsuario}">
+                    <f:selectItem itemLabel="Seleccione.." itemValue="Seleccione" />
+                    <f:selectItems value="#{mostrarUsuariosController.listaTiposdeUsuario}"
+                                   var="usuarios" itemLabel="#{usuarios}" itemValue="#{usuarios}"/>
+                    <p:ajax update=":tablasUsuarios"/>
+                    <p:ajax onstart="PF('cargando').show()"  onsuccess="PF('cargando').hide()"/>                                        
+                </p:selectOneMenu>                     
+                <p:commandButton  value="Registrar Nuevo Usuario" style="margin-left: 250px;"
+                                  action="#{registrarUsuarioController.abrirVentanaRegistrarUsuario()}"
+                                  onstart="PF('cargando').show()"  onsuccess="PF('cargando').hide()"/>
+            </h:panelGrid>
+        </h:form>                   
+        <p:separator/>
+        <br/>
+        <ui:include src="listarUsuarios.xhtml"/>              
+        <p:separator/>
+        <ui:include src="/EfectodeCarga.xhtml"/>
+        <ui:include src="RegistroUsuario.xhtml"/>
+        <ui:include src="VerUsuario.xhtml"/>
+        <ui:include src="EditarUsuario.xhtml"/>
+
+        <p:dialog modal="true" resizable="false" header="Confirmar" widgetVar="eliminarUsuario" closable="false" position="center">
+            <h:form>
+                <p:panelGrid style="text-align:left;" styleClass="panelgrid">
+                    <p:row>
+                        <p:column>
+                            <h:outputLabel style="color: red;" value="¿Está seguro que desea eliminar este usuario?"/><br/>
+                        </p:column>                                
+                    </p:row>
+                    <p:row>
+                        <p:column width="200px;">
+                            <p:commandButton style="font-style: italic;margin-left: 170px;font-weight: normal;" 
+                                             value="Aceptar" action="#{eliminarUsuario.eliminarUsuario()}"/>
+                            <p:commandButton style="font-style: italic; margin-left: 10px;font-weight: normal;" value="Cancelar" onclick="PF('eliminarUsuario').hide()"/>
+                        </p:column>
+
+                    </p:row>
+                </p:panelGrid>
+            </h:form>
+        </p:dialog>
+
+        <p:dialog modal="true" resizable="false" header="Error" widgetVar="noSePuedeEliminar" closable="false">
+            <h:form>
+                <p:panelGrid style="text-align:left;" styleClass="panelgrid">
+                    <p:row>
+                        <p:column>
+                            <h:outputLabel style="color: red;" value="El usuario tiene registros o familiares asociados."/>
+                        </p:column>                                
+                    </p:row>
+                    <p:row>
+                        <p:column width="200px;">
+                            <p:commandButton style="font-style: italic;margin-left: 100px;font-weight: normal;" 
+                                             value="Aceptar" onclick="PF('noSePuedeEliminar').hide()"/>                                    
+                        </p:column>
+
+                    </p:row>
+                </p:panelGrid>
+            </h:form>
+
+
+        </p:dialog>
+
+        <p:dialog modal="true" header="Información" resizable="false" widgetVar="eliminacionCorrecta" closable="false">
+            <h:form>
+                <p:panelGrid style="text-align:left;" styleClass="panelgrid">
+                    <p:row>
+                        <p:column>
+                            <h:outputLabel style="color: blue;" value="Se ha eliminado el usuario."/>
+                        </p:column>                                
+                    </p:row>
+                    <p:row>
+                        <p:column width="200px;">
+                            <p:commandButton style="font-style: italic;margin-left: 60px;font-weight: normal;" 
+                                             value="Aceptar" onclick="PF('eliminacionCorrecta').hide()"/>                                    
+                        </p:column>
+
+                    </p:row>
+                </p:panelGrid>
+            </h:form>
+
+
+        </p:dialog>
+
+    </h:body>
+</html>

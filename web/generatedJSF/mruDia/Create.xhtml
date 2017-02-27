@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MruDiaCreateDlg" widgetVar="MruDiaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateMruDiaTitle}">
+            <h:form id="MruDiaCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{mruDiaController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateMruDiaLabel_diaId}" for="diaId" />
+                        <p:inputText id="diaId" value="#{mruDiaController.selected.diaId}" title="#{bundle.CreateMruDiaTitle_diaId}" required="true" requiredMessage="#{bundle.CreateMruDiaRequiredMessage_diaId}"/>
+                        <p:outputLabel value="#{bundle.CreateMruDiaLabel_diaNumero}" for="diaNumero" />
+                        <p:inputText id="diaNumero" value="#{mruDiaController.selected.diaNumero}" title="#{bundle.CreateMruDiaTitle_diaNumero}" required="true" requiredMessage="#{bundle.CreateMruDiaRequiredMessage_diaNumero}"/>
+                        <p:outputLabel value="#{bundle.CreateMruDiaLabel_diaTiempomin}" for="diaTiempomin" />
+                        <p:calendar id="diaTiempomin" pattern="HH:mm:ss" value="#{mruDiaController.selected.diaTiempomin}" title="#{bundle.EditMruDiaTitle_diaTiempomin}" required="true" requiredMessage="#{bundle.EditMruDiaRequiredMessage_diaTiempomin}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateMruDiaLabel_ruId}" for="ruId" />
+                        <p:selectOneMenu id="ruId" value="#{mruDiaController.selected.ruId}" required="true" requiredMessage="#{bundle.EditMruDiaRequiredMessage_ruId}">
+                            <f:selectItems value="#{mruRutinaController.itemsAvailableSelectOne}"
+                                           var="ruIdItem"
+                                           itemValue="#{ruIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{mruDiaController.create}" value="#{bundle.Save}" update="display,:MruDiaListForm:datalist,:growl" oncomplete="handleSubmit(args,'MruDiaCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="MruDiaCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

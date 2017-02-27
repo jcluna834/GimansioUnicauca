@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MruRutinaViewDlg" widgetVar="MruRutinaViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewMruRutinaTitle}">
+            <h:form id="MruRutinaViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{mruRutinaController.selected != null}">
+                        <h:outputText value="#{bundle.ViewMruRutinaLabel_ruId}"/>
+                        <h:outputText value="#{mruRutinaController.selected.ruId}" title="#{bundle.ViewMruRutinaTitle_ruId}"/>
+                        <h:outputText value="#{bundle.ViewMruRutinaLabel_ruFechaini}"/>
+                        <h:outputText value="#{mruRutinaController.selected.ruFechaini}" title="#{bundle.ViewMruRutinaTitle_ruFechaini}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewMruRutinaLabel_ruFechafin}"/>
+                        <h:outputText value="#{mruRutinaController.selected.ruFechafin}" title="#{bundle.ViewMruRutinaTitle_ruFechafin}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewMruRutinaLabel_ruPeso}"/>
+                        <h:outputText value="#{mruRutinaController.selected.ruPeso}" title="#{bundle.ViewMruRutinaTitle_ruPeso}"/>
+                        <h:outputText value="#{bundle.ViewMruRutinaLabel_ruTalla}"/>
+                        <h:outputText value="#{mruRutinaController.selected.ruTalla}" title="#{bundle.ViewMruRutinaTitle_ruTalla}"/>
+                        <h:outputText value="#{bundle.ViewMruRutinaLabel_ruObservaciones}"/>
+                        <h:outputText value="#{mruRutinaController.selected.ruObservaciones}" title="#{bundle.ViewMruRutinaTitle_ruObservaciones}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="MruRutinaViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

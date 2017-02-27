@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:composition>
+
+        <p:dialog id="MvRegistrofotograficoViewDlg" widgetVar="MvRegistrofotograficoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{mvMensajes.ViewMvRegistrofotograficoTitle}" position="top">
+            <h:form id="MvRegistrofotograficoViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" style="text-align: center">
+                        <h:outputText value="#{mvMensajes.ViewMvRegistrofotograficoLabel_imgId}"/>
+                        <h:outputText value="#{mvRegistrofotograficoController.selected.imgId}" title="#{mvMensajes.ViewMvRegistrofotograficoTitle_imgId}"/>
+
+                        <h:outputText value="#{mvMensajes.ViewMvRegistrofotograficoLabel_valId}"/>
+                        <h:outputText value="#{mvRegistrofotograficoController.selected.valId}" title="#{mvMensajes.ViewMvRegistrofotograficoTitle_valId}"/>
+
+                        <c:if test="#{mvRegistrofotograficoController.selected.imgLatIzq != null}">
+                            <h:outputText value="#{mvMensajes.ViewMvRegistrofotograficoLabel_imgLatIzq}"/>
+                            <p:graphicImage value="#{mvRegistrofotograficoController.imageLatIzq}" style="width:100px;height:100px" title="#{mvMensajes.ViewMvRegistrofotograficoTitle_imgLatIzq}">
+                                <f:param name="image" value="#{mvRegistrofotograficoController.selected.imgId}" />
+                            </p:graphicImage>
+                        </c:if>
+
+                        <c:if test="#{mvRegistrofotograficoController.selected.imgLatDer != null}">
+                            <h:outputText value="#{mvMensajes.ViewMvRegistrofotograficoLabel_imgLatDer}"/>
+                            <p:graphicImage value="#{mvRegistrofotograficoController.imageLatDer}" style="width:100px;height:100px" title="#{mvMensajes.ViewMvRegistrofotograficoTitle_imgLatDer}">
+                                <f:param name="image" value="#{mvRegistrofotograficoController.selected.imgId}" />
+                            </p:graphicImage>
+                        </c:if>
+
+                        <c:if test="#{mvRegistrofotograficoController.selected.imgFront != null}">
+                            <h:outputText value="#{mvMensajes.ViewMvRegistrofotograficoLabel_imgFront}"/>
+                            <p:graphicImage value="#{mvRegistrofotograficoController.imageFront}" style="width:100px;height:100px" title="#{mvMensajes.ViewMvRegistrofotograficoTitle_imgFront}">
+                                <f:param name="image" value="#{mvRegistrofotograficoController.selected.imgId}" />
+                            </p:graphicImage>
+                        </c:if>
+
+                        <c:if test="#{mvRegistrofotograficoController.selected.imgPost != null}">
+                            <h:outputText value="#{mvMensajes.ViewMvRegistrofotograficoLabel_imgPost}"/>
+                            <p:graphicImage value="#{mvRegistrofotograficoController.imagePost}" style="width:100px;height:100px" title="#{mvMensajes.ViewMvRegistrofotograficoTitle_imgPost}">
+                                <f:param name="image" value="#{mvRegistrofotograficoController.selected.imgId}" />
+                            </p:graphicImage>
+                        </c:if>
+                    </p:panelGrid>
+                    <p:commandButton value="#{mvMensajes.Close}" onclick="MvRegistrofotograficoViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

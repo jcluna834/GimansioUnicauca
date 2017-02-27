@@ -1,0 +1,16 @@
+/* 
+    Created on : 24/04/2016, 03:39:32 PM
+    Author     : Ricardo
+*/
+
+
+.panelgrid , .panelgrid tr , .panelgrid td
+{
+    border-style: none !important
+
+}
+
+.ui-confirm-dialog{
+ top: 30% !important;
+ left: 40% !important;
+}

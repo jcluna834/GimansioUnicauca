@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+        <p:dialog header="Información" modal="true" position="center" widgetVar="mensajeRegistroExitoso" closable="false">
+            <p:messages  style="font-size: 15px;"  showDetail="true" autoUpdate="true"/>
+            <h:form>
+                <p:commandButton  value="Aceptar" style=" 
+                                  font-weight: normal;"
+                                  onclick="PF('mensajeRegistroExitoso').hide()"/>
+            </h:form>
+        </p:dialog>
+
+        <p:dialog position="center" resizable="false" header="Registro de usuario" showEffect="scale"  modal="true"  widgetVar="RegistrarUsuario">
+            <h:form id="form">
+                <p:panelGrid style="text-align:left;" styleClass="panelgrid"  id="panel" >
+                    <p:row>
+                        <p:column colspan="6">
+                            <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
+                                           value="*"/>
+                            <h:outputLabel class="CampoLabelObligatorios" value=" Campos Obligatorios" />
+                        </p:column>                                
+                    </p:row>                            
+                    <p:row>
+                        <p:column style="text-align:right">
+                            <h:outputLabel class="CampoLabel" for="ocupacion" value="Ocupación: " />
+                            <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
+                                           value="*"/>
+                        </p:column>
+                        <p:column>
+                            <p:selectOneMenu id="ocupacion"  style="width:170px" value="#{registrarUsuarioController.ocupacion.ocuId}" valueChangeListener="#{registrarUsuarioController.cambiarOcupacionUsuario}">
+                                <f:selectItem itemLabel="Seleccione..." itemValue="0" />
+                                <f:selectItems value="#{registrarUsuarioController.listaOcupaciones}" 
+                                               var="ocupacion" itemLabel="#{ocupacion.ocuDescripcion}" 
+                                               itemValue="#{ocupacion.ocuId}"
+                                               />                              
+                                <f:validator validatorId="ValidarCamposSeleccionar"/>
+                                <f:ajax   execute="ocupacion" render="panel" />
+                                <p:ajax  onstart="PF('cargando').show()"  onsuccess="PF('cargando').hide()"/>
+                            </p:selectOneMenu>                                                                             
+                        </p:column>
+                        <p:column>
+                            <p:message for="ocupacion"/>  
+                        </p:column>
+
+                        <p:column style="text-align:right" rendered="#{registrarUsuarioController.ocupacionSeleccionada}">
+                            <h:outputLabel class="CampoLabel" for="facultadDependencia" value="Dependencia o Facultad: " />
+                        </p:column>
+                        <p:column rendered="#{registrarUsuarioController.ocupacionSeleccionada}">
+                            <p:selectOneMenu id="facultadDependencia"  style="width:170px"  
+                                             value="#{registrarUsuarioController.facultadDependencia.facDepId}">
+                                <f:selectItem itemLabel="Seleccione.." itemValue="0" />
+                                <f:selectItems value="#{registrarUsuarioController.listaFacultadesYDependencias}" 
+                                               var="facultadDependencia" itemLabel="#{facultadDependencia.facDepNombre}" 
+                                               itemValue="#{facultadDependencia.facDepId}"/>
+                            </p:selectOneMenu>                                                                             
+                        </p:column>
+                    </p:row>
+                    
+                    <p:row>
+                        <p:column style="text-align:right">
+                            <h:outputLabel class="CampoLabel" for="nombres" value="Nombres: " />
+                            <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
+                                           value="*"/>
+                        </p:column>
+                        <p:column>
+                            <p:inputText style="width: 170px;font-size:15px" 
+                                         id="nombres" value="#{registrarUsuarioController.usuario.usuNombres}"
+                                         required="true" requiredMessage="Obligatorio.">
+                                <f:validator validatorId="ValidarCampoSoloLetrasYespacio"/>
+
+                            </p:inputText>                                
+                        </p:column>
+                        <p:column>
+                            <p:message for="nombres"/>
+                        </p:column>
+
+                        <p:column style="text-align:right">
+                            <h:outputLabel class="CampoLabel" for="primerApellido" value="Primer Apellido: " />
+                            <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
+                                           value="*"/>
+                        </p:column>
+                        <p:column>
+                            <p:inputText style="width: 170px;font-size:15px" 
+                                         id="primerApellido" value="#{registrarUsuarioController.usuario.usuApellido1}"
+                                         required="true" requiredMessage="Obligatorio.">
+                                <f:validator validatorId="ValidarCampoSoloLetrasYespacio"/>
+                            </p:inputText>                                
+                        </p:column>
+                        <p:column>
+                            <p:message for="primerApellido"/>
+                        </p:column>
+                    </p:row>
+
+                    <p:row>
+                        <p:column style="text-align:right">
+                            <h:outputLabel class="CampoLabel" for="segundoApellido" value="Segundo Apellido: " />
+                        </p:column>
+                        <p:column>
+                            <p:inputText style="width: 170px;font-size:15px" 
+                                         id="segundoApellido" value="#{registrarUsuarioController.usuario.usuApellido2}"
+                                         >
+                                <f:validator validatorId="ValidarCampoSoloLetrasYespacio"/>
+                            </p:inputText>                                
+                        </p:column>
+                        <p:column>
+                            <p:message for="segundoApellido"/>
+                        </p:column>
+
+                        <p:column style="text-align:right">
+                            <h:outputLabel class="CampoLabel" for="numeroIdentificacion" value="Cédula: " />
+                            <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
+                                           value="*"/>
+                        </p:column>
+                        <p:column>
+                            <p:inputText style="width: 170px;font-size:15px" 
+                                         id="numeroIdentificacion" value="#{registrarUsuarioController.usuario.usuIdentificacion}"
+                                         required="true" requiredMessage="Campo obligatorio.">                                             
+                                <f:validator validatorId="ValidarCampoNumeroIdentificacion"/>
+                            </p:inputText>                                
+                        </p:column>
+                        <p:column>
+                            <p:message for="numeroIdentificacion"/>
+                        </p:column>
+
+                    </p:row>
+                    <p:row>
+                        <p:column style="text-align:right">
+                            <h:outputLabel class="CampoLabel" for="codigo" value="Código: " />
+                            <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
+                                           />
+                        </p:column>
+                        <p:column>
+                            <p:inputText style="width: 170px;font-size:15px" 
+                                         id="codigo" value="#{registrarUsuarioController.usuario.usuCodigo}"
+                                         >                                             
+
+                            </p:inputText>                                
+                        </p:column>
+                        <p:column>
+
+                        </p:column>
+
+                        <p:column style="text-align: right; ">                                       
+                            <h:outputLabel class="CampoLabel"  for="fechaNacimiento" value="Fecha de Nacimiento: " />
+                            <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
+                                           value="*"/>
+                        </p:column>
+                        <p:column>
+                            <p:calendar value="#{registrarUsuarioController.usuario.usuFechaNacimiento}" size="14" id="fechaNacimiento"  required="true" 
+                                        requiredMessage="Seleccione una fecha de nacimiento." 
+                                        showOn="button" navigator="true" yearRange="c-100:c" pattern="yyyy-MM-dd" 
+                                        placeholder="aaaa-mm-dd"
+                                        >
+                                <f:validator validatorId="ValidarCampoFechaNacimiento"/>
+                            </p:calendar>
+                        </p:column>
+
+                        <p:column>
+                            <p:message for="fechaNacimiento"/>
+                        </p:column>
+
+                    </p:row>
+
+                    <p:row>
+                        <p:column style="text-align:right">
+                            <h:outputLabel class="CampoLabel" for="correoElectronico" value="Correo Electrónico: " />
+                            <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
+                                           />
+                        </p:column>
+                        <p:column>
+                            <p:inputText style="width: 170px;font-size:15px" 
+                                         id="correoElectronico" value="#{registrarUsuarioController.usuario.usuEmail}"
+                                         >
+
+                            </p:inputText>
+                        </p:column>
+                        <p:column>
+                            <p:message for="correoElectronico"/>
+                        </p:column>
+                        <p:column style="text-align:right">
+                            <h:outputLabel class="CampoLabel" for="telefono" value="Teléfono: " />
+                        </p:column>
+                        <p:column>
+                            <p:inputText style="width: 170px;font-size:15px" 
+                                         id="telefono" value="#{registrarUsuarioController.usuario.usuTelefono}"
+                                         >                              
+                            </p:inputText>
+                        </p:column>
+
+                    </p:row>
+
+
+                    <p:row>
+                        <p:column style="text-align:right">
+                            <h:outputLabel class="CampoLabel" for="celular" value="Celular " />
+                        </p:column>
+                        <p:column>
+                            <p:inputText style="width: 170px;font-size:15px" 
+                                         id="celular" value="#{registrarUsuarioController.usuario.usuCelular}"
+                                         >                              
+                            </p:inputText>
+                        </p:column>
+                        <p:column>                            
+                        </p:column>
+                        <p:column colspan="3" rowspan="6">
+                            <p:panel header="Foto perfil" toggleable="true">
+                                <div style="float:left">
+                                    <h:form id="formularioFoto">
+                                        <p:messages closable="true"/>
+                                        <p:panelGrid styleClass="panelgrid" id="panelgridusuario">                            
+                                            <p:row>
+                                                <p:column  rendered="#{registrarUsuarioController.campoFoto}">                                
+                                                    <p:graphicImage value="#{registrarUsuarioController.imagenFlujo}" >
+                                                        <f:param name="idUsu" />
+                                                    </p:graphicImage>
+                                                </p:column>
+
+                                            </p:row>
+                                            <p:row>
+                                                <p:column rendered="#{registrarUsuarioController.campoFoto}">
+                                                    <p:commandLink style="color: blue;" action="#{registrarUsuarioController.mostraSubirFoto()}" value="Cambiar"/>                                                                 
+                                                </p:column>
+
+                                            </p:row>
+                                            <p:row>
+                                                <p:column  rendered="#{!registrarUsuarioController.campoFoto}">
+                                                    <p:fileUpload  fileUploadListener="#{registrarUsuarioController.cargarFoto}" mode="advanced" dragDropSupport="false"
+                                                                   style="width:250px;"
+                                                                   label="Seleccionar" auto="false"  
+                                                                   invalidFileMessage="Tipo de archivo no válido" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+                                                                   onstart="PF('cargando').show()"  oncomplete="PF('cargando').hide()"/>
+
+                                                </p:column>
+                                                <p:column rendered="#{!registrarUsuarioController.campoFoto}">
+                                                    <p:outputLabel value="#{registrarUsuarioController.uploadedFileFoto.fileName}"/>
+                                                </p:column> 
+                                            </p:row>
+                                            
+                                            <!--<p:row> 
+                                                <p:column>
+                                                    <p:commandLink rendered="#{!registrarUsuarioController.campoFoto}"
+                                                                   action="#{registrarUsuarioController.actualizarFoto()}"
+                                                                   style="color:blue;"  value="Aceptar"
+                                                                   onstart="PF('cargando').show()"  oncomplete="PF('cargando').hide()"  />
+                                                </p:column>
+                                                <p:column>
+                                                    <p:commandLink rendered="#{!registrarUsuarioController.campoFoto}" 
+                                                                   style="margin-left:5px; color:blue;"  value="Cancelar" action="#{registrarUsuarioController.cancelarSubirFoto()}"
+                                                                   onstart="PF('cargando').show()"  oncomplete="PF('cargando').hide()"/>
+                                                </p:column>
+                                            </p:row>-->
+
+                                        </p:panelGrid>            
+                                    </h:form> 
+                                </div>
+
+                                <div style="clear: both"></div>
+                            </p:panel>
+                        </p:column>
+                    </p:row>
+
+                    <p:row>
+                        <p:column style="text-align:right">
+                            <h:outputLabel class="CampoLabel" for="nombreUsuario" value="Nombre de Usuario: " />
+                            <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
+                                           value="*"/>
+                        </p:column>
+                        <p:column>
+                            <p:inputText style="width: 170px;font-size:15px" 
+                                         id="nombreUsuario" value="#{registrarUsuarioController.usuario.usuNombreUsuario}"
+                                         required="true" requiredMessage="Campo obligatorio.">                                            
+                                <f:validator validatorId="ValidarCampoNombreUsuario"/>
+                            </p:inputText>                                
+                        </p:column>
+                        <p:column>
+                            <p:message for="nombreUsuario"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column style="text-align:right">
+                            <h:outputLabel class="CampoLabel" for="contrasena" value="Contraseña: " />
+                            <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
+                                           value="*"/>
+                        </p:column>
+                        <p:column> 
+                            <p:password style="width: 170px;font-size:15px" 
+                                        id="contrasena" value="#{registrarUsuarioController.contrasena}"
+                                        required="true" requiredMessage="Campo obligatorio."
+                                        validator="#{registrarUsuarioController.validateContrasena}">
+                                <f:validator validatorId="ValidarCampoMaximo20Caracteres"/>
+                                <f:validator validatorId="ValidarCampoMinimo6Caracteres"/>
+
+                            </p:password>                                
+                        </p:column>
+                        <p:column>
+                            <p:message for="contrasena"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>                                        
+                        </p:column>
+                        <p:column>
+                            <h:outputLabel class="CampoLabelEspecificacion"  value="Entre 6 y 20 caracteres AlfaNuméricos." />
+                        </p:column>
+                                                                
+                    </p:row>
+                    <p:row>
+                        <p:column style="text-align:right">
+                            <h:outputLabel class="CampoLabel" for="confirmarContrasena" value="Confirmar Contraseña: " />
+                            <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
+                                           value="*"/>
+                        </p:column>
+                        <p:column>
+                            <p:password  style="width: 170px;font-size:15px" 
+                                         id="confirmarContrasena" value="#{registrarUsuarioController.repetircontrasena}"
+                                         required="true" requiredMessage="Campo obligatorio."
+                                         validator="#{registrarUsuarioController.validateRepitaContrasena}"
+                                         >                                            
+                            </p:password>                                
+                        </p:column>
+                        <p:column>
+                            <p:message for="confirmarContrasena"/>
+                        </p:column>
+                    </p:row>
+
+                    <p:row>
+                        <p:column style="text-align:right">
+                            <h:outputLabel class="CampoLabel" for="genero" value="Genero " />
+                            <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
+                                           value="*"/>
+                        </p:column>
+                        <p:column>
+                            <p:selectOneRadio  id="genero" value="#{registrarUsuarioController.usuario.usuGenero}" required="true" requiredMessage="Seleccione Sexo.">
+                                <f:selectItem itemLabel="M" itemValue="M" />
+                                <f:selectItem itemLabel="F" itemValue="F" />                                            
+                            </p:selectOneRadio>
+                        </p:column>
+                        <p:column>
+                            <p:message for="genero"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column style="text-align:right">
+                            <h:outputLabel class="CampoLabel" for="estado" value="Estado " />
+                            <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
+                                           value="*"/>
+                        </p:column>
+                        <p:column>
+                            <p:selectOneRadio    id="estado" value="#{registrarUsuarioController.usuario.usuEstado}" required="true" requiredMessage="Seleccione estado.">
+                                <f:selectItem itemLabel="Activo" itemValue="Activo" />
+                                <f:selectItem itemLabel="Inactivo" itemValue="Inactivo" />                                            
+                            </p:selectOneRadio>
+                        </p:column>
+                        <p:column>
+                            <p:message for="estado"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column style="text-align: center; " colspan="6">
+                            <p:commandButton    
+                                action="#{registrarUsuarioController.registrarUsuario()}" value="Registrar" ajax="true" 
+                                update="panel" id="registrar" onstart="PF('cargando').show()"  onsuccess="PF('cargando').hide()"
+                                />
+                            <p:commandButton   
+                                value="Cancelar" onclick="PF('RegistrarUsuario').hide()"
+                                id="cancelar" onstart="PF('cargando').show()"  onsuccess="PF('cargando').hide()"
+                                />
+                        </p:column>
+                    </p:row>                               
+                </p:panelGrid>                            
+            </h:form>       
+        </p:dialog>
+
+</html>
+
+

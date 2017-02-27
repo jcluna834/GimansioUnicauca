@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+        <h:panelGrid columns="1">
+            <h:form id="MruEjercicioListForm">
+                <p:panel header="#{mru_Bundle.ListMruEjercicioTitle}">
+                    <p:dataTable id="datalist" value="#{mruEjercicioController.items}" var="item"
+                                 selectionMode="single" selection="#{mruEjercicioController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.ejId}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 emptyMessage="#{mru_Bundle.NoRecords}"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{mru_Bundle.ListMruEjercicioTitle_ejId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.ejId}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{mru_Bundle.ListMruEjercicioTitle_ejNombre}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.ejNombre}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{mru_Bundle.ListMruEjercicioTitle_ejDescrip}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.ejDescrip}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{mru_Bundle.ListMruEjercicioTitle_ejImagen}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.ejImagen}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{mru_Bundle.Create}" actionListener="#{mruEjercicioController.prepareCreate}" update=":MruEjercicioCreateForm" oncomplete="PF('MruEjercicioCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{mru_Bundle.View}" update=":MruEjercicioViewForm" oncomplete="PF('MruEjercicioViewDialog').show()" disabled="#{empty mruEjercicioController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{mru_Bundle.Delete}" actionListener="#{mruEjercicioController.destroy}" update="datalist" disabled="#{empty mruEjercicioController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+        </h:panelGrid>
+
+        <p:dialog id="MruEjercicioCreateDlg" widgetVar="MruEjercicioCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{mru_Bundle.CreateMruEjercicioTitle}">
+            <h:form id="MruEjercicioCreateForm" enctype="multipart/form-data">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{mruEjercicioController.selected != null}">
+                        <p:outputLabel value="#{mru_Bundle.CreateMruEjercicioLabel_ejId}" for="ejId" />
+                        <p:inputText id="ejId" value="#{mruEjercicioController.selected.ejId}" title="#{mru_Bundle.CreateMruEjercicioTitle_ejId}" required="true" requiredMessage="#{mru_Bundle.CreateMruEjercicioRequiredMessage_ejId}"/>
+                        <p:outputLabel value="#{mru_Bundle.CreateMruEjercicioLabel_ejNombre}" for="ejNombre" />
+                        <p:inputText id="ejNombre" value="#{mruEjercicioController.selected.ejNombre}" title="#{mru_Bundle.CreateMruEjercicioTitle_ejNombre}" required="true" requiredMessage="#{mru_Bundle.CreateMruEjercicioRequiredMessage_ejNombre}"/>
+                        <p:outputLabel value="#{mru_Bundle.CreateMruEjercicioLabel_ejDescrip}" for="ejDescrip" />
+                        <p:inputText id="ejDescrip" value="#{mruEjercicioController.selected.ejDescrip}" title="#{mru_Bundle.CreateMruEjercicioTitle_ejDescrip}" />
+                        <h:panelGrid columns="1">
+                        <p:outputLabel value="#{mru_Bundle.CreateMruEjercicioLabel_ejImagen}" />
+                        <!--<p:inputText id="ejImagen" value="#{mruEjercicioController.selected.ejImagen}" title="#{mru_Bundle.CreateMruEjercicioTitle_ejImagen}" />-->
+                        <p:fileUpload fileUploadListener="#{mruEjercicioController.handleFileUpload}" mode="advanced" dragDropSupport="true"
+                                      update="messages" sizeLimit="100000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+                        <p:growl id="messages" showDetail="true" />
+                        </h:panelGrid>
+                    
+                    </p:panelGrid>
+                    <p:commandButton ajax="false" actionListener="#{mruEjercicioController.create}" value="#{mru_Bundle.Save}" update="display,:MruEjercicioListForm:datalist" oncomplete="handleSubmit(args,'MruEjercicioCreateDialog');"/>
+                    <p:commandButton ajax="false" value="#{mru_Bundle.Cancel}" onclick="MruEjercicioCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+        <p:dialog id="MruEjercicioViewDlg" widgetVar="MruEjercicioViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{mru_Bundle.ViewMruEjercicioTitle}">
+            <h:form id="MruEjercicioViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{mruEjercicioController.selected != null}">
+                        <h:outputText value="#{mru_Bundle.ViewMruEjercicioLabel_ejId}"/>
+                        <h:outputText value="#{mruEjercicioController.selected.ejId}" title="#{mru_Bundle.ViewMruEjercicioTitle_ejId}"/>
+                        <h:outputText value="#{mru_Bundle.ViewMruEjercicioLabel_ejNombre}"/>
+                        <h:outputText value="#{mruEjercicioController.selected.ejNombre}" title="#{mru_Bundle.ViewMruEjercicioTitle_ejNombre}"/>
+                        <h:outputText value="#{mru_Bundle.ViewMruEjercicioLabel_ejDescrip}"/>
+                        <h:outputText value="#{mruEjercicioController.selected.ejDescrip}" title="#{mru_Bundle.ViewMruEjercicioTitle_ejDescrip}"/>
+                        <h:outputText value="#{mru_Bundle.ViewMruEjercicioLabel_ejImagen}"/>
+                        <h:outputText value="#{mruEjercicioController.selected.ejImagen}" title="#{mru_Bundle.ViewMruEjercicioTitle_ejImagen}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{mru_Bundle.Close}" onclick="MruEjercicioViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+    </body>
+
+</html>

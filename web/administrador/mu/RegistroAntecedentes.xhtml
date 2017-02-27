@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+        <h:form id="RegistrarAntecedentes">
+        <p:dialog header="Formulario Antecedentes"  modal="true"  widgetVar="RegistrarAntecedentes" width="1000" height="250">
+            
+                 
+    <p:growl id="growl" sticky="true" showDetail="true"/>
+ 
+    <p:wizard widgetVar="myWizard" showNavBar="false"  >
+              
+ <p:tab id="personal" title="1">
+            <p:panel header="Pregunta 1">
+                <p:messages />
+                <h:panelGrid columns="2" columnClasses="label, value">
+                    
+                    
+                       <h:outputLabel value="1. ¿Ha tenido o tiene alguna lesión osea?. En caso afirmativo, descríbalo brevemente." for="pregunta" />
+                 
+                       <p:selectOneRadio id="antaRespuesta" value="#{muAntecedentesTipoaController.selected.antaRespuesta}" >
+                         <f:selectItem itemLabel="Si" itemValue="true"/>
+                         <f:selectItem itemLabel="No" itemValue="false"/>
+                    </p:selectOneRadio>
+                    <h:outputLabel value="Descripción" for="Descripción" />
+                    <h:inputText id="antaDescripcion" value="#{muAntecedentesTipoaController.antaDescripcion1}" title="#{bundle.EditMuAntecedentesTipoaTitle_antaDescripcion}" />
+                               
+                    <p:commandButton icon="ui-icon-disk" value="Guardar" 
+                                          action="#{muAntecedentesTipoaController.setIdsalud(registrarDatosIngresoController.usuario.usuIdentificacion,1)}"  />
+               
+                   <p:commandButton value="Siguiente" icon=" ui-icon-circle-triangle-e" iconPos="right" type="button"   onclick="PF('myWizard').next();"/>
+   
+    </h:panelGrid>
+            </p:panel>
+        </p:tab>
+        
+            <p:tab id="address" title="2">
+            <p:panel header="Pregunta 2">
+                <p:messages />
+                <h:panelGrid columns="2" columnClasses="label, value">
+                    
+                     <h:outputLabel value="2. ¿Ha tenido o tiene alguna lesión muscular?. En caso afirmativo, descríbalo brevemente." for="pregunta2" />
+                          
+                    <p:selectOneRadio id="antaRespuesta1" value="#{muAntecedentesTipoaController.selected.antaRespuesta}" >
+                         <f:selectItem itemLabel="Si" itemValue="true"/>
+                         <f:selectItem itemLabel="No" itemValue="false"/>
+                    </p:selectOneRadio>
+                    <h:outputLabel value="Descripción" for="antaDescripcion1" />
+                    <h:inputText id="antaDescripcion1" value="#{muAntecedentesTipoaController.antaDescripcion2}" title="#{bundle.EditMuAntecedentesTipoaTitle_antaDescripcion}" />
+                    <br/>                    
+                         <p:commandButton value="Guardar"  icon="ui-icon-disk"
+                                          action="#{muAntecedentesTipoaController.setIdsalud(registrarDatosIngresoController.usuario.usuIdentificacion,2)}"  />
+                       <p:commandButton value="Atras" icon="ui-icon-circle-triangle-w" iconPos="left" type="button"   onclick="PF('myWizard').back();"/>
+                       <p:commandButton value="Siguiente" icon=" ui-icon-circle-triangle-e" iconPos="right" type="button"   onclick="PF('myWizard').next();"/>
+   
+                </h:panelGrid>
+            </p:panel>
+        </p:tab>
+        
+        <p:tab id="contact" title="3">
+            <p:panel header="Pregunta 3">
+                <p:messages />
+                <h:panelGrid columns="2" columnClasses="label, value">
+                      <h:outputLabel value="3. ¿Padece usted de alguna enfermedad cardiovascular?. En caso afirmativo, descríbalo brevemente." />
+                          
+                    <p:selectOneRadio id="antaRespuesta3" value="#{muAntecedentesTipoaController.selected.antaRespuesta}" >
+                         <f:selectItem itemLabel="Si" itemValue="true"/>
+                         <f:selectItem itemLabel="No" itemValue="false"/>
+                    </p:selectOneRadio>
+                    <h:outputLabel value="Descripción" for="antaDescripcion3" />
+                    <h:inputText id="antaDescripcion3" value="#{muAntecedentesTipoaController.antaDescripcion3}" title="#{bundle.EditMuAntecedentesTipoaTitle_antaDescripcion}" />
+                 
+                    <br/>
+                      <p:commandButton value="Guardar"  icon="ui-icon-disk" 
+                                          action="#{muAntecedentesTipoaController.setIdsalud(registrarDatosIngresoController.usuario.usuIdentificacion,3)}"  />
+                      <p:commandButton value="Atras" icon="ui-icon-circle-triangle-w" iconPos="left" type="button"   onclick="PF('myWizard').back();"/>
+                       <p:commandButton value="Siguiente" icon=" ui-icon-circle-triangle-e" iconPos="right" type="button"   onclick="PF('myWizard').next();"/>
+   
+                      
+                      
+                </h:panelGrid>
+            </p:panel>
+        </p:tab>
+        
+        <p:tab id="p5" title="4">
+            <p:panel header="Pregunta 4">
+                <p:messages />
+                <h:panelGrid columns="2" columnClasses="label, value">
+                      <h:outputLabel value="4. ¿Tiene dolores frecuentes y no ha consultado al medico?                         ." />
+                         <h:outputLabel value="   "/>
+                      <p:selectManyCheckbox id="basic" value="#{muAntecedentesTipobController.retbRespuesta1}">
+                           <f:selectItem itemLabel="Espalda" itemValue="Espalda" />
+                           <f:selectItem itemLabel="Rodilla" itemValue="Rodilla" />
+                           <f:selectItem itemLabel="Cadera" itemValue="Cadera" />
+                           <f:selectItem itemLabel="Cuello" itemValue="Cuello" />
+                           <f:selectItem itemLabel="Tobillo" itemValue="Tobillo" />
+                           <f:selectItem itemLabel="Codo" itemValue="Codo" />
+                           </p:selectManyCheckbox>
+                      <h:outputLabel value="   "/>
+                      <br/>
+                      <p:commandButton value="Guardar"  icon="ui-icon-disk"  
+                                          action="#{muAntecedentesTipobController.setIdsalud(registrarDatosIngresoController.usuario.usuIdentificacion,1)}"  />
+                      
+                     <p:commandButton value="Atras" icon="ui-icon-circle-triangle-w" iconPos="left" type="button"   onclick="PF('myWizard').back();"/>
+                       <p:commandButton value="Siguiente" icon=" ui-icon-circle-triangle-e" iconPos="right" type="button"   onclick="PF('myWizard').next();"/>
+   
+                      
+                </h:panelGrid>
+            </p:panel>
+        </p:tab>
+        
+          <p:tab id="p6" title="5">
+            <p:panel header="Pregunta 5">
+                <p:messages />
+                <h:panelGrid columns="2" columnClasses="label, value">
+                      <h:outputLabel value="5. ¿Ha tenido operaciones graves?." />
+                      <h:outputLabel value="   "/>
+                      <p:selectManyCheckbox id="basic1" value="#{muAntecedentesTipobController.retbRespuesta2}">
+                           <f:selectItem itemLabel="Corazon" itemValue="Corazon" />
+                           <f:selectItem itemLabel="Riñon" itemValue="Riñon" />
+                           <f:selectItem itemLabel="Articulaciones" itemValue="Articulaciones" />
+                           <f:selectItem itemLabel="Hernia" itemValue="Hernia" />
+                           <f:selectItem itemLabel="Pulmones" itemValue="Pulmones" />
+                           <f:selectItem itemLabel="Otra" itemValue="Otra" />
+                    </p:selectManyCheckbox>
+                       <h:outputLabel value="   "/>
+                      <br/>
+                 
+                      
+                      <p:commandButton value="Guardar"  icon="ui-icon-disk"
+                                          action="#{muAntecedentesTipobController.setIdsalud(registrarDatosIngresoController.usuario.usuIdentificacion,2)}"  />
+               
+                    <p:commandButton value="Atras" icon="ui-icon-circle-triangle-w" iconPos="left" type="button"   onclick="PF('myWizard').back();"/>
+                       <p:commandButton value="Siguiente" icon=" ui-icon-circle-triangle-e" iconPos="right" type="button"   onclick="PF('myWizard').next();"/>
+   
+                      
+                </h:panelGrid>
+            </p:panel>
+        </p:tab>
+        
+        
+         <p:tab id="id5" title="6">
+            <p:panel header="Pregunta 6">
+                <p:messages />
+                <h:panelGrid columns="2" columnClasses="label, value">
+                      <h:outputLabel value="6. ¿Se afixia con facilidad al realizar ejercicio físico?" />
+                          
+                    <p:selectOneRadio id="antaRespuesta6" value="#{muAntecedentesTipoaController.selected.antaRespuesta}" >
+                         <f:selectItem itemLabel="Si" itemValue="true"/>
+                         <f:selectItem itemLabel="No" itemValue="false"/>
+                    </p:selectOneRadio>
+                      <br/>
+                          <p:commandButton value="Guardar"  icon="ui-icon-disk"
+                                          action="#{muAntecedentesTipoaController.setIdsalud(registrarDatosIngresoController.usuario.usuIdentificacion,4)}"  />
+               
+                   <p:commandButton value="Atras" icon="ui-icon-circle-triangle-w" iconPos="left" type="button"   onclick="PF('myWizard').back();"/>
+                       <p:commandButton value="Siguiente" icon=" ui-icon-circle-triangle-e" iconPos="right" type="button"   onclick="PF('myWizard').next();"/>
+   
+                   
+                      
+                </h:panelGrid>
+            </p:panel>
+        </p:tab>
+        
+        
+        <p:tab id="p7" title="7">
+            <p:panel header="Pregunta 7">
+                <p:messages />
+                <h:panelGrid columns="2" columnClasses="label, value">
+                      <h:outputLabel value="7. ¿Es usted?." />
+                      <h:outputLabel value="   "/>
+                      <p:selectManyCheckbox id="basic22" value="#{muAntecedentesTipobController.retbRespuesta3}">
+                           <f:selectItem itemLabel="Asmático/a" itemValue="Asmático/a" />
+                           <f:selectItem itemLabel="Epileptico/a" itemValue="Epileptico/a" />
+                           <f:selectItem itemLabel="Diabetico/a" itemValue="Diabetico/a" />
+                           <f:selectItem itemLabel="Fumador/a" itemValue="Fumador/a" />
+                    </p:selectManyCheckbox>
+                 <h:outputLabel value="   "/>
+                      <br/>
+                      <p:commandButton value="Guardar"  icon="ui-icon-disk"
+                                          action="#{muAntecedentesTipobController.setIdsalud(registrarDatosIngresoController.usuario.usuIdentificacion,3)}"  />
+               
+                   <p:commandButton value="Atras" icon="ui-icon-circle-triangle-w" iconPos="left" type="button"   onclick="PF('myWizard').back();"/>
+                       <p:commandButton value="Siguiente" icon=" ui-icon-circle-triangle-e" iconPos="right" type="button"   onclick="PF('myWizard').next();"/>
+   
+                      
+                </h:panelGrid>
+            </p:panel>
+        </p:tab>
+        
+        
+        
+        <p:tab id="pregunta8" title="8">
+            <p:panel header="Pregunta 8">
+                <p:messages />
+                <h:panelGrid columns="2" columnClasses="label, value">
+                      <h:outputLabel value="8. ¿Está usted embarazada o sospecha estarlo? (Sólo mujeres)" />
+                          
+                    <p:selectOneRadio id="antaRespuesta8" value="#{muAntecedentesTipoaController.selected.antaRespuesta}" >
+                         <f:selectItem itemLabel="Si" itemValue="true"/>
+                         <f:selectItem itemLabel="No" itemValue="false"/>
+                    </p:selectOneRadio>
+                      <br/>
+                    <p:commandButton value="Guardar"  icon="ui-icon-disk" 
+                                          action="#{muAntecedentesTipoaController.setIdsalud(registrarDatosIngresoController.usuario.usuIdentificacion,5)}"  />
+               
+                   <p:commandButton value="Atras" icon="ui-icon-circle-triangle-w" iconPos="left" type="button"   onclick="PF('myWizard').back();"/>
+                       <p:commandButton value="Siguiente" icon=" ui-icon-circle-triangle-e" iconPos="right" type="button"   onclick="PF('myWizard').next();"/>
+   
+                      
+                </h:panelGrid>
+            </p:panel>
+        </p:tab>
+        
+         <p:tab id="pregunta9" title="9">
+            <p:panel header="Pregunta 9">
+                <p:messages />
+                <h:panelGrid columns="2" columnClasses="label, value">
+                      <h:outputLabel value="9. ¿Padece de anemia en la actualidad?" />
+                          
+                    <p:selectOneRadio id="antaRespuesta9" value="#{muAntecedentesTipoaController.selected.antaRespuesta}" >
+                         <f:selectItem itemLabel="Si" itemValue="true"/>
+                         <f:selectItem itemLabel="No" itemValue="false"/>
+                    </p:selectOneRadio>
+                   <br/>
+                        <p:commandButton value="Guardar"  icon="ui-icon-disk" 
+                                          action="#{muAntecedentesTipoaController.setIdsalud(registrarDatosIngresoController.usuario.usuIdentificacion,6)}"  />
+               <p:commandButton value="Atras" icon="ui-icon-circle-triangle-w" iconPos="left" type="button"   onclick="PF('myWizard').back();"/>
+                       <p:commandButton value="Siguiente" icon=" ui-icon-circle-triangle-e" iconPos="right" type="button"   onclick="PF('myWizard').next();"/>
+   
+                      
+                </h:panelGrid>
+            </p:panel>
+        </p:tab>
+        
+        <p:tab id="p10" title="10">
+            <p:panel header="Pregunta 10">
+                <p:messages />
+                <h:panelGrid columns="2" columnClasses="label, value">
+                      <h:outputLabel value="10. Indique si ha tenido alguno de estos síntomas al realizar esfuerzos o ejercicio fisico: " />
+                      <h:outputLabel value="   "/>
+                      <p:selectManyCheckbox id="basic2" value="#{muAntecedentesTipobController.retbRespuesta4}">
+                           <f:selectItem itemLabel="Mareos/a" itemValue="Mareos/a" />
+                           <f:selectItem itemLabel="Desmayos o lipotimias/a" itemValue="Desmayos o lipotimias/a" />
+                           <f:selectItem itemLabel="Nauceas/a" itemValue="Nauceas/a" />
+                           <f:selectItem itemLabel="Dificultad para respirar/a" itemValue="Dificultad para respirar/a" />
+                    </p:selectManyCheckbox>
+                  <h:outputLabel value="   "/>
+                      <br/>
+                
+                      <p:commandButton value="Guardar"  icon="ui-icon-disk"
+                                          action="#{muAntecedentesTipobController.setIdsalud(registrarDatosIngresoController.usuario.usuIdentificacion,4)}"  />
+               <p:commandButton value="Atras" icon="ui-icon-circle-triangle-w" iconPos="left" type="button"   onclick="PF('myWizard').back();"/>
+                       <p:commandButton value="Siguiente" icon=" ui-icon-circle-triangle-e" iconPos="right" type="button"   onclick="PF('myWizard').next();"/>
+   
+                   
+                      
+                </h:panelGrid>
+            </p:panel>
+        </p:tab>
+        
+        
+        <p:tab id="pregunta11" title="11">
+            <p:panel header="Pregunta 11">
+                <p:messages />
+                <h:panelGrid columns="2" columnClasses="label, value">
+                      <h:outputLabel value="11. ¿Ha estado inscrito en algún gimnasio o instalación deportiva?" />
+                          
+                    <p:selectOneRadio id="antaRespuesta11" value="#{muAntecedentesTipoaController.selected.antaRespuesta}" >
+                         <f:selectItem itemLabel="Si" itemValue="true"/>
+                         <f:selectItem itemLabel="No" itemValue="false"/>
+                    </p:selectOneRadio>
+                   <br/>
+                       <p:commandButton value="Guardar"  icon="ui-icon-disk" 
+                                          action="#{muAntecedentesTipoaController.setIdsalud(registrarDatosIngresoController.usuario.usuIdentificacion,7)}"  />
+               <p:commandButton value="Atras" icon="ui-icon-circle-triangle-w" iconPos="left" type="button"   onclick="PF('myWizard').back();"/>
+                       <p:commandButton value="Siguiente" icon=" ui-icon-circle-triangle-e" iconPos="right" type="button"   onclick="PF('myWizard').next();"/>
+   
+                   
+                </h:panelGrid>
+            </p:panel>
+        </p:tab>
+        
+        <p:tab id="pregunta12" title="12">
+            <p:panel header="Pregunta 12">
+                <p:messages />
+                <h:panelGrid columns="2" columnClasses="label, value">
+                      <h:outputLabel value="12. ¿Tiene varices prominentes?" />
+                          
+                    <p:selectOneRadio id="antaRespuesta12" value="#{muAntecedentesTipoaController.selected.antaRespuesta}" >
+                         <f:selectItem itemLabel="Si" itemValue="true"/>
+                         <f:selectItem itemLabel="No" itemValue="false"/>
+                    </p:selectOneRadio>
+                   <br/>
+                      <p:commandButton value="Guardar"  icon="ui-icon-disk" 
+                                          action="#{muAntecedentesTipoaController.setIdsalud(registrarDatosIngresoController.usuario.usuIdentificacion,8)}"  />
+               <p:commandButton value="Atras" icon="ui-icon-circle-triangle-w" iconPos="left" type="button"   onclick="PF('myWizard').back();"/>
+                       <p:commandButton value="Siguiente" icon=" ui-icon-circle-triangle-e" iconPos="right" type="button"   onclick="PF('myWizard').next();"/>
+   
+                      
+                </h:panelGrid>
+            </p:panel>
+        </p:tab>
+        
+        <p:tab id="pregunta13" title="13">
+            <p:panel header="Pregunta 13">
+                <p:messages />
+                <h:panelGrid columns="2" columnClasses="label, value">
+                      <h:outputLabel value="13. ¿Tiene celulitis muy marcada?" />
+                          
+                    <p:selectOneRadio id="antaRespuesta13" value="#{muAntecedentesTipoaController.selected.antaRespuesta}" >
+                         <f:selectItem itemLabel="Si" itemValue="true"/>
+                         <f:selectItem itemLabel="No" itemValue="false"/>
+                    </p:selectOneRadio>
+                   <br/>
+                     <p:commandButton value="Guardar"  icon="ui-icon-disk" 
+                                          action="#{muAntecedentesTipoaController.setIdsalud(registrarDatosIngresoController.usuario.usuIdentificacion,9)}"  />
+                <p:commandButton value="Atras" icon="ui-icon-circle-triangle-w" iconPos="left" type="button"   onclick="PF('myWizard').back();"/>
+                       <p:commandButton value="Siguiente" icon=" ui-icon-circle-triangle-e" iconPos="right" type="button"   onclick="PF('myWizard').close;"/>
+   
+                      
+                </h:panelGrid>
+            </p:panel>
+        </p:tab>
+ 
+    </p:wizard>
+ 
+           
+        </p:dialog>
+
+ </h:form> 
+</html>

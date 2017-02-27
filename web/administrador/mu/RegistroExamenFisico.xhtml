@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Facelets Template</title>
+    </h:head>
+    <h:body>
+        <p:dialog resizable="false" header="Información" modal="true"  widgetVar="mensajeRegistroExitoso" closable="false">
+            <p:messages  style="font-size: 15px;"  showDetail="true" autoUpdate="true"/>
+            <h:form >
+                <p:commandButton  value="Agregar informción" style="margin-left: 150px;"
+                                  action="#{registrarUsuarioController.abrirVentanaRegistrarUsuario()}"
+                                  onstart="PF('cargando').show()"  onsuccess="PF('cargando').hide()"/>
+            </h:form>
+        </p:dialog>
+        <p:dialog header="Examen fisico"  modal="true" widgetVar="RegistrarExamenFisico">
+
+            <h:form id="formregFis">
+                <p:panelGrid style="text-align:left;" styleClass="panelgrid"  id="panel">
+                    <p:row>
+                        <p:column colspan="5">
+                            <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
+                                           value="*"/>
+                            <h:outputLabel class="CampoLabelObligatorios" value=" Campos Obligatorios" />
+                        </p:column>                                
+                    </p:row>                            
+
+                    <p:row>
+                        <p:column style="text-align: left;">                                       
+                            <h:outputLabel class="CampoLabel" for="fecha" value="Fecha del examen " />
+                            <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
+                                           value="*"/>
+                        </p:column>
+                        <p:column colspan="7">
+                            <p:calendar size="10" id="fecha"  required="true" value="#{registrarDatosIngresoController.fecha}"
+                                        requiredMessage="Seleccione una fecha" 
+                                        showOn="button" navigator="true" yearRange="c-100:c" pattern="yyyy-MM-dd" 
+                                        >
+                            </p:calendar>
+                        </p:column>
+
+                        <p:column>
+                            <p:message for="fecha"/>
+                        </p:column>
+
+                    </p:row>
+
+
+
+                    <p:row>
+                        <p:column style="text-align:right">
+                            <h:outputLabel class="CampoLabel" for="peso" value="Peso (Kg) " />
+                            <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
+                                           value="*"/>
+                        </p:column>
+                        <p:column>
+                            <p:inputText style="width: 60px;font-size:15px" 
+                                         id="peso" 
+                                         value="#{registrarDatosIngresoController.peso}"
+                                         required="true" requiredMessage="Campo obligatorio.">
+
+                            </p:inputText>                                
+                        </p:column>
+                        <p:column>
+                            <p:message for="peso"/>
+                        </p:column>
+                        <p:column style="text-align:right">
+                            <h:outputLabel class="CampoLabel" for="talla" value="Talla (cm) " />
+                            <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
+                                           value="*"/>
+                        </p:column>
+                        <p:column>
+                            <p:inputText style="width: 60px;font-size:15px" 
+                                         id="talla"
+                                         value="#{registrarDatosIngresoController.talla}"
+                                         required="true" requiredMessage="Campo obligatorio.">
+
+                            </p:inputText>                                
+                        </p:column>
+                        <p:column>
+                            <p:message for="talla"/>
+                        </p:column>
+                        <p:column style="text-align:right">
+                            <h:outputLabel class="CampoLabel" for="fc" value="F.C. (p.p.m) " />
+                            <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
+                                           value="*"/>
+                        </p:column>
+                        <p:column>
+                            <p:inputText style="width: 60px;font-size:15px" 
+                                         id="fc" 
+                                         value="#{registrarDatosIngresoController.fc}"
+                                         required="true" requiredMessage="Campo obligatorio.">
+
+                            </p:inputText>                                
+                        </p:column>
+                        <p:column>
+                            <p:message for="fc"/>
+                        </p:column>
+                    </p:row>
+
+                    <p:row>
+                        <p:column style="text-align:right">
+                            <h:outputLabel class="CampoLabel" for="fcm" value="F.C.M " />
+                            <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
+                                           value="*"/>
+                        </p:column>
+                        <p:column>
+                            <p:inputText style="width: 60px;font-size:15px" 
+                                         id="fcm" 
+                                         value="#{registrarDatosIngresoController.fcm}"
+                                         required="true" requiredMessage="Campo obligatorio.">                                             
+
+                            </p:inputText>                                
+                        </p:column>
+                        <p:column>
+                            <p:message for="fcm"/>
+                        </p:column>
+
+                        <p:column style="text-align:right">
+                            <h:outputLabel class="CampoLabel" for="ta" value="T.A.(mmhg) " />
+                            <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
+                                           value="*"/>
+                        </p:column>
+                        <p:column>
+                            <p:inputText style="width: 60px;font-size:15px" 
+                                         id="ta" 
+                                         value="#{registrarDatosIngresoController.ta}"
+                                         required="true" requiredMessage="Campo obligatorio.">
+
+                            </p:inputText>
+                        </p:column>
+                        <p:column>
+                            <p:message for="ta"/>
+                        </p:column>
+                        <p:column style="text-align:right">
+                            <h:outputLabel class="CampoLabel" for="fr" value="F.R.(r.p.m) " />
+                        </p:column>
+                        <p:column>
+                            <p:inputText style="width: 60px;font-size:15px" 
+                                         id="fr" 
+                                         value="#{registrarDatosIngresoController.fr}"
+                                         >                              
+                            </p:inputText>
+                        </p:column>
+                        <p:column>
+                            <p:message for="fr"/>
+                        </p:column>
+                    </p:row>
+
+                    <p:row>
+                        <p:column style="text-align:right">
+                            <h:outputLabel class="CampoLabel" for="imc" value="I.M.C." />
+                            <h:outputLabel style="font-style: italic;font-size: 16px;text-align: left; color:red;" 
+                                           value="*"/>
+                        </p:column>
+                        <p:column>
+                            <p:inputText style="width: 60px;font-size:15px" 
+                                         id="imc" 
+                                         value="#{registrarDatosIngresoController.imc}"
+                                         required="true" requiredMessage="Campo obligatorio.">
+
+                            </p:inputText>
+                        </p:column>
+                        <p:column>
+                            <p:message for="imc"/>
+                        </p:column>
+                        <p:column style="text-align:right">
+                            <h:outputLabel class="CampoLabel" for="icc" value="ICC" />
+                        </p:column>
+                        <p:column>
+                            <p:inputText style="width: 60px;font-size:15px" 
+                                         id="icc" 
+                                         value="#{registrarDatosIngresoController.icc}"
+                                         >                              
+                            </p:inputText>
+                        </p:column>
+                        <p:column>
+                            <p:message for="icc"/>
+                        </p:column>
+                    </p:row>
+
+                    <p:row >                                 
+                        <p:column colspan="2">
+                            <p:panel header="Foto de frente" toggleable="true">
+                                <div style="float:left">
+                                    <h:form id="formularioFotoF">
+                                        <p:messages closable="true"/>
+                                        <p:panelGrid styleClass="panelgrid" id="panelgridusuario">                            
+                                            <p:row>
+                                                <p:column  rendered="#{verEditarUsuarioController.campoFoto}">                                
+                                                    <p:graphicImage value="#{verEditarUsuarioController.imagenFlujo}" >
+                                                        <f:param name="idUsu" />
+                                                    </p:graphicImage>
+                                                </p:column>
+
+                                            </p:row>
+                                            <p:row>
+                                                <p:column rendered="#{verEditarUsuarioController.campoFoto}">
+                                                    <p:commandLink style="color: blue;" action="#{verEditarUsuarioController.mostraSubirFoto()}" value="Cambiar"/>                                                                 
+                                                </p:column>
+
+                                            </p:row>
+                                            <p:row>
+                                                <p:column  rendered="#{!verEditarUsuarioController.campoFoto}">
+                                                    <p:fileUpload  fileUploadListener="#{verEditarUsuarioController.cargarFoto}" mode="advanced" dragDropSupport="false"
+                                                                   style="width:100px;"
+                                                                   label="Cargar" auto="true"  
+                                                                   invalidFileMessage="Tipo de archivo no válido"   fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+                                                                   onstart="PF('cargando').show()"  oncomplete="PF('cargando').hide()"/>
+                                                </p:column>
+                                                <p:column rendered="#{!verEditarUsuarioController.campoFoto}">
+                                                    <p:outputLabel value="#{verEditarUsuarioController.foto.fileName}"/>
+                                                </p:column>
+                                            </p:row>
+                                            <p:row> 
+                                                <p:column>
+                                                    <p:commandLink rendered="#{!verEditarUsuarioController.campoFoto}"
+                                                                   action="#{verEditarUsuarioController.actualizarFoto()}"
+                                                                   style="color:blue;"  value="Aceptar"
+                                                                   onstart="PF('cargando').show()"  oncomplete="PF('efectoCarga').hide()"  />
+                                                </p:column>
+                                                <p:column>
+                                                    <p:commandLink rendered="#{!verEditarUsuarioController.campoFoto}" 
+                                                                   style="margin-left:5px; color:blue;"  value="Cancelar" action="#{verEditarUsuarioController.cancelarSubirFoto()}"
+                                                                   onstart="PF('cargando').show()"  oncomplete="PF('cargando').hide()"/>
+                                                </p:column>
+                                                <div style="float:left;margin-top: 40px;">
+                                                    <h:form id="formularioEditarFoto">
+
+
+                                                    </h:form>
+                                                </div>            
+                                            </p:row>
+                                        </p:panelGrid>            
+                                    </h:form> 
+                                </div>
+
+                                <div style="clear: both"></div>
+                            </p:panel>
+                        </p:column>
+
+                        <p:column colspan="4">
+                            <p:panel header="Foto espalda" toggleable="true">
+                                <div style="float:left">
+                                    <h:form id="formularioFotoE">
+                                        <p:messages closable="true"/>
+                                        <p:panelGrid styleClass="panelgrid" id="panelgridusuario">                            
+                                            <p:row>
+                                                <p:column  rendered="#{verEditarUsuarioController.campoFoto}">                                
+                                                    <p:graphicImage value="#{verEditarUsuarioController.imagenFlujo}" >
+                                                        <f:param name="idUsu" />
+                                                    </p:graphicImage>
+                                                </p:column>
+
+                                            </p:row>
+                                            <p:row>
+                                                <p:column rendered="#{verEditarUsuarioController.campoFoto}">
+                                                    <p:commandLink style="color: blue;" action="#{verEditarUsuarioController.mostraSubirFoto()}" value="Cambiar"/>                                                                 
+                                                </p:column>
+
+                                            </p:row>
+                                            <p:row>
+                                                <p:column  rendered="#{!verEditarUsuarioController.campoFoto}">
+                                                    <p:fileUpload  fileUploadListener="#{verEditarUsuarioController.cargarFoto}" mode="advanced" dragDropSupport="false"
+                                                                   style="width:100px;"
+                                                                   label="Cargar" auto="true"  
+                                                                   invalidFileMessage="Tipo de archivo no válido"   fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+                                                                   onstart="PF('cargando').show()"  oncomplete="PF('cargando').hide()"/>
+                                                </p:column>
+                                                <p:column rendered="#{!verEditarUsuarioController.campoFoto}">
+                                                    <p:outputLabel value="#{verEditarUsuarioController.foto.fileName}"/>
+                                                </p:column>
+                                            </p:row>
+                                            <p:row> 
+                                                <p:column>
+                                                    <p:commandLink rendered="#{!verEditarUsuarioController.campoFoto}"
+                                                                   action="#{verEditarUsuarioController.actualizarFoto()}"
+                                                                   style="color:blue;"  value="Aceptar"
+                                                                   onstart="PF('cargando').show()"  oncomplete="PF('efectoCarga').hide()"  />
+                                                </p:column>
+                                                <p:column>
+                                                    <p:commandLink rendered="#{!verEditarUsuarioController.campoFoto}" 
+                                                                   style="margin-left:5px; color:blue;"  value="Cancelar" action="#{verEditarUsuarioController.cancelarSubirFoto()}"
+                                                                   onstart="PF('cargando').show()"  oncomplete="PF('cargando').hide()"/>
+                                                </p:column>
+                                                <div style="float:left;margin-top: 40px;">
+                                                    <h:form id="formularioEditarFoto">
+
+
+                                                    </h:form>
+                                                </div>            
+                                            </p:row>            
+
+
+
+                                        </p:panelGrid>            
+                                    </h:form> 
+                                </div>
+
+                                <div style="clear: both"></div>
+                            </p:panel>
+                        </p:column>
+                        <p:column colspan="3">
+                            <p:panel header="Foto perfil derecho" toggleable="true">
+                                <div style="float:left">
+                                    <h:form id="formularioFotoPf">
+                                        <p:messages closable="true"/>
+                                        <p:panelGrid styleClass="panelgrid" id="panelgridusuario">                            
+                                            <p:row>
+                                                <p:column  rendered="#{verEditarUsuarioController.campoFoto}">                                
+                                                    <p:graphicImage value="#{verEditarUsuarioController.imagenFlujo}" >
+                                                        <f:param name="idUsu" />
+                                                    </p:graphicImage>
+                                                </p:column>
+
+                                            </p:row>
+                                            <p:row>
+                                                <p:column rendered="#{verEditarUsuarioController.campoFoto}">
+                                                    <p:commandLink style="color: blue;" action="#{verEditarUsuarioController.mostraSubirFoto()}" value="Cambiar"/>                                                                 
+                                                </p:column>
+
+                                            </p:row>
+                                            <p:row>
+                                                <p:column  rendered="#{!verEditarUsuarioController.campoFoto}">
+                                                    <p:fileUpload  fileUploadListener="#{verEditarUsuarioController.cargarFoto}" mode="advanced" dragDropSupport="false"
+                                                                   style="width:100px;"
+                                                                   label="Cargar" auto="true"  
+                                                                   invalidFileMessage="Tipo de archivo no válido"   fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+                                                                   onstart="PF('cargando').show()"  oncomplete="PF('cargando').hide()"/>
+                                                </p:column>
+                                                <p:column rendered="#{!verEditarUsuarioController.campoFoto}">
+                                                    <p:outputLabel value="#{verEditarUsuarioController.foto.fileName}"/>
+                                                </p:column>
+                                            </p:row>
+
+                                            <p:row> 
+                                                <p:column>
+                                                    <p:commandLink rendered="#{!verEditarUsuarioController.campoFoto}"
+                                                                   action="#{verEditarUsuarioController.actualizarFoto()}"
+                                                                   style="color:blue;"  value="Aceptar"
+                                                                   onstart="PF('cargando').show()"  oncomplete="PF('efectoCarga').hide()"  />
+                                                </p:column>
+                                                <p:column>
+                                                    <p:commandLink rendered="#{!verEditarUsuarioController.campoFoto}" 
+                                                                   style="margin-left:5px; color:blue;"  value="Cancelar" action="#{verEditarUsuarioController.cancelarSubirFoto()}"
+                                                                   onstart="PF('cargando').show()"  oncomplete="PF('cargando').hide()"/>
+                                                </p:column>
+                                                <div style="float:left;margin-top: 40px;">
+                                                    <h:form id="formularioEditarFoto">
+
+
+                                                    </h:form>
+                                                </div>            
+                                            </p:row>
+
+
+
+                                        </p:panelGrid>            
+                                    </h:form> 
+                                </div>
+
+                                <div style="clear: both"></div>
+                            </p:panel>
+                        </p:column>
+                        <p:column colspan="3">
+                            <p:panel header="Foto perfil izquierdo" toggleable="true">
+                                <div style="float:left">
+                                    <h:form id="formularioFotoPi">
+                                        <p:messages closable="true"/>
+                                        <p:panelGrid styleClass="panelgrid" id="panelgridusuario">                            
+                                            <p:row>
+                                                <p:column  rendered="#{verEditarUsuarioController.campoFoto}">                                
+                                                    <p:graphicImage value="#{verEditarUsuarioController.imagenFlujo}" >
+                                                        <f:param name="idUsu" />
+                                                    </p:graphicImage>
+                                                </p:column>
+
+                                            </p:row>
+                                            <p:row>
+                                                <p:column rendered="#{verEditarUsuarioController.campoFoto}">
+                                                    <p:commandLink style="color: blue;" action="#{verEditarUsuarioController.mostraSubirFoto()}" value="Cambiar"/>                                                                 
+                                                </p:column>
+
+                                            </p:row>
+                                            <p:row>
+                                                <p:column  rendered="#{!verEditarUsuarioController.campoFoto}">
+                                                    <p:fileUpload  fileUploadListener="#{verEditarUsuarioController.cargarFoto}" mode="advanced" dragDropSupport="false"
+                                                                   style="width:100px;"
+                                                                   label="Cargar" auto="true"  
+                                                                   invalidFileMessage="Tipo de archivo no válido"   fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+                                                                   onstart="PF('cargando').show()"  oncomplete="PF('cargando').hide()"/>
+                                                </p:column>
+                                                <p:column rendered="#{!verEditarUsuarioController.campoFoto}">
+                                                    <p:outputLabel value="#{verEditarUsuarioController.foto.fileName}"/>
+                                                </p:column>
+                                            </p:row>
+                                            <p:row> 
+                                                <p:column>
+                                                    <p:commandLink rendered="#{!verEditarUsuarioController.campoFoto}"
+                                                                   action="#{verEditarUsuarioController.actualizarFoto()}"
+                                                                   style="color:blue;"  value="Aceptar"
+                                                                   onstart="PF('cargando').show()"  oncomplete="PF('efectoCarga').hide()"  />
+                                                </p:column>
+                                                <p:column>
+                                                    <p:commandLink rendered="#{!verEditarUsuarioController.campoFoto}" 
+                                                                   style="margin-left:5px; color:blue;"  value="Cancelar" action="#{verEditarUsuarioController.cancelarSubirFoto()}"
+                                                                   onstart="PF('cargando').show()"  oncomplete="PF('cargando').hide()"/>
+                                                </p:column>
+                                                <div style="float:left;margin-top: 40px;">
+                                                    <h:form id="formularioEditarFoto">
+
+
+                                                    </h:form>
+                                                </div>            
+                                            </p:row>
+
+
+
+                                        </p:panelGrid>            
+                                    </h:form> 
+                                </div>
+
+                                <div style="clear: both"></div>
+                            </p:panel>
+                        </p:column>
+                    </p:row>                  
+
+
+                    <p:row>
+                        <p:column>
+
+                        </p:column>
+                        <p:column>
+                            <p:commandButton   style="background: #22419A;color:#FFFFFF;font-style: italic;font-weight: normal;" 
+                                               action="#{registrarDatosIngresoController.registrarExamenFisico()}" value="Registrar" ajax="true" 
+                                               update="panel" id="registrar" onstart="PF('cargando').show()"  onsuccess="PF('cargando').hide()"
+                                               />
+                            <p:commandButton   style="background: #22419A;color:#FFFFFF;font-style: italic;font-weight: normal;" 
+                                               value="Cancelar" onclick="PF('RegistrarExamenFisico').hide()"
+                                               id="cancelar" onstart="PF('cargando').show()"  onsuccess="PF('cargando').hide()"
+                                               />
+                        </p:column>
+                    </p:row>                               
+                </p:panelGrid>                            
+            </h:form>       
+        </p:dialog>
+
+
+        <p:dialog header="Error" resizable="false" width="440" modal="true" widgetVar="FuncionarioYaTieneFamiliarAsociado"  closable="false">                    
+            <h:form>                
+                <p:messages  style="font-size: 15px;"  showDetail="true" autoUpdate="true"/>
+                <p:commandButton  value="Aceptar" style="background:#22419A; 
+                                  color: #FFFFFF;margin-left:150px;font-weight: normal;"
+                                  />                
+            </h:form>            
+        </p:dialog>
+
+    </h:body>
+</html>
+
+

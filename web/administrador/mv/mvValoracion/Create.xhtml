@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition>
+        <p:dialog id="MvValoracionCreateDlg" widgetVar="MvValoracionCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{mvMensajes.CreateMvValoracionTitle}" position="center">
+            <h:form id="MvValoracionCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{mvValoracionController.selected != null}">
+                        <p:wizard nextLabel="Siguiente" backLabel="Atras">
+                            <p:tab title="Diametros Oseos (CMS)">
+                                <h:panelGrid columns="2" cellpadding="10">
+                                    <p:outputLabel value="#{mvMensajes.CreateMvValoracionLabel_valBiepicondilarhumeral}" for="valBiepicondilarhumeral" styleClass="requiredLbl"/>
+                                    <p:inputText id="valBiepicondilarhumeral" value="#{mvValoracionController.selected.valBiepicondilarhumeral}" title="#{mvMensajes.CreateMvValoracionTitle_valBiepicondilarhumeral}" required="true"/>
+                                    <p:outputLabel value="#{mvMensajes.CreateMvValoracionLabel_valRadiocubital}" for="valRadiocubital" styleClass="requiredLbl"/>
+                                    <p:inputText id="valRadiocubital" value="#{mvValoracionController.selected.valRadiocubital}" title="#{mvMensajes.CreateMvValoracionTitle_valRadiocubital}" required="true"/>
+                                    <p:outputLabel value="#{mvMensajes.CreateMvValoracionLabel_valBiepicondilarfemoral}" for="valBiepicondilarfemoral" styleClass="requiredLbl"/>
+                                    <p:inputText id="valBiepicondilarfemoral" value="#{mvValoracionController.selected.valBiepicondilarfemoral}" title="#{mvMensajes.CreateMvValoracionTitle_valBiepicondilarfemoral}" required="true"/>
+                                </h:panelGrid>
+                            </p:tab>
+                            <p:tab title="Pliegues cutaneos (MMS)">
+                                <h:panelGrid columns="4" cellpadding="10">
+                                    <p:outputLabel value="#{mvMensajes.CreateMvValoracionLabel_valTricepts}" for="valTricepts" styleClass="requiredLbl"/>
+                                    <p:inputText id="valTricepts" value="#{mvValoracionController.selected.valTricepts}" title="#{mvMensajes.CreateMvValoracionTitle_valTricepts}" required="true"/>
+                                    <p:outputLabel value="#{mvMensajes.CreateMvValoracionLabel_valMusloanterior}" for="valMusloanterior" styleClass="requiredLbl"/>
+                                    <p:inputText id="valMusloanterior" value="#{mvValoracionController.selected.valMusloanterior}" title="#{mvMensajes.CreateMvValoracionTitle_valMusloanterior}" required="true"/>
+                                    <p:outputLabel value="#{mvMensajes.CreateMvValoracionLabel_valSubescapular}" for="valSubescapular" styleClass="requiredLbl"/>
+                                    <p:inputText id="valSubescapular" value="#{mvValoracionController.selected.valSubescapular}" title="#{mvMensajes.CreateMvValoracionTitle_valSubescapular}" required="true"/>
+                                    <p:outputLabel value="#{mvMensajes.CreateMvValoracionLabel_valMedialpierna}" for="valMedialpierna" styleClass="requiredLbl"/>
+                                    <p:inputText id="valMedialpierna" value="#{mvValoracionController.selected.valMedialpierna}" title="#{mvMensajes.CreateMvValoracionTitle_valMedialpierna}" required="true"/>
+                                    <p:outputLabel value="#{mvMensajes.CreateMvValoracionLabel_valSupraiiatico}" for="valSupraiiatico" styleClass="requiredLbl"/>
+                                    <p:inputText id="valSupraiiatico" value="#{mvValoracionController.selected.valSupraiiatico}" title="#{mvMensajes.CreateMvValoracionTitle_valSupraiiatico}" required="true"/>
+                                    <p:outputLabel value="#{mvMensajes.CreateMvValoracionLabel_valPectoral}" for="valPectoral" styleClass="requiredLbl"/>
+                                    <p:inputText id="valPectoral" value="#{mvValoracionController.selected.valPectoral}" title="#{mvMensajes.CreateMvValoracionTitle_valPectoral}" required="true"/>
+                                    <p:outputLabel value="#{mvMensajes.CreateMvValoracionLabel_valAbdominal}" for="valAbdominal" styleClass="requiredLbl"/>
+                                    <p:inputText id="valAbdominal" value="#{mvValoracionController.selected.valAbdominal}" title="#{mvMensajes.CreateMvValoracionTitle_valAbdominal}" required="true"/>
+                                    <p:outputLabel value="#{mvMensajes.CreateMvValoracionLabel_valPorcentajegrasaimpedanciometria}" for="valPorcentajegrasaimpedanciometria" styleClass="optionalLbl"/>
+                                    <p:inputText id="valPorcentajegrasaimpedanciometria" value="#{mvValoracionController.selected.valPorcentajegrasaimpedanciometria}" title="#{mvMensajes.CreateMvValoracionTitle_valPorcentajegrasaimpedanciometria}" />
+                                </h:panelGrid>
+                            </p:tab>
+                            <p:tab title="Valores de acondicionamiento">
+                                <h:panelGrid columns="2" cellpadding="10">
+                                    <p:outputLabel value="#{mvMensajes.CreateMvValoracionLabel_valFrecuenciacardiacareposo}" for="valFrecuenciacardiacareposo" styleClass="requiredLbl"/>
+                                    <p:inputText id="valFrecuenciacardiacareposo" value="#{mvValoracionController.selected.valFrecuenciacardiacareposo}" title="#{mvMensajes.CreateMvValoracionTitle_valFrecuenciacardiacareposo}" required="true"/>
+                                    <p:outputLabel value="#{mvMensajes.CreateMvValoracionLabel_valVo2max}" for="valVo2max" styleClass="optionalLbl"/>
+                                    <p:inputText id="valVo2max" value="#{mvValoracionController.selected.valVo2max}" title="#{mvMensajes.CreateMvValoracionTitle_valVo2max}" />
+                                </h:panelGrid>
+                            </p:tab>
+                            <p:tab title="Perimetros (CMS)">
+                                <h:panelGrid columns="4" cellpadding="10">
+                                    <p:outputLabel value="#{mvMensajes.CreateMvValoracionLabel_valTorax}" for="valTorax" styleClass="requiredLbl"/>
+                                    <p:inputText id="valTorax" value="#{mvValoracionController.selected.valTorax}" title="#{mvMensajes.CreateMvValoracionTitle_valTorax}" required="true"/>
+                                    <p:outputLabel value="#{mvMensajes.CreateMvValoracionLabel_valAbdomeninferior}" for="valAbdomeninferior" styleClass="requiredLbl"/>
+                                    <p:inputText id="valAbdomeninferior" value="#{mvValoracionController.selected.valAbdomeninferior}" title="#{mvMensajes.CreateMvValoracionTitle_valAbdomeninferior}" required="true"/>
+                                    <p:outputLabel value="#{mvMensajes.CreateMvValoracionLabel_valCadera}" for="valCadera" styleClass="requiredLbl"/>
+                                    <p:inputText id="valCadera" value="#{mvValoracionController.selected.valCadera}" title="#{mvMensajes.CreateMvValoracionTitle_valCadera}" required="true"/>
+                                    <p:outputLabel value="#{mvMensajes.CreateMvValoracionLabel_valPorcentajeaguacorporal}" for="valPorcentajeaguacorporal" styleClass="optionalLbl"/>
+                                    <p:inputText id="valPorcentajeaguacorporal" value="#{mvValoracionController.selected.valPorcentajeaguacorporal}" title="#{mvMensajes.CreateMvValoracionTitle_valPorcentajeaguacorporal}" />
+
+
+                                    <p:outputLabel value="#{mvMensajes.CreateMvValoracionLabel_valBicepsrelajadoder}" for="valBicepsrelajadoder" styleClass="requiredLbl"/>
+                                    <p:inputText id="valBicepsrelajadoder" value="#{mvValoracionController.selected.valBicepsrelajadoder}" title="#{mvMensajes.CreateMvValoracionTitle_valBicepsrelajadoder}" required="true"/>
+
+                                    <p:outputLabel value="#{mvMensajes.CreateMvValoracionLabel_valBicepsrelajadoizq}" for="valBicepsrelajadoizq" styleClass="requiredLbl"/>
+                                    <p:inputText id="valBicepsrelajadoizq" value="#{mvValoracionController.selected.valBicepsrelajadoizq}" title="#{mvMensajes.CreateMvValoracionTitle_valBicepsrelajadoizq}" required="true"/>
+
+                                    <p:outputLabel value="#{mvMensajes.CreateMvValoracionLabel_valBicepscontraidoder}" for="valBicepscontraidoder" styleClass="requiredLbl"/>
+                                    <p:inputText id="valBicepscontraidoder" value="#{mvValoracionController.selected.valBicepscontraidoder}" title="#{mvMensajes.CreateMvValoracionTitle_valBicepscontraidoder}" required="true"/>
+
+                                    <p:outputLabel value="#{mvMensajes.CreateMvValoracionLabel_valBicepscontraidoizq}" for="valBicepscontraidoizq" styleClass="requiredLbl"/>
+                                    <p:inputText id="valBicepscontraidoizq" value="#{mvValoracionController.selected.valBicepscontraidoizq}" title="#{mvMensajes.CreateMvValoracionTitle_valBicepscontraidoizq}" required="true"/>
+
+
+                                    <p:outputLabel value="#{mvMensajes.CreateMvValoracionLabel_valMuslosuperiorder}" for="valMuslosuperiorder" styleClass="requiredLbl"/>
+                                    <p:inputText id="valMuslosuperiorder" value="#{mvValoracionController.selected.valMuslosuperiorder}" title="#{mvMensajes.CreateMvValoracionTitle_valMuslosuperiorder}" required="true"/>
+                                    
+                                    <p:outputLabel value="#{mvMensajes.CreateMvValoracionLabel_valMuslosuperiorizq}" for="valMuslosuperiorizq" styleClass="requiredLbl"/>
+                                    <p:inputText id="valMuslosuperiorizq" value="#{mvValoracionController.selected.valMuslosuperiorizq}" title="#{mvMensajes.CreateMvValoracionTitle_valMuslosuperiorizq}" required="true"/>
+                                    
+                                    <p:outputLabel value="#{mvMensajes.CreateMvValoracionLabel_valPantorrillader}" for="valPantorrillader" styleClass="requiredLbl"/>
+                                    <p:inputText id="valPantorrillader" value="#{mvValoracionController.selected.valPantorrillader}" title="#{mvMensajes.CreateMvValoracionTitle_valPantorrillader}" required="true"/>
+                                    
+                                    <p:outputLabel value="#{mvMensajes.CreateMvValoracionLabel_valPantorrillaizq}" for="valPantorrillaizq" styleClass="requiredLbl"/>
+                                    <p:inputText id="valPantorrillaizq" value="#{mvValoracionController.selected.valPantorrillaizq}" title="#{mvMensajes.CreateMvValoracionTitle_valPantorrillaizq}" required="true"/>
+                                    
+                                    <p:commandButton  action="#{mvValoracionController.create}" value="#{mvMensajes.Save}" actionListener="#{routingController.irVerResultado()}" ajax="false"/>
+                                    
+                                </h:panelGrid>
+                            </p:tab>
+                        </p:wizard>
+                    </p:panelGrid>
+                    <p:commandButton value="#{mvMensajes.Cancel}" onclick="MvValoracionCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+    </ui:composition>
+</html>

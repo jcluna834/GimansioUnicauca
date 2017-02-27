@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+   <h:head>
+   </h:head>
+   <h:body>
+      <div id="tituloMenu">
+         <span><b>Menú de Usuario</b></span>
+      </div>
+
+      <div id="contenidoMenu">
+         <h:form id="formMenu">
+            <p:tieredMenu>
+               <p:menuitem value="Mi perfil" action="#{routingController.irPerfil()}" ajax="false"
+                              onstart="PF('cargando').show()"  oncomplete="PF('cargando').hide()"/>
+               <p:menuitem value="Recaudos"/>
+               <p:menuitem value="Valoraciones"/>
+               <p:menuitem value="Rutinas"/>
+               <p:menuitem value="Asistencia"/>
+                             
+               
+            </p:tieredMenu>
+         </h:form>
+      </div>
+ <ui:include src="/EfectodeCarga.xhtml"/>
+   </h:body>
+</html>

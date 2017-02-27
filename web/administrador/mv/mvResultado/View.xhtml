@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition>
+        <p:dialog id="MvResultadoViewDlg" widgetVar="MvResultadoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{mvMensajes.ViewMvResultadoTitle}">
+            <h:form id="MvResultadoViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{mvResultadoController.selected != null}">
+                        <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resId}"/>
+                        <h:outputText value="#{mvResultadoController.selected.resId}" title="#{mvMensajes.ViewMvResultadoTitle_resId}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resCaloriasrequeridadieta}"/>
+                        <h:outputText value="#{mvResultadoController.selected.resCaloriasrequeridadieta}" title="#{mvMensajes.ViewMvResultadoTitle_resCaloriasrequeridadieta}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resEctomorfia}"/>
+                        <h:outputText value="#{mvResultadoController.selected.resEctomorfia}" title="#{mvMensajes.ViewMvResultadoTitle_resEctomorfia}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resEjex}"/>
+                        <h:outputText value="#{mvResultadoController.selected.resEjex}" title="#{mvMensajes.ViewMvResultadoTitle_resEjex}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resEjey}"/>
+                        <h:outputText value="#{mvResultadoController.selected.resEjey}" title="#{mvMensajes.ViewMvResultadoTitle_resEjey}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resEndomorfia}"/>
+                        <h:outputText value="#{mvResultadoController.selected.resEndomorfia}" title="#{mvMensajes.ViewMvResultadoTitle_resEndomorfia}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resGramoproteinadia}"/>
+                        <h:outputText value="#{mvResultadoController.selected.resGramoproteinadia}" title="#{mvMensajes.ViewMvResultadoTitle_resGramoproteinadia}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resMasacorporalmagra}"/>
+                        <h:outputText value="#{mvResultadoController.selected.resMasacorporalmagra}" title="#{mvMensajes.ViewMvResultadoTitle_resMasacorporalmagra}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resMasacorporalmagraideal}"/>
+                        <h:outputText value="#{mvResultadoController.selected.resMasacorporalmagraideal}" title="#{mvMensajes.ViewMvResultadoTitle_resMasacorporalmagraideal}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resMesomorfia}"/>
+                        <h:outputText value="#{mvResultadoController.selected.resMesomorfia}" title="#{mvMensajes.ViewMvResultadoTitle_resMesomorfia}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resPesoanterior}"/>
+                        <h:outputText value="#{mvResultadoController.selected.resPesoanterior}" title="#{mvMensajes.ViewMvResultadoTitle_resPesoanterior}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resPesograso}"/>
+                        <h:outputText value="#{mvResultadoController.selected.resPesograso}" title="#{mvMensajes.ViewMvResultadoTitle_resPesograso}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resPesograsoideal}"/>
+                        <h:outputText value="#{mvResultadoController.selected.resPesograsoideal}" title="#{mvMensajes.ViewMvResultadoTitle_resPesograsoideal}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resPesoideal}"/>
+                        <h:outputText value="#{mvResultadoController.selected.resPesoideal}" title="#{mvMensajes.ViewMvResultadoTitle_resPesoideal}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resPesoidealinferior}"/>
+                        <h:outputText value="#{mvResultadoController.selected.resPesoidealinferior}" title="#{mvMensajes.ViewMvResultadoTitle_resPesoidealinferior}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resPesoideallimite}"/>
+                        <h:outputText value="#{mvResultadoController.selected.resPesoideallimite}" title="#{mvMensajes.ViewMvResultadoTitle_resPesoideallimite}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resPesomuscular}"/>
+                        <h:outputText value="#{mvResultadoController.selected.resPesomuscular}" title="#{mvMensajes.ViewMvResultadoTitle_resPesomuscular}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resPesomuscularanterior}"/>
+                        <h:outputText value="#{mvResultadoController.selected.resPesomuscularanterior}" title="#{mvMensajes.ViewMvResultadoTitle_resPesomuscularanterior}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resPesomuscularideal}"/>
+                        <h:outputText value="#{mvResultadoController.selected.resPesomuscularideal}" title="#{mvMensajes.ViewMvResultadoTitle_resPesomuscularideal}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resPesooseo}"/>
+                        <h:outputText value="#{mvResultadoController.selected.resPesooseo}" title="#{mvMensajes.ViewMvResultadoTitle_resPesooseo}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resPesoresidual}"/>
+                        <h:outputText value="#{mvResultadoController.selected.resPesoresidual}" title="#{mvMensajes.ViewMvResultadoTitle_resPesoresidual}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resPesototal}"/>
+                        <h:outputText value="#{mvResultadoController.selected.resPesototal}" title="#{mvMensajes.ViewMvResultadoTitle_resPesototal}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resPorcentajegrasaanterior}"/>
+                        <h:outputText value="#{mvResultadoController.selected.resPorcentajegrasaanterior}" title="#{mvMensajes.ViewMvResultadoTitle_resPorcentajegrasaanterior}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resPorcentajegrasacorporaltotal}"/>
+                        <h:outputText value="#{mvResultadoController.selected.resPorcentajegrasacorporaltotal}" title="#{mvMensajes.ViewMvResultadoTitle_resPorcentajegrasacorporaltotal}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resPorcentajegrasaideal}"/>
+                        <h:outputText value="#{mvResultadoController.selected.resPorcentajegrasaideal}" title="#{mvMensajes.ViewMvResultadoTitle_resPorcentajegrasaideal}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resPorcentajeoseoideal}"/>
+                        <h:outputText value="#{mvResultadoController.selected.resPorcentajeoseoideal}" title="#{mvMensajes.ViewMvResultadoTitle_resPorcentajeoseoideal}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resPorcentajepesomuscularideal}"/>
+                        <h:outputText value="#{mvResultadoController.selected.resPorcentajepesomuscularideal}" title="#{mvMensajes.ViewMvResultadoTitle_resPorcentajepesomuscularideal}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resPorcentajepesooseo}"/>
+                        <h:outputText value="#{mvResultadoController.selected.resPorcentajepesooseo}" title="#{mvMensajes.ViewMvResultadoTitle_resPorcentajepesooseo}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resPorcentajepesoresidual}"/>
+                        <h:outputText value="#{mvResultadoController.selected.resPorcentajepesoresidual}" title="#{mvMensajes.ViewMvResultadoTitle_resPorcentajepesoresidual}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resPorcentajepesomuscular}"/>
+                        <h:outputText value="#{mvResultadoController.selected.resPorcentajepesomuscular}" title="#{mvMensajes.ViewMvResultadoTitle_resPorcentajepesomuscular}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resQuemacaloriassemana}"/>
+                        <h:outputText value="#{mvResultadoController.selected.resQuemacaloriassemana}" title="#{mvMensajes.ViewMvResultadoTitle_resQuemacaloriassemana}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resRangosfreccardquemagrasamax}"/>
+                        <h:outputText value="#{mvResultadoController.selected.resRangosfreccardquemagrasamax}" title="#{mvMensajes.ViewMvResultadoTitle_resRangosfreccardquemagrasamax}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resRelacioncinturacadera}"/>
+                        <h:outputText value="#{mvResultadoController.selected.resRelacioncinturacadera}" title="#{mvMensajes.ViewMvResultadoTitle_resRelacioncinturacadera}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resSemanaprograma}"/>
+                        <h:outputText value="#{mvResultadoController.selected.resSemanaprograma}" title="#{mvMensajes.ViewMvResultadoTitle_resSemanaprograma}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resSesionessemana}"/>
+                        <h:outputText value="#{mvResultadoController.selected.resSesionessemana}" title="#{mvMensajes.ViewMvResultadoTitle_resSesionessemana}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resSumatoria6pliegues}"/>
+                        <h:outputText value="#{mvResultadoController.selected.resSumatoria6pliegues}" title="#{mvMensajes.ViewMvResultadoTitle_resSumatoria6pliegues}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resTmb1hora}"/>
+                        <h:outputText value="#{mvResultadoController.selected.resTmb1hora}" title="#{mvMensajes.ViewMvResultadoTitle_resTmb1hora}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resTmb24horas}"/>
+                        <h:outputText value="#{mvResultadoController.selected.resTmb24horas}" title="#{mvMensajes.ViewMvResultadoTitle_resTmb24horas}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resEstado}"/>
+                        <h:outputText value="#{mvResultadoController.selected.resEstado}" title="#{mvMensajes.ViewMvResultadoTitle_resEstado}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resContextura}"/>
+                        <h:outputText value="#{mvResultadoController.selected.resContextura}" title="#{mvMensajes.ViewMvResultadoTitle_resContextura}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resEnfermedadcoronaria}"/>
+                        <h:outputText value="#{mvResultadoController.selected.resEnfermedadcoronaria}" title="#{mvMensajes.ViewMvResultadoTitle_resEnfermedadcoronaria}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resHidratacion}"/>
+                        <h:outputText value="#{mvResultadoController.selected.resHidratacion}" title="#{mvMensajes.ViewMvResultadoTitle_resHidratacion}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resVo2maxextimado}"/>
+                        <h:outputText value="#{mvResultadoController.selected.resVo2maxextimado}" title="#{mvMensajes.ViewMvResultadoTitle_resVo2maxextimado}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resCapacidadfuncional}"/>
+                        <h:outputText value="#{mvResultadoController.selected.resCapacidadfuncional}" title="#{mvMensajes.ViewMvResultadoTitle_resCapacidadfuncional}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resRangosfreccardquemagrasamin}"/>
+                        <h:outputText value="#{mvResultadoController.selected.resRangosfreccardquemagrasamin}" title="#{mvMensajes.ViewMvResultadoTitle_resRangosfreccardquemagrasamin}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resRecomendaciones}"/>
+                        <h:outputText value="#{mvResultadoController.selected.resRecomendaciones}" title="#{mvMensajes.ViewMvResultadoTitle_resRecomendaciones}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resQuemacaloriassesion}"/>
+                        <h:outputText value="#{mvResultadoController.selected.resQuemacaloriassesion}" title="#{mvMensajes.ViewMvResultadoTitle_resQuemacaloriassesion}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_resDeficitaerobico}"/>
+                        <h:outputText value="#{mvResultadoController.selected.resDeficitaerobico}" title="#{mvMensajes.ViewMvResultadoTitle_resDeficitaerobico}"/>
+                        <h:outputText value="#{mvMensajes.ViewMvResultadoLabel_valId}"/>
+                        <h:outputText value="#{mvResultadoController.selected.valId}" title="#{mvMensajes.ViewMvResultadoTitle_valId}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{mvMensajes.Close}" onclick="MvResultadoViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

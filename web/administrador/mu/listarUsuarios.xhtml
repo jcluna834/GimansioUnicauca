@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"      
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+        
+        <h:form id="tablasUsuarios">
+            <h:panelGrid style="margin-bottom: 10px;" rendered="#{mostrarUsuariosController.habilitarTablaUsuarios}" columns="3">                      
+                <h:outputLabel rendered="#{mostrarUsuariosController.habilitarFuncionarios}" class="CampoLabel" value="Nombre del Funcionario:" />
+                <h:outputLabel rendered="#{mostrarUsuariosController.habilitarEstudiantes}" class="CampoLabel" value="Nombre del Estudiante:" />
+                <h:outputLabel rendered="#{mostrarUsuariosController.habilitarFamiliares}" class="CampoLabel" value="Nombre del Familiar:"/>
+                <h:outputLabel rendered="#{mostrarUsuariosController.habilitarTodos}" class="CampoLabel" value="Todos:"/>
+                
+                <p:inputText rendered="#{mostrarUsuariosController.habilitarFuncionarios}" style="width: 240px;" value="#{mostrarUsuariosController.nombreOApellidos}"  
+                             placeholder="Buscar en funcionarios...">
+                    <p:ajax event="keyup" update="tablaGestionUsuario" listener="#{mostrarUsuariosController.buscarPorNombresOApellidosFuncionarios()}" />                                
+                    
+                </p:inputText>                                                   
+                <p:inputText rendered="#{mostrarUsuariosController.habilitarEstudiantes}" style="width: 240px;" value="#{mostrarUsuariosController.nombreOApellidos}"  
+                             placeholder="Buscar en estudiantes...">
+                    <p:ajax event="keyup" update="tablaGestionUsuario" listener="#{mostrarUsuariosController.buscarPorNombresOApellidosEstudiantes()}" />                                
+                    
+                </p:inputText>                                                   
+                <p:inputText rendered="#{mostrarUsuariosController.habilitarFamiliares}" style="width: 240px;" value="#{mostrarUsuariosController.nombreOApellidos}"  
+                             placeholder="Buscar en familiares...">
+                    <p:ajax event="keyup" update="tablaGestionUsuario" listener="#{mostrarUsuariosController.buscarPorNombresOApellidosFamiliares()}" />                                
+                    
+                </p:inputText>                                                   
+                <p:inputText rendered="#{mostrarUsuariosController.habilitarTodos}" style="width: 240px;" value="#{mostrarUsuariosController.nombreOApellidos}"  
+                             placeholder="Buscar en todos los usuarios...">
+                    <p:ajax event="keyup" update="tablaGestionUsuario" listener="#{mostrarUsuariosController.buscarPorNombresOApellidos()}" />                                
+                    
+                </p:inputText>                                                   
+            </h:panelGrid>
+            <p:panel id="tablaGestionUsuario" rendered="#{mostrarUsuariosController.habilitarTablaUsuarios}">                                            
+                <p:dataTable  value="#{mostrarUsuariosController.listaUsuarios}"
+                              var="usuario" 
+                              paginator="true" rows="6"  
+                              paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                              >
+                    <p:column headerText="Cédula" width="100">                               
+                        #{usuario.usuIdentificacion}
+                    </p:column> 
+                    <p:column headerText="Nombres">
+                        #{usuario.usuNombres}
+                    </p:column>
+                    <p:column headerText="Apellidos" width="140">
+                        #{usuario.usuApellido1}
+                        #{usuario.usuApellido2}
+                    </p:column>                             
+                    <p:column headerText="Ocupacion">
+                        #{usuario.ocuId.ocuDescripcion}
+                    </p:column>
+                    
+                    <p:column width="70" style="text-align: center">
+                        <f:facet name="header">
+                            <h:outputText value="Foto" />
+                        </f:facet>
+                        <p:graphicImage value="#{mostrarUsuariosController.imagenFlujo}" width="50"  height="50" >
+                            <f:param name="id" value="#{usuario.usuIdentificacion}" />
+                        </p:graphicImage>                            
+                                            
+                    </p:column> 
+
+                    <p:column headerText="Acciones" width="100">
+                        <p:commandButton id="viewButton"   icon="ui-icon-search" style="width: 30px; height: 30px" 
+                                         action="#{verUsuarioController.usuarioSeleccionado(usuario,mostrarUsuariosController)}"/>
+                        <p:commandButton id="editButton"   icon="ui-icon-pencil" style="width: 30px; height: 30px" 
+                                         action="#{editarUsuarioController.usuarioSeleccionado(usuario,mostrarUsuariosController)}"/>
+                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  style="width: 30px; height: 30px" 
+                                         action="#{eliminarUsuario.ventanaEliminarUsuario(usuario, mostrarUsuariosController)}"/>
+                    </p:column>
+                </p:dataTable>
+            </p:panel>                   
+        </h:form>
+</html>

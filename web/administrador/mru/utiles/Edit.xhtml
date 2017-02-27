@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MuUsuarioEditDlg" widgetVar="MuUsuarioEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{mru_Bundle.EditMuUsuarioTitle}">
+            <h:form id="MuUsuarioEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{muUsuarioController.usuario != null}">
+                        <p:outputLabel value="#{mru_Bundle.EditMuUsuarioLabel_usuIdentificacion}" for="usuIdentificacion" />
+                        <p:inputText id="usuIdentificacion" value="#{muUsuarioController.usuario.usuIdentificacion}" title="#{mru_Bundle.EditMuUsuarioTitle_usuIdentificacion}" required="true" requiredMessage="#{mru_Bundle.EditMuUsuarioRequiredMessage_usuIdentificacion}"/>
+                        <p:outputLabel value="#{mru_Bundle.EditMuUsuarioLabel_facId}" for="facId" />
+                        <p:inputText id="facId" value="#{muUsuarioController.usuario.facDepIdId}" title="#{mru_Bundle.EditMuUsuarioTitle_facId}" required="true" requiredMessage="#{mru_Bundle.EditMuUsuarioRequiredMessage_facId}"/>
+                        <p:outputLabel value="#{mru_Bundle.EditMuUsuarioLabel_ocuId}" for="ocuId" />
+                        <p:inputText id="ocuId" value="#{muUsuarioController.usuario.ocuId}" title="#{mru_Bundle.EditMuUsuarioTitle_ocuId}" required="true" requiredMessage="#{mru_Bundle.EditMuUsuarioRequiredMessage_ocuId}"/>
+                        <p:outputLabel value="#{mru_Bundle.EditMuUsuarioLabel_usuCodigo}" for="usuCodigo" />
+                        <p:inputText id="usuCodigo" value="#{muUsuarioController.usuario.usuCodigo}" title="#{mru_Bundle.EditMuUsuarioTitle_usuCodigo}" />
+                        <p:outputLabel value="#{mru_Bundle.EditMuUsuarioLabel_usuNombres}" for="usuNombres" />
+                        <p:inputText id="usuNombres" value="#{muUsuarioController.usuario.usuNombres}" title="#{mru_Bundle.EditMuUsuarioTitle_usuNombres}" required="true" requiredMessage="#{mru_Bundle.EditMuUsuarioRequiredMessage_usuNombres}"/>
+                        <p:outputLabel value="#{mru_Bundle.EditMuUsuarioLabel_usuApellido1}" for="usuApellido1" />
+                        <p:inputText id="usuApellido1" value="#{muUsuarioController.usuario.usuApellido1}" title="#{mru_Bundle.EditMuUsuarioTitle_usuApellido1}" required="true" requiredMessage="#{mru_Bundle.EditMuUsuarioRequiredMessage_usuApellido1}"/>
+                        <p:outputLabel value="#{mru_Bundle.EditMuUsuarioLabel_usuApellido2}" for="usuApellido2" />
+                        <p:inputText id="usuApellido2" value="#{muUsuarioController.usuario.usuApellido2}" title="#{mru_Bundle.EditMuUsuarioTitle_usuApellido2}" required="true" requiredMessage="#{mru_Bundle.EditMuUsuarioRequiredMessage_usuApellido2}"/>
+                        <p:outputLabel value="#{mru_Bundle.EditMuUsuarioLabel_usuFechaNacimiento}" for="usuFechaNacimiento" />
+                        <p:calendar id="usuFechaNacimiento" pattern="MM/dd/yyyy" value="#{muUsuarioController.usuario.usuFechaNacimiento}" title="#{mru_Bundle.EditMuUsuarioTitle_usuFechaNacimiento}" required="true" requiredMessage="#{mru_Bundle.EditMuUsuarioRequiredMessage_usuFechaNacimiento}" showOn="button"/>
+                        <p:outputLabel value="#{mru_Bundle.EditMuUsuarioLabel_usuGenero}" for="usuGenero" />
+                        <p:inputText id="usuGenero" value="#{muUsuarioController.usuario.usuGenero}" title="#{mru_Bundle.EditMuUsuarioTitle_usuGenero}" required="true" requiredMessage="#{mru_Bundle.EditMuUsuarioRequiredMessage_usuGenero}"/>
+                        <p:outputLabel value="#{mru_Bundle.EditMuUsuarioLabel_usuTelefono}" for="usuTelefono" />
+                        <p:inputText id="usuTelefono" value="#{muUsuarioController.usuario.usuTelefono}" title="#{mru_Bundle.EditMuUsuarioTitle_usuTelefono}" />
+                        <p:outputLabel value="#{mru_Bundle.EditMuUsuarioLabel_usuCelular}" for="usuCelular" />
+                        <p:inputText id="usuCelular" value="#{muUsuarioController.usuario.usuCelular}" title="#{mru_Bundle.EditMuUsuarioTitle_usuCelular}" />
+                        <p:outputLabel value="#{mru_Bundle.EditMuUsuarioLabel_usuEmail}" for="usuEmail" />
+                        <p:inputText id="usuEmail" value="#{muUsuarioController.usuario.usuEmail}" title="#{mru_Bundle.EditMuUsuarioTitle_usuEmail}" required="true" requiredMessage="#{mru_Bundle.EditMuUsuarioRequiredMessage_usuEmail}"/>
+                        <p:outputLabel value="#{mru_Bundle.EditMuUsuarioLabel_usuFoto}" for="usuFoto" />
+                        <p:inputTextarea rows="4" cols="30" id="usuFoto" value="#{muUsuarioController.usuario.usuFoto}" title="#{mru_Bundle.EditMuUsuarioTitle_usuFoto}" required="true" requiredMessage="#{mru_Bundle.EditMuUsuarioRequiredMessage_usuFoto}"/>
+                        <p:outputLabel value="#{mru_Bundle.EditMuUsuarioLabel_usuContrasena}" for="usuContrasena" />
+                        <p:inputText id="usuContrasena" value="#{muUsuarioController.usuario.usuContrasena}" title="#{mru_Bundle.EditMuUsuarioTitle_usuContrasena}" required="true" requiredMessage="#{mru_Bundle.EditMuUsuarioRequiredMessage_usuContrasena}"/>
+                        <p:outputLabel value="#{mru_Bundle.EditMuUsuarioLabel_usuNombreUsuario}" for="usuNombreUsuario" />
+                        <p:inputText id="usuNombreUsuario" value="#{muUsuarioController.usuario.usuNombreUsuario}" title="#{mru_Bundle.EditMuUsuarioTitle_usuNombreUsuario}" required="true" requiredMessage="#{mru_Bundle.EditMuUsuarioRequiredMessage_usuNombreUsuario}"/>
+                        <p:outputLabel value="#{mru_Bundle.EditMuUsuarioLabel_usuEstado}" for="usuEstado" />
+                        <p:inputText id="usuEstado" value="#{muUsuarioController.usuario.usuEstado}" title="#{mru_Bundle.EditMuUsuarioTitle_usuEstado}" required="true" requiredMessage="#{mru_Bundle.EditMuUsuarioRequiredMessage_usuEstado}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{muUsuarioController.update}" value="#{mru_Bundle.Save}" update="display,:MuUsuarioListForm:datalist,:growl" oncomplete="handleSubmit(args, 'MuUsuarioEditDialog');"/>
+                    <p:commandButton value="#{mru_Bundle.Cancel}" onclick="MuUsuarioEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+   <h:head>
+   </h:head>
+   <h:body>
+      <div id="tituloMenu">
+         <span><b>Menú de Usuario</b></span>
+      </div>
+
+      <div id="contenidoMenu">
+         <h:form id="formMenu">
+            <p:tieredMenu>
+               <p:submenu label="Usuarios">
+                  <p:menuitem value="Gestión de usuarios" action="#{routingController.irGestionUsuario()}" ajax="false"
+                              onstart="PF('cargando').show()"  oncomplete="PF('cargando').hide()"/>
+                   <p:menuitem value="Registros de ingreo" action="#{routingController.irRegistroIngreso()}" ajax="false"
+                               onstart="PF('cargando').show()"  oncomplete="PF('cargando').hide()"/>
+               </p:submenu>
+               <p:submenu label="Asistencia">
+                  <p:menuitem value="Sub-menu"/>
+               </p:submenu>
+               <p:submenu label="Recaudos">
+                  <p:menuitem value="Reportes mensuales" ajax="false"
+                              action="#{routingController.goToReporteMensualMREC()}"/>
+                  <p:menuitem value="Registrar recaudo" ajax="false"
+                              action="#{routingController.goToNuevoRecaudoMREC()}"/>
+                  <p:menuitem value="Estadisticas" ajax="false"
+                              action="#{routingController.goToEstadisticasMREC()}"/>
+               </p:submenu>
+               <p:submenu label="Valoraciones">
+                  <p:menuitem value="Valoraciones" action="#{routingController.irValoracion()}" ajax="false"/>
+                   <p:menuitem value="Siguientes Valoraciones" action="#{routingController.irSiguientesValoraciones()}" ajax="false"/>
+                   <p:menuitem value="Dias Festivos" action="#{routingController.irDiasFestivos()}" ajax="false"/>
+               </p:submenu>
+			   <!--.................................RUTINAS..................................................................-->
+               <p:submenu label="Rutinas">
+                        <p:menuitem value="Ver rutinas" ajax="false"
+                                    action="#{routingController.goToUsuarios_Rutinas}"/>
+                        <p:menuitem value="Nueva rutina" ajax="false"
+                                    action="#{routingController.goToNuevaRutina}"/>
+                        <p:menuitem value="Agregar nuevo día a rutina" ajax="false"
+                                    action="#{routingController.goToNuevoDia()}"/>
+                        <p:menuitem value="Gestionar ejercicios" ajax="false"
+                                    action="#{routingController.goToEjercicios}"/>
+				</p:submenu>
+				<!--.................................FIN_RUTINAS..................................................................-->
+				
+               <p:separator/>
+               <p:menuitem value="Configuracion"/>
+            </p:tieredMenu>
+         </h:form>
+      </div>
+ <ui:include src="/EfectodeCarga.xhtml"/>
+   </h:body>
+</html>

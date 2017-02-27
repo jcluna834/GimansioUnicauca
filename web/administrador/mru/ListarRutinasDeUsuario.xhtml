@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form id="MruRutinasListForm">
+            <p:growl id="growl" life="2000" />
+            <h3>Rutinas registradas: <p:outputLabel value="#{mruRutinaController.selectedUsuario.usuNombres} #{mruRutinaController.selectedUsuario.usuApellido1} #{mruRutinaController.selectedUsuario.usuApellido2}"></p:outputLabel></h3>
+            <h:panelGroup>      
+                <p:dataTable id="tblRutinas" value="#{mruRutinaController.rutinas}" var="rutina" selectionMode="single"
+                             selection="#{mruRutinaController.selected}" rowKey="#{rutina.ruId}"
+                             emptyMessage="#{mru_Bundle.ListMruUsuariosNoRecords}">
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{mru_Bundle.ListMruRutinaTitle_ruId}"/>
+                        </f:facet>
+                        <h:outputText value="#{rutina.ruId}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{mru_Bundle.ListMruRutinaTitle_ruFechafin}"/>
+                        </f:facet>
+                        <h:outputText value="#{rutina.ruFechafin}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{mru_Bundle.ListMruRutinaTitle_ruPeso}"/>
+                        </f:facet>
+                        <h:outputText value="#{rutina.ruPeso}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{mru_Bundle.ListMruRutinaTitle_ruTalla}"/>
+                        </f:facet>
+                        <h:outputText value="#{rutina.ruTalla}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{mru_Bundle.ListMruRutinaTitle_usuImc}"/>
+                        </f:facet>
+                        <h:outputText value="#{rutina.ruImc}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{mru_Bundle.ListMruRutinaTitle_ruObservaciones}"/>
+                        </f:facet>
+                        <h:outputText value="#{rutina.ruObservaciones}"/>
+                    </p:column>
+
+                    <p:column width="28%">
+                        <f:facet name="header">
+                            <h:outputText value="Acciones"/>
+                        </f:facet>
+                        <p:commandButton ajax="false" update="tblDias" id="verDias" value="#{mru_Bundle.btnVerDiasLabel}" title="#{mru_Bundle.btnVerDiasTitle}">
+                            <p:ajax listener="#{mruDiaController.consultarDiaPorRutina()}"/>
+                            <f:setPropertyActionListener value="#{rutina}" target="#{mruDiaController.selectedRutina}" />
+                        </p:commandButton>
+                        <p:commandButton ajax="false" id="nuevoDia" value="#{mru_Bundle.btnNuevoDiaLabel}" title="#{mru_Bundle.btnNuevoDiaTitle}" actionListener="#{routingController.goToNuevoDia()}"/>
+
+                    </p:column>
+                </p:dataTable>
+
+            </h:panelGroup>
+        </h:form>
+    </h:body>
+</html>
+

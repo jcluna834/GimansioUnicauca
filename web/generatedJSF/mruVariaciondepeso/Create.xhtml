@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MruVariaciondepesoCreateDlg" widgetVar="MruVariaciondepesoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateMruVariaciondepesoTitle}">
+            <h:form id="MruVariaciondepesoCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{mruVariaciondepesoController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateMruVariaciondepesoLabel_vpId}" for="vpId" />
+                        <p:inputText id="vpId" value="#{mruVariaciondepesoController.selected.vpId}" title="#{bundle.CreateMruVariaciondepesoTitle_vpId}" required="true" requiredMessage="#{bundle.CreateMruVariaciondepesoRequiredMessage_vpId}"/>
+                        <p:outputLabel value="#{bundle.CreateMruVariaciondepesoLabel_vpNombre}" for="vpNombre" />
+                        <p:inputText id="vpNombre" value="#{mruVariaciondepesoController.selected.vpNombre}" title="#{bundle.CreateMruVariaciondepesoTitle_vpNombre}" required="true" requiredMessage="#{bundle.CreateMruVariaciondepesoRequiredMessage_vpNombre}"/>
+                        <p:outputLabel value="#{bundle.CreateMruVariaciondepesoLabel_vpDescrip}" for="vpDescrip" />
+                        <p:inputText id="vpDescrip" value="#{mruVariaciondepesoController.selected.vpDescrip}" title="#{bundle.CreateMruVariaciondepesoTitle_vpDescrip}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{mruVariaciondepesoController.create}" value="#{bundle.Save}" update="display,:MruVariaciondepesoListForm:datalist,:growl" oncomplete="handleSubmit(args,'MruVariaciondepesoCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="MruVariaciondepesoCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

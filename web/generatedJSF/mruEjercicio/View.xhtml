@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MruEjercicioViewDlg" widgetVar="MruEjercicioViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewMruEjercicioTitle}">
+            <h:form id="MruEjercicioViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{mruEjercicioController.selected != null}">
+                        <h:outputText value="#{bundle.ViewMruEjercicioLabel_ejId}"/>
+                        <h:outputText value="#{mruEjercicioController.selected.ejId}" title="#{bundle.ViewMruEjercicioTitle_ejId}"/>
+                        <h:outputText value="#{bundle.ViewMruEjercicioLabel_ejNombre}"/>
+                        <h:outputText value="#{mruEjercicioController.selected.ejNombre}" title="#{bundle.ViewMruEjercicioTitle_ejNombre}"/>
+                        <h:outputText value="#{bundle.ViewMruEjercicioLabel_ejDescrip}"/>
+                        <h:outputText value="#{mruEjercicioController.selected.ejDescrip}" title="#{bundle.ViewMruEjercicioTitle_ejDescrip}"/>
+                        <h:outputText value="#{bundle.ViewMruEjercicioLabel_ejImagen}"/>
+                        <h:outputText value="#{mruEjercicioController.selected.ejImagen}" title="#{bundle.ViewMruEjercicioTitle_ejImagen}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="MruEjercicioViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

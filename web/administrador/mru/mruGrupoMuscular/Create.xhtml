@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MruGrupomuscularCreateDlg" widgetVar="MruGrupomuscularCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{mru_Bundle.CreateMruGrupomuscularTitle}">
+            <h:form id="MruGrupomuscularCreateForm">
+                <p:growl id="growl" life="2000" />
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{mruGrupomuscularController.selected != null}">
+                        <p:outputLabel value="#{mru_Bundle.CreateMruGrupomuscularLabel_gmId}" for="gmId" />
+                        <p:inputText id="gmId" value="#{mruGrupomuscularController.selected.gmId}" title="#{mru_Bundle.CreateMruGrupomuscularTitle_gmId}" required="true" requiredMessage="#{mru_Bundle.CreateMruGrupomuscularRequiredMessage_gmId}"/>
+                        <p:outputLabel value="#{mru_Bundle.CreateMruGrupomuscularLabel_gmNombre}" for="gmNombre" />
+                        <p:inputText id="gmNombre" value="#{mruGrupomuscularController.selected.gmNombre}" title="#{mru_Bundle.CreateMruGrupomuscularTitle_gmNombre}" required="true" requiredMessage="#{mru_Bundle.CreateMruGrupomuscularRequiredMessage_gmNombre}"/>
+                        <p:outputLabel value="#{mru_Bundle.CreateMruGrupomuscularLabel_diaId}" for="diaId" />
+                        <p:selectOneMenu id="diaId" value="#{mruGrupomuscularController.selected.diaId}" required="true" requiredMessage="#{mru_Bundle.EditMruGrupomuscularRequiredMessage_diaId}">
+                            <f:selectItems value="#{mruDiaController.itemsAvailableSelectOne}"
+                                           var="diaIdItem"
+                                           itemValue="#{diaIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{mruGrupomuscularController.create}" value="#{mru_Bundle.Save}" update="growl, display,:MruGrupomuscularListForm:datalist" oncomplete="handleSubmit(args,'MruGrupomuscularCreateDialog');"/>
+                    <p:commandButton value="#{mru_Bundle.Cancel}" onclick="MruGrupomuscularCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
